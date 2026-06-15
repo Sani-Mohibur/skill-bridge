@@ -1,0 +1,131 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { Star, ShieldCheck, Clock, BookOpen, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+export interface Tutor {
+  id: string;
+  name: string;
+  image?: string;
+  isVerified: boolean;
+  rating: number;
+  reviewCount: number;
+  categories: string[];
+  bio: string;
+  pricePerHour: number;
+  experienceYears: number;
+}
+
+interface TutorCardProps {
+  tutor: Tutor;
+}
+
+export function TutorCard({ tutor }: TutorCardProps) {
+  return (
+    <div className="group relative bg-background hover:bg-muted/10 border border-border/50 hover:border-border/90 rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-md">
+      <div>
+        {/* Top Header Card Info Row */}
+        <div className="flex items-start gap-4">
+          {/* Tutor Avatar Frame */}
+          <div className="relative shrink-0">
+            {tutor.image ? (
+              <img
+                src={tutor.image}
+                alt={tutor.name}
+                className="w-14 h-14 rounded-xl object-cover border border-border/80"
+              />
+            ) : (
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg font-black border border-emerald-500/20 shadow-xs">
+                {tutor.name.charAt(0).toUpperCase()}
+              </div>
+            )}
+
+            {tutor.isVerified && (
+              <div className="absolute -bottom-1 -right-1 bg-background rounded-full p-0.5 shadow-xs">
+                <ShieldCheck className="w-4 h-4 fill-emerald-500 text-white dark:text-background" />
+              </div>
+            )}
+          </div>
+
+          {/* Title and Badge Metadata Info */}
+          <div className="space-y-1 min-w-0">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <h2 className="text-sm font-black tracking-tight text-foreground truncate max-w-[150px]">
+                {tutor.name}
+              </h2>
+            </div>
+
+            {/* Micro Rating Indicator Row */}
+            <div className="flex items-center gap-1.5 text-xs">
+              <div className="flex items-center gap-0.5 text-amber-500">
+                <Star className="w-3.5 h-3.5 fill-current" />
+                <span className="font-bold text-foreground">
+                  {tutor.rating.toFixed(1)}
+                </span>
+              </div>
+              <span className="text-muted-foreground/60 text-[10px]">
+                ({tutor.reviewCount} reviews)
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Categories / Tag Badges Stack */}
+        <div className="flex flex-wrap gap-1 mt-4">
+          {tutor.categories.map((category) => (
+            <span
+              key={category}
+              className="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-md bg-muted text-muted-foreground border border-border/30"
+            >
+              {category}
+            </span>
+          ))}
+        </div>
+
+        {/* Short Text Description Bio Bio Summary */}
+        <p className="text-xs text-muted-foreground line-clamp-2 mt-3 leading-relaxed">
+          {tutor.bio}
+        </p>
+
+        {/* Meta Timeline Tags */}
+        <div className="flex items-center gap-3 mt-4 text-[11px] text-muted-foreground/80 font-medium">
+          <div className="flex items-center gap-1">
+            <Clock className="w-3.5 h-3.5 text-emerald-500/80" />
+            <span>{tutor.experienceYears} Years Exp</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <BookOpen className="w-3.5 h-3.5 text-teal-500/80" />
+            <span>Active Slots</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Price and Booking CTA CTA Block Row */}
+      <div className="pt-4 mt-4 border-t border-border/40 flex items-center justify-between gap-2">
+        <div className="flex flex-col">
+          <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">
+            Rate
+          </span>
+          <div className="flex items-baseline gap-0.5">
+            <span className="text-base font-black text-foreground">
+              ${tutor.pricePerHour}
+            </span>
+            <span className="text-[10px] text-muted-foreground font-semibold">
+              /hr
+            </span>
+          </div>
+        </div>
+
+        <Link href={`/tutors/${tutor.id}`} passHref className="shrink-0">
+          <Button className="h-9 px-3.5 text-xs font-bold rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white border-none cursor-pointer flex items-center gap-1 shadow-xs group-hover:px-4 transition-all duration-300">
+            View Profile
+            <ChevronRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </Button>
+        </Link>
+      </div>
+    </div>
+  );
+}
