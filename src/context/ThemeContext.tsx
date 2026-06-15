@@ -21,12 +21,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       "(prefers-color-scheme: dark)",
     ).matches;
 
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.setAttribute("data-theme", savedTheme);
-    } else if (systemPrefersDark) {
-      setTheme("dark");
-      document.documentElement.setAttribute("data-theme", "dark");
+    const appliedTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+
+    setTheme(appliedTheme);
+    if (appliedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 
@@ -34,7 +35,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const nextTheme = theme === "light" ? "dark" : "light";
     setTheme(nextTheme);
     localStorage.setItem("theme", nextTheme);
-    document.documentElement.setAttribute("data-theme", nextTheme);
+
+    if (nextTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   return (

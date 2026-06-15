@@ -1,34 +1,82 @@
 @import "tailwindcss";
 
 @theme {
+  /* Core Canvas Tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Semantic Layer Tokens */
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-muted-surface: var(--muted-surface);
+  --color-muted-text: var(--muted-text);
+
+  /* Sophisticated Interactive Accents */
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-hover: var(--brand-hover);
+  --color-input-focus: var(--input-focus);
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
+  /* Premium Minimalist Light Mode */
+  --background: #fafafa; /* Luxurious gallery off-white */
+  --foreground: #09090b; /* Strict obsidian charcoal for high-end text */
+
+  --card: #ffffff; /* Pure crisp floating cards */
+  --card-border: #e4e4e7; /* Razor-thin subtle border structure */
+
+  --muted-surface: #f4f4f5; /* Soft contrasting section background rows */
+  --muted-text: #71717a; /* Calmed metadata tracking gray */
+
+  --brand-accent: #059669; /* Sharp Engineering Emerald */
+  --brand-hover: #047857; /* Deep tactile emerald feedback */
+  --input-focus: #09090b;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ffffff;
+.dark {
+  /* Elite Engineering Dark Mode */
+  --background: #09090b; /* True technical matte midnight */
+  --foreground: #f4f4f5; /* Crisp industrial silver prose */
+
+  --card: #141417; /* Low-lit micro-elevated containers */
+  --card-border: #232326; /* Ghostly fine framework outlines */
+
+  --muted-surface: #18181b; /* Dark contrast section anchors */
+  --muted-text: #9a9a14; /* Highly legible steel secondary font gray */
+
+  --brand-accent: #10b981; /* Vivid luminous electronic green */
+  --brand-hover: #34d399; /* Vibrant accent reaction flare */
+  --input-focus: #f4f4f5;
+}
+
+@layer base {
+  * {
+    /* Fluid micro-interactions across the entire application workspace */
+    transition-property:
+      background-color, border-color, text-color, fill, stroke, box-shadow;
+    transition-timing-function: cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    ); /* Premium ease-out exponential */
+    transition-duration: 250ms;
+    box-sizing: border-box;
   }
-}
 
-/* Explicit data-theme toggle fallback */
-[data-theme="dark"] {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
-}
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings:
+      "ss01", "ss03", "cv02", "cv11"; /* Elite geometry alignment for Geist typography */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em; /* Tight high-end look */
+  }
 
-[data-theme="light"] {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-}
-
-body {
-  background-color: var(--background);
-  color: var(--foreground);
+  /* Custom text highlighting shade to match brand */
+  ::selection {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--foreground);
+  }
 }

@@ -12,14 +12,14 @@ export default function Navbar() {
   const isLoggedIn = false;
 
   return (
-    <nav className="w-full border-b border-neutral-200 bg-white sticky top-0 z-50">
+    <nav className="w-full border-b border-card-border bg-card/80 backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link
               href="/"
-              className="text-xl font-bold tracking-tight text-neutral-950"
+              className="text-xl font-extrabold tracking-tight text-foreground hover:text-brand-accent transition-colors"
             >
               Skill Bridge
             </Link>
@@ -29,19 +29,19 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <Link
               href="/tutors"
-              className="text-sm font-medium text-neutral-600 hover:text-neutral-950 transition-colors"
+              className="text-sm font-medium text-muted-text hover:text-foreground transition-colors"
             >
               Find Tutors
             </Link>
             <Link
               href="#how-it-works"
-              className="text-sm font-medium text-neutral-600 hover:text-neutral-950 transition-colors"
+              className="text-sm font-medium text-muted-text hover:text-foreground transition-colors"
             >
               How It Works
             </Link>
             <Link
               href="/register?role=tutor"
-              className="text-sm font-medium text-neutral-600 hover:text-neutral-950 transition-colors"
+              className="text-sm font-medium text-muted-text hover:text-foreground transition-colors"
             >
               Become a Tutor
             </Link>
@@ -52,7 +52,7 @@ export default function Navbar() {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors text-sm"
+              className="w-9 h-9 flex items-center justify-center rounded-lg border border-card-border bg-card text-foreground hover:bg-muted-surface active:scale-[0.95] transition-all cursor-pointer text-sm"
               aria-label="Toggle theme"
             >
               {theme === "light" ? "🌙" : "☀️"}
@@ -60,13 +60,13 @@ export default function Navbar() {
 
             <Link
               href="/login"
-              className="text-sm font-medium text-neutral-600 hover:text-neutral-950 transition-colors"
+              className="text-sm font-medium text-muted-text hover:text-foreground transition-colors"
             >
               Log In
             </Link>
             <Link
               href="/register"
-              className="inline-flex h-9 items-center justify-center rounded-md bg-neutral-950 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors"
+              className="inline-flex h-9 items-center justify-center rounded-lg bg-foreground text-background px-4 text-sm font-semibold hover:opacity-90 active:scale-[0.97] transition-all"
             >
               Sign Up
             </Link>
@@ -76,17 +76,17 @@ export default function Navbar() {
           <div className="flex md:hidden items-center space-x-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 text-sm"
+              className="w-9 h-9 flex items-center justify-center rounded-lg border border-card-border bg-card text-foreground text-sm cursor-pointer"
             >
               {theme === "light" ? "🌙" : "☀️"}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-neutral-950 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-lg text-muted-text hover:text-foreground hover:bg-muted-surface focus:outline-none cursor-pointer transition-colors"
               aria-label="Toggle menu"
             >
               <svg
-                className="h-6 w-6"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -114,40 +114,40 @@ export default function Navbar() {
 
       {/* Mobile Drawer Dropdown */}
       {isOpen && (
-        <div className="md:hidden border-b border-neutral-200 bg-white px-4 pt-2 pb-4 space-y-2">
+        <div className="md:hidden border-b border-card-border bg-card px-4 pt-2 pb-5 space-y-1 shadow-md">
           <Link
             href="/tutors"
             onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-950"
+            className="block px-3 py-2.5 rounded-lg text-base font-medium text-muted-text hover:bg-muted-surface hover:text-foreground transition-all"
           >
             Find Tutors
           </Link>
           <Link
             href="#how-it-works"
             onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-950"
+            className="block px-3 py-2.5 rounded-lg text-base font-medium text-muted-text hover:bg-muted-surface hover:text-foreground transition-all"
           >
             How It Works
           </Link>
           <Link
             href="/register?role=tutor"
             onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-950"
+            className="block px-3 py-2.5 rounded-lg text-base font-medium text-muted-text hover:bg-muted-surface hover:text-foreground transition-all"
           >
             Become a Tutor
           </Link>
-          <div className="pt-4 border-t border-neutral-200 flex flex-col space-y-2">
+          <div className="pt-4 mt-2 border-t border-card-border flex flex-col space-y-2">
             <Link
               href="/login"
               onClick={() => setIsOpen(false)}
-              className="block text-center px-3 py-2 rounded-md text-base font-medium text-neutral-600 hover:bg-neutral-50"
+              className="block text-center px-3 py-2.5 rounded-lg text-base font-medium text-muted-text hover:bg-muted-surface transition-all"
             >
               Log In
             </Link>
             <Link
               href="/register"
               onClick={() => setIsOpen(false)}
-              className="block text-center px-3 py-2 rounded-md text-base font-medium bg-neutral-950 text-white hover:bg-neutral-800"
+              className="block text-center px-3 py-2.5 rounded-lg text-base font-semibold bg-foreground text-background shadow-xs active:scale-[0.98] transition-all"
             >
               Sign Up
             </Link>

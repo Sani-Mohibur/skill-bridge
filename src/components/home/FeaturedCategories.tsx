@@ -40,14 +40,14 @@ const POPULAR_CATEGORIES: CategoryCard[] = [
 
 export default function FeaturedCategories() {
   return (
-    <section className="w-full py-12 border-t border-neutral-100 bg-neutral-50/50">
+    <section className="w-full py-16 md:py-20 border-y border-card-border bg-muted-surface/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
-        <div className="text-center md:text-left mb-8">
-          <h2 className="text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">
+        <div className="text-center md:text-left mb-10">
+          <h2 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
             Explore Popular Subjects
           </h2>
-          <p className="mt-2 text-sm text-neutral-600">
+          <p className="mt-2 text-sm text-muted-text">
             Select a specialized technical vertical to find matching engineering
             mentors.
           </p>
@@ -59,13 +59,18 @@ export default function FeaturedCategories() {
             <Link
               key={category.slug}
               href={`/tutors?category=${category.slug}`}
-              className="group block p-6 rounded-xl border border-neutral-200 bg-white hover:border-neutral-950 hover:shadow-sm transition-all duration-200"
+              className="group block p-6 rounded-xl border border-card-border bg-card hover:border-brand-accent/50 hover:shadow-md hover:shadow-brand-accent/5 transition-all duration-300 relative overflow-hidden"
             >
-              <div className="text-3xl mb-4">{category.icon}</div>
-              <h3 className="text-base font-semibold text-neutral-950 group-hover:text-neutral-950">
+              {/* Subtle top accent bar that lights up on hover */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-brand-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
+              <div className="text-3xl mb-4 filter drop-shadow-sm group-hover:scale-110 transition-transform duration-300 inline-block">
+                {category.icon}
+              </div>
+              <h3 className="text-base font-bold text-foreground transition-colors">
                 {category.title}
               </h3>
-              <p className="mt-2 text-xs leading-relaxed text-neutral-500">
+              <p className="mt-2 text-xs leading-relaxed text-muted-text">
                 {category.description}
               </p>
             </Link>
