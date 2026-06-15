@@ -7,17 +7,15 @@ import Navbar from "@/components/layout/Navbar";
 
 export default function HomePage() {
   return (
-    <>
-      <Navbar />
-
-      <main className="flex-1">
+    <div className="relative min-h-screen flex flex-col w-full overflow-x-hidden">
+      <main className="flex-grow w-full">
         <Hero />
         <FeaturedCategories />
         <HowItWorks />
-        <CallToAction />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <CallToAction />
+        </div>
       </main>
-
-      <Footer />
-    </>
+    </div>
   );
 }
