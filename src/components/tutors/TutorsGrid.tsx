@@ -26,7 +26,7 @@ export function TutorsGrid({
         {[...Array(6)].map((_, idx) => (
           <div
             key={idx}
-            className="h-[220px] rounded-2xl border border-border/40 bg-muted/20 animate-pulse"
+            className="h-[220px] rounded-2xl border border-border/100 dark:border-border/40 bg-muted/30 dark:bg-muted/20 animate-pulse"
           />
         ))}
       </div>

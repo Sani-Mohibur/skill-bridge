@@ -177,10 +177,10 @@ export default function TutorProfileDetailsPage() {
               <Briefcase className="w-4 h-4 text-primary" />
               <span>{tutor.experienceYears} Years Experience</span>
             </div>
-            <div className="flex items-center gap-2.5">
+            {/* <div className="flex items-center gap-2.5">
               <Clock className="w-4 h-4 text-primary" />
               <span>{tutor.totalHoursTaught} Hours Instructed</span>
-            </div>
+            </div> */}
             <div className="flex items-center gap-2.5">
               <Mail className="w-4 h-4 text-primary" />
               <span className="truncate">{tutor.user?.email}</span>

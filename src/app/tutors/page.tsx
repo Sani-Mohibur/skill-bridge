@@ -1,43 +1,77 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { TutorsFilterSidebar } from "@/components/tutors/TutorsFilterSidebar";
 import { TutorsGrid } from "@/components/tutors/TutorsGrid";
 import { Tutor } from "@/components/tutors/TutorCard";
 import { TutorsHeader } from "@/components/tutors/TutorsHeader";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const INITIAL_FILTERS = {
   searchName: "",
-  priceRange: [10, 150] as [number, number],
+  priceRange: [0, 150] as [number, number],
   minRating: 0,
   selectedCategories: [] as string[],
 };
 
-//     id: "1",
-//     name: "Sani Mohibur",
-//     isVerified: true,
-//     rating: 4.9,
-//     reviewCount: 42,
-//     categories: ["WebSockets", "Node.js", "System Design"],
-//     bio: "Backend scale engineer specializing in real-time, event-driven web applications and highly responsive system architectures.",
-//     pricePerHour: 45,
-//     experienceYears: 5,
-//   },
-
 export default function TutorsPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [tutors, setTutors] = useState<Tutor[]>([]);
   const [availableCategories, setAvailableCategories] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [filters, setFilters] = useState(INITIAL_FILTERS);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+
+  const filters = useMemo(() => {
+    const search = searchParams.get("search") || "";
+    const minPrice = Number(searchParams.get("minPrice")) || 0;
+    const maxPrice = Number(searchParams.get("maxPrice")) || 150;
+    const minRating = Number(searchParams.get("minRating")) || 0;
+    const selectedCategories = searchParams.getAll("categories");
+
+    return {
+      searchName: search,
+      priceRange: [minPrice, maxPrice] as [number, number],
+      minRating,
+      selectedCategories,
+    };
+  }, [searchParams]);
+
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 9;
 
   useEffect(() => {
-    const fetchTutors = async () => {
+    const fetchTutorsData = async () => {
       try {
         setIsLoading(true);
+
+        // 1. Map reactive filters cleanly onto URL query options
+        const queryParams = new URLSearchParams({
+          page: currentPage.toString(),
+          limit: itemsPerPage.toString(),
+          ...(filters.searchName && { search: filters.searchName }),
+          ...(filters.minRating > 0 && {
+            minRating: filters.minRating.toString(),
+          }),
+          ...(filters.priceRange[0] && {
+            minPrice: filters.priceRange[0].toString(),
+          }),
+          ...(filters.priceRange[1] && {
+            maxPrice: filters.priceRange[1].toString(),
+          }),
+        });
+
+        // 2. Format express multi-query array strings correctly for category records
+        filters.selectedCategories.forEach((categoryName) => {
+          queryParams.append("categories", categoryName);
+        });
+
+        // 3. Parallel execute both network endpoints asynchronously
         const [tutorsRes, categoriesRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/tutor/search`),
+          fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/tutor/search?${queryParams.toString()}`,
+          ),
           fetch(`${process.env.NEXT_PUBLIC_API_URL}/tutor/categories`),
         ]);
 
@@ -48,7 +82,9 @@ export default function TutorsPage() {
         const tutorsData = await tutorsRes.json();
         const categoriesData = await categoriesRes.json();
 
+        // 4. Update data and metadata objects from the clean API schema
         setTutors(tutorsData.data || []);
+        setTotalPages(tutorsData.meta?.totalPage || 1);
 
         const categoryNames = (categoriesData.data || []).map(
           (cat: { name: string }) => cat.name,
@@ -61,60 +97,47 @@ export default function TutorsPage() {
       }
     };
 
-    fetchTutors();
-  }, []);
+    fetchTutorsData();
+  }, [searchParams]);
 
-  const handleResetAll = () => {
-    setFilters(INITIAL_FILTERS);
-    setCurrentPage(1);
+  const createQueryString = (
+    page: number,
+    updatedFilters: typeof INITIAL_FILTERS,
+  ) => {
+    const params = new URLSearchParams();
+    params.set("page", page.toString());
+    if (updatedFilters.searchName)
+      params.set("search", updatedFilters.searchName);
+    if (updatedFilters.minRating > 0)
+      params.set("minRating", updatedFilters.minRating.toString());
+    if (updatedFilters.priceRange[0] > 0)
+      params.set("minPrice", updatedFilters.priceRange[0].toString());
+    if (updatedFilters.priceRange[1] < 150)
+      params.set("maxPrice", updatedFilters.priceRange[1].toString());
+
+    updatedFilters.selectedCategories.forEach((cat) =>
+      params.append("categories", cat),
+    );
+    return params.toString();
   };
 
-  // Perform client-side engine filtering across all active filter matrices
-  const filteredTutors = useMemo(() => {
-    return tutors.filter((tutor) => {
-      // 1. Filter by Name Query
-      if (
-        filters.searchName &&
-        !tutor.name.toLowerCase().includes(filters.searchName.toLowerCase())
-      ) {
-        return false;
-      }
-
-      // 2. Filter by Price Range Bounds
-      if (
-        tutor.pricePerHour < filters.priceRange[0] ||
-        tutor.pricePerHour > filters.priceRange[1]
-      ) {
-        return false;
-      }
-
-      // 3. Filter by Minimum Rating Threshold
-      if (filters.minRating > 0 && tutor.rating < filters.minRating) {
-        return false;
-      }
-
-      // 4. Filter by Multi-Selected Categories
-      if (filters.selectedCategories.length > 0) {
-        const hasMatchingCategory = tutor.categories.some((cat) =>
-          filters.selectedCategories.includes(cat),
-        );
-        if (!hasMatchingCategory) return false;
-      }
-
-      return true;
-    });
-  }, [tutors, filters]); // Added tutors as dependency
-
-  // Handle client-side pagination computing boundaries
-  const totalPages = Math.ceil(filteredTutors.length / itemsPerPage);
-  const paginatedTutors = useMemo(() => {
-    const startOffset = (currentPage - 1) * itemsPerPage;
-    return filteredTutors.slice(startOffset, startOffset + itemsPerPage);
-  }, [filteredTutors, currentPage]);
+  const handleResetAll = () => {
+    router.push("/tutors?page=1");
+  };
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    const queryString = createQueryString(page, filters);
+    router.push(`/tutors?${queryString}`, { scroll: false });
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleFilterChange = (
+    updater: React.SetStateAction<typeof INITIAL_FILTERS>,
+  ) => {
+    const nextFilters =
+      typeof updater === "function" ? updater(filters) : updater;
+    const queryString = createQueryString(1, nextFilters); // Always forces back to page 1
+    router.push(`/tutors?${queryString}`);
   };
 
   return (
@@ -122,27 +145,26 @@ export default function TutorsPage() {
       <TutorsHeader
         searchValue={filters.searchName}
         onSearchChange={(value) => {
-          setFilters((prev) => ({ ...prev, searchName: value }));
-          setCurrentPage(1);
+          handleFilterChange((prev) => ({ ...prev, searchName: value }));
         }}
       />
 
-      {/* Main Structural Filter + Grid Panel Content Body */}
       <div className="flex flex-col md:flex-row gap-8 items-start pt-2 w-full">
         <TutorsFilterSidebar
           key="tutors-sidebar-filter"
           filters={filters}
-          setFilters={setFilters}
+          setFilters={handleFilterChange}
           availableCategories={availableCategories}
           onReset={handleResetAll}
         />
 
         <div className="flex-1 grow w-full min-w-0">
           <TutorsGrid
-            tutors={paginatedTutors}
+            tutors={tutors}
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={handlePageChange}
+            isLoading={isLoading}
           />
         </div>
       </div>

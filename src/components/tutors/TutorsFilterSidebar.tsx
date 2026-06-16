@@ -50,7 +50,7 @@ export function TutorsFilterSidebar({
       />
       <hr className="border-border/40" />
       <PriceSlider
-        minPrice={10}
+        minPrice={0}
         maxPrice={150}
         value={filters.priceRange}
         onChange={handlePriceChange}

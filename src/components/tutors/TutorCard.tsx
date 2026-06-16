@@ -25,8 +25,9 @@ interface TutorCardProps {
 
 export function TutorCard({ tutor }: TutorCardProps) {
   return (
-    <div className="group relative bg-background hover:bg-muted/10 border border-border/50 hover:border-border/90 rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-md">
+    <div className="group relative bg-gradient-to-br from-slate-50 via-indigo-50/60 to-violet-100/40 dark:from-slate-950 dark:via-indigo-950/40 dark:to-violet-950/40 border border-border/70 hover:border-emerald-500/40 rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-lg hover:shadow-emerald-500/5">
       <div>
+        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.12),transparent_40%),radial-gradient(circle_at_top_right,rgba(20,184,166,0.10),transparent_45%),radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)]" />
         {/* Top Header Card Info Row */}
         <div className="flex items-start gap-4">
           {/* Tutor Avatar Frame */}
