@@ -32,7 +32,8 @@ export default function RegisterForm() {
         email: formData.email,
         password: formData.password,
         name: formData.name,
-      });
+        role,
+      } as any);
 
       toast.success("Account constructed! Authenticating session...");
 
