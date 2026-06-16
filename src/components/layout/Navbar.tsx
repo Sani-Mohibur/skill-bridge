@@ -28,7 +28,7 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Find Tutors", href: "/tutors" },
-    { name: "How It Works", href: "#how-it-works" },
+    { name: "How It Works", href: "/how-it-works" },
     { name: "About", href: "/about" },
     { name: "Become a Tutor", href: "/register?role=tutor" },
   ];
@@ -68,9 +68,9 @@ export default function Navbar() {
                 Find Tutors
               </Link>
               <Link
-                href="#how-it-works"
+                href="/how-it-works"
                 className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
-                  isActive("#how-it-works")
+                  isActive("/how-it-works")
                     ? "text-emerald-500 bg-emerald-500/5"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                 }`}
@@ -246,10 +246,10 @@ export default function Navbar() {
             Find Tutors
           </Link>
           <Link
-            href="#how-it-works"
+            href="/how-it-works"
             onClick={() => setIsOpen(false)}
             className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
-              isActive("#how-it-works")
+              isActive("/how-it-works")
                 ? "text-emerald-500 bg-emerald-500/5"
                 : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
             }`}
