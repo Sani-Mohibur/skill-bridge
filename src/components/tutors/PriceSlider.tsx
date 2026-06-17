@@ -1,6 +1,7 @@
 "use client";
 
 import * as SliderPrimitive from "@radix-ui/react-slider";
+import { useEffect, useState } from "react";
 
 interface PriceSliderProps {
   minPrice: number;
@@ -15,6 +16,12 @@ export function PriceSlider({
   value,
   onChange,
 }: PriceSliderProps) {
+  // Local state to keep slide track movement buttery smooth
+  const [localValue, setLocalValue] = useState<[number, number]>(value);
+
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
   return (
     <div className="w-full space-y-4 p-1">
       <div className="flex items-center justify-between">
@@ -30,8 +37,9 @@ export function PriceSlider({
 
       <SliderPrimitive.Root
         className="relative flex w-full touch-none select-none items-center h-5"
-        value={value}
-        onValueChange={(val) => onChange(val as [number, number])}
+        value={localValue}
+        onValueChange={(val) => setLocalValue(val as [number, number])}
+        onValueCommit={(val) => onChange(val as [number, number])}
         min={minPrice}
         max={maxPrice}
         step={5}

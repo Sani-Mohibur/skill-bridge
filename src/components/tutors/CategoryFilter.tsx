@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Search, ChevronDown, ChevronUp, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +18,15 @@ export function CategoryFilter({
   const [searchQuery, setSearchQuery] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Local state to keep checkbox clicks responsive in production builds
+  const [localSelected, setLocalSelected] =
+    useState<string[]>(selectedCategories);
+
+  // Keep local state in sync with external actions/resets
+  useEffect(() => {
+    setLocalSelected(selectedCategories);
+  }, [selectedCategories]);
+
   // Filter categories based on the sub-search query
   const filteredCategories = useMemo(() => {
     return categories.filter((category) =>
@@ -34,11 +43,12 @@ export function CategoryFilter({
   }, [filteredCategories, isExpanded, searchQuery]);
 
   const handleToggleCategory = (category: string) => {
-    if (selectedCategories.includes(category)) {
-      onChange(selectedCategories.filter((item) => item !== category));
-    } else {
-      onChange([...selectedCategories, category]);
-    }
+    const nextSelection = localSelected.includes(category)
+      ? localSelected.filter((item) => item !== category)
+      : [...localSelected, category];
+
+    setLocalSelected(nextSelection);
+    onChange(nextSelection);
   };
 
   return (
@@ -63,7 +73,7 @@ export function CategoryFilter({
       <div className="flex flex-col gap-1 max-h-[220px] overflow-y-auto pr-1 scrollbar-thin">
         {visibleCategories.length > 0 ? (
           visibleCategories.map((category) => {
-            const isChecked = selectedCategories.includes(category);
+            const isChecked = localSelected.includes(category);
 
             return (
               <button

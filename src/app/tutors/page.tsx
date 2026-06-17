@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import { TutorsFilterSidebar } from "@/components/tutors/TutorsFilterSidebar";
 import { TutorsGrid } from "@/components/tutors/TutorsGrid";
 import { Tutor } from "@/components/tutors/TutorCard";
@@ -14,7 +14,7 @@ const INITIAL_FILTERS = {
   selectedCategories: [] as string[],
 };
 
-export default function TutorsPage() {
+function TutorsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -137,7 +137,7 @@ export default function TutorsPage() {
     const nextFilters =
       typeof updater === "function" ? updater(filters) : updater;
     const queryString = createQueryString(1, nextFilters); // Always forces back to page 1
-    router.push(`/tutors?${queryString}`);
+    router.push(`/tutors?${queryString}`, { scroll: false });
   };
 
   return (
@@ -169,5 +169,21 @@ export default function TutorsPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function TutorsPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen w-full bg-background pt-24 pb-16 px-4 max-w-7xl mx-auto flex items-center justify-center">
+          <div className="text-xs font-bold tracking-wide text-muted-foreground animate-pulse">
+            Loading mentoring marketplace database...
+          </div>
+        </main>
+      }
+    >
+      <TutorsContent />
+    </Suspense>
   );
 }
