@@ -20,7 +20,7 @@ export default function HowItWorksPage() {
   const [activeTab, setActiveTab] = useState<"students" | "tutors">("students");
 
   return (
-    <main className="min-h-screen w-full bg-background pt-24 pb-20 px-4 max-w-7xl mx-auto space-y-16">
+    <main className="min-h-screen w-full bg-background pt-16 pb-16 px-4 max-w-7xl mx-auto space-y-16">
       {/* 1. HERO HEADER SECTION */}
       <div className="w-full bg-gradient-to-br from-[#d0e7ff] via-[#e3f2fd] to-[#f0f4f8] dark:bg-gradient-to-br dark:from-[#0f172a] dark:via-[#090d16] dark:to-[#020617] border border-blue-300/40 dark:border-border/60 rounded-3xl p-6 sm:p-8 relative overflow-hidden">
         <div className="hidden dark:block absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import {
   Zap,
   ShieldCheck,
@@ -15,7 +14,7 @@ import {
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen w-full bg-background pt-24 pb-20 px-4 max-w-7xl mx-auto space-y-20">
+    <main className="min-h-screen w-full bg-background pt-16 pb-16 px-4 max-w-7xl mx-auto space-y-16">
       {/* 1. PREMIUM HEADER CONTAINER - EXACT DESIGN MATCH */}
       <div className="w-full bg-gradient-to-br from-[#d0e7ff] via-[#e3f2fd] to-[#f0f4f8] dark:bg-gradient-to-br dark:from-[#0f172a] dark:via-[#090d16] dark:to-[#020617] border border-blue-300/40 dark:border-border/60 rounded-3xl p-6 sm:p-8 relative overflow-hidden">
         <div className="hidden dark:block absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -237,7 +236,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="space-y-1">
             <div className="text-2xl md:text-3xl font-black text-foreground tracking-tight">
-              500+
+              50+
             </div>
             <div className="text-[10px] uppercase tracking-wider text-emerald-500 font-bold">
               Verified Mentors
@@ -245,7 +244,7 @@ export default function AboutPage() {
           </div>
           <div className="space-y-1">
             <div className="text-2xl md:text-3xl font-black text-foreground tracking-tight">
-              10k+
+              2k+
             </div>
             <div className="text-[10px] uppercase tracking-wider text-teal-500 font-bold">
               Review Hours Logged
@@ -253,7 +252,7 @@ export default function AboutPage() {
           </div>
           <div className="space-y-1">
             <div className="text-2xl md:text-3xl font-black text-foreground tracking-tight">
-              99.8%
+              90.8%
             </div>
             <div className="text-[10px] uppercase tracking-wider text-emerald-500 font-bold">
               Pipeline Success Rate

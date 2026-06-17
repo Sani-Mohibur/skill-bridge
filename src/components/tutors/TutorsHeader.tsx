@@ -30,7 +30,7 @@ export function TutorsHeader({
       <div className="space-y-4 max-w-2xl relative z-10">
         {/* PRESERVED: Your Original Micro Announcement Badge */}
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/5 border border-emerald-500/20 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 tracking-wide animate-pulse">
-          <span>✨ Over 500+ Verified Expert Mentors Available</span>
+          <span>✨ Over 50+ Verified Expert Mentors Available</span>
         </div>
 
         {/* PRESERVED: Your Original Tutor Headings */}
