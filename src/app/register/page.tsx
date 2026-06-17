@@ -1,6 +1,7 @@
 import RegisterForm from "@/components/auth/RegisterForm";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Suspense } from "react";
 
 export default function RegisterPage() {
   return (
@@ -9,7 +10,15 @@ export default function RegisterPage() {
         {/* Subtle decorative background accents for the premium look */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
-        <RegisterForm />
+        <Suspense
+          fallback={
+            <div className="text-xs font-bold tracking-wide text-muted-foreground animate-pulse">
+              Constructing workspace instance...
+            </div>
+          }
+        >
+          <RegisterForm />
+        </Suspense>
       </main>
     </div>
   );
