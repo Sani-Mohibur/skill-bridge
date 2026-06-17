@@ -5,7 +5,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full border-t border-card-border bg-card mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           {/* Brand/Copyright */}
           <div className="text-sm text-muted-text font-medium">
