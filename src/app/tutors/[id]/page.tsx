@@ -10,12 +10,21 @@ import {
   DollarSign,
   CheckCircle2,
   MessageSquare,
+  CalendarDays,
 } from "lucide-react";
+import {
+  TutorAvailableSlotsTable,
+  TutorSlotData,
+} from "@/components/tutors/TutorAvailableSlotsTable";
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 export default function TutorProfileDetailsPage() {
   const { id } = useParams();
   const [tutor, setTutor] = useState<any>(null);
+  const [slots, setSlots] = useState<TutorSlotData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSlotsLoading, setIsSlotsLoading] = useState(true);
 
   useEffect(() => {
     if (!id) return;
@@ -23,9 +32,7 @@ export default function TutorProfileDetailsPage() {
     const fetchTutorProfile = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/tutor/${id}`,
-        );
+        const response = await fetch(`${API_BASE}/tutor/${id}`);
         if (!response.ok) throw new Error("Profile not found");
 
         const resData = await response.json();
@@ -38,7 +45,47 @@ export default function TutorProfileDetailsPage() {
     };
 
     fetchTutorProfile();
+    fetchTutorSlots();
   }, [id]);
+
+  const fetchTutorSlots = async () => {
+    try {
+      setIsSlotsLoading(true);
+      // Reusing your optimized backend logic filter by passing the query param
+      const res = await fetch(
+        `${API_BASE}/availability/upcoming?tutorId=${id}`,
+        {
+          credentials: "include",
+        },
+      );
+      const json = await res.json();
+      if (json.success) setSlots(json.data);
+    } catch (err) {
+      console.error("Error fetching specific tutor slots:", err);
+    } finally {
+      setIsSlotsLoading(false);
+    }
+  };
+
+  const handleBookSlot = async (slotId: string) => {
+    try {
+      const res = await fetch(`${API_BASE}/bookings/book`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ availabilityId: slotId }),
+        credentials: "include",
+      });
+      const json = await res.json();
+      if (json.success) {
+        alert("Class booked successfully!");
+        fetchTutorSlots(); // Refresh local list instantly
+      } else {
+        alert(json.message || "Booking failed.");
+      }
+    } catch (err) {
+      console.error("Booking handler error:", err);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -57,10 +104,10 @@ export default function TutorProfileDetailsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-background pt-24 pb-16 px-4 max-w-7xl mx-auto">
+    <main className="min-h-screen bg-background pt-16 pb-16 px-4 max-w-7xl mx-auto w-full">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Main Content Info Block: Column 1 & 2 */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-8">
           <div className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-sm space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-4">
@@ -99,23 +146,49 @@ export default function TutorProfileDetailsPage() {
               </p>
             </div>
 
-            {tutor.categories?.length > 0 && (
+            {/* Added Qualifications Dynamic Section */}
+            {tutor.qualifications && (
               <div className="space-y-2 pt-2">
                 <h3 className="font-semibold text-foreground text-sm">
-                  Expertise Frameworks
+                  Background & Education
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {tutor.qualifications}
+                </p>
+              </div>
+            )}
+
+            {/* Core Skills Tags Array */}
+            {tutor.skills?.length > 0 && (
+              <div className="space-y-2 pt-2">
+                <h3 className="font-semibold text-foreground text-sm">
+                  Subjects Taught
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {tutor.categories.map((category: string, index: number) => (
+                  {tutor.skills.map((skill: string, index: number) => (
                     <span
                       key={index}
-                      className="bg-secondary text-secondary-foreground text-xs px-2.5 py-1 rounded-md border border-border"
+                      className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
                     >
-                      {category}
+                      {skill}
                     </span>
                   ))}
                 </div>
               </div>
             )}
+          </div>
+
+          {/* NEW LIVE DIRECT AVAILABILITY SLOTS VIEW */}
+          <div className="space-y-4">
+            <h2 className="text-lg font-bold flex items-center gap-2 px-1">
+              <CalendarDays className="w-5 h-5 text-primary" /> Direct Live
+              Booking Slots
+            </h2>
+            <TutorAvailableSlotsTable
+              slots={slots}
+              onBookSlot={handleBookSlot}
+              isLoading={isSlotsLoading}
+            />
           </div>
 
           {/* Student Reviews Segment */}
@@ -177,19 +250,17 @@ export default function TutorProfileDetailsPage() {
               <Briefcase className="w-4 h-4 text-primary" />
               <span>{tutor.experienceYears} Years Experience</span>
             </div>
-            {/* <div className="flex items-center gap-2.5">
+            {/* totalHoursTaught preserved inside comment metrics layer safely
+            <div className="flex items-center gap-2.5">
               <Clock className="w-4 h-4 text-primary" />
               <span>{tutor.totalHoursTaught} Hours Instructed</span>
-            </div> */}
+            </div> 
+            */}
             <div className="flex items-center gap-2.5">
               <Mail className="w-4 h-4 text-primary" />
               <span className="truncate">{tutor.user?.email}</span>
             </div>
           </div>
-
-          <button className="w-full bg-primary hover:bg-primary/95 text-primary-foreground font-medium py-2.5 px-4 rounded-lg shadow-sm transition-colors text-sm">
-            Book Direct Session
-          </button>
         </div>
       </div>
     </main>
