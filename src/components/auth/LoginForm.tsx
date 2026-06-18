@@ -30,7 +30,7 @@ export default function LoginForm() {
 
             setTimeout(() => {
               if (userRole === "tutor") {
-                router.push("/manage-slots");
+                router.push("/slots");
               } else {
                 router.push("/tutors");
               }
