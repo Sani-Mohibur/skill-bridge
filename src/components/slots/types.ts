@@ -8,5 +8,6 @@ export interface SlotData {
   slot: string; // ISO String from backend
   timeDuration: string | null; // stored as minutes string, e.g., "120"
   pricePerHour: number | null;
+  status: string;
   isBooked: boolean;
 }
