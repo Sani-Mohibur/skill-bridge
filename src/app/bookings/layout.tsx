@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { headers } from "next/headers";
 import { ROLES } from "@/constants/roles";
 import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 interface BookingsLayoutProps {
   student: ReactNode;
@@ -16,7 +17,12 @@ export default async function BookingsLayout(props: BookingsLayoutProps) {
     },
   });
 
-  const userRole = session?.data?.user?.role;
+  // Guard check: Redirect unauthenticated requests to login page
+  if (!session?.data) {
+    redirect("login");
+  }
+
+  const userRole = session.data?.user?.role;
 
   // Dynamically route based on the authentic session role
   if (userRole === ROLES.TUTOR) {

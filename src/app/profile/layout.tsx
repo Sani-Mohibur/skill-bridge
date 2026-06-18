@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { headers } from "next/headers";
 import { ROLES } from "@/constants/roles";
 import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 interface ProfileLayoutProps {
   student: ReactNode;
@@ -15,7 +16,11 @@ export default async function ProfileLayout(props: ProfileLayoutProps) {
     },
   });
 
-  const userRole = session?.data?.user?.role;
+  if (!session?.data) {
+    redirect("/login");
+  }
+
+  const userRole = session.data?.user?.role;
 
   if (userRole === ROLES.TUTOR) {
     return <>{props.tutor}</>;
