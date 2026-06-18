@@ -24,6 +24,7 @@ export interface BookingData {
     location: string | null;
     slot: string;
     timeDuration: string | null;
+    pricePerHour: number | 0;
     tutorProfile: {
       title: string;
       pricePerHour: number;
@@ -55,8 +56,7 @@ export function BookingCard({
   const durationMins = availability.timeDuration
     ? parseInt(availability.timeDuration, 10)
     : 60;
-  const totalCost =
-    availability.tutorProfile.pricePerHour * (durationMins / 60);
+  const totalCost = availability.pricePerHour * (durationMins / 60);
 
   const isCompleted = status === "completed";
 
@@ -180,7 +180,7 @@ export function BookingCard({
             <span>
               Total Value:{" "}
               <strong className="text-emerald-600 dark:text-emerald-400 font-bold">
-                ${totalCost.toFixed(2)}
+                {totalCost === 0 ? "Free Session" : `$${totalCost.toFixed(2)}`}
               </strong>
             </span>
           </div>
