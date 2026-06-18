@@ -1,7 +1,11 @@
-export default function page() {
+"use client";
+
+import TutorDashboardView from "@/components/dashboard/TutorDashboard";
+
+export default function DashboardPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center text-6xl font-bold">
-      <h1> This is Dashboard page for tutor </h1>
-    </div>
+    <main className="min-h-screen bg-background text-foreground">
+      <TutorDashboardView />
+    </main>
   );
 }
