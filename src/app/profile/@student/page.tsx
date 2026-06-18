@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Settings } from "lucide-react";
-import { ProfileDisplayView } from "@/components/profile/ProfileDisplayView";
+import { ProfileDisplayView } from "@/components/profile/student/ProfileDisplayView";
 
 interface ProfileData {
   bio: string;

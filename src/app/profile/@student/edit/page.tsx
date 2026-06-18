@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Settings } from "lucide-react";
-import { ProfileEdit } from "@/components/profile/ProfileEdit";
+import { ProfileEdit } from "@/components/profile/student/ProfileEdit";
 
 interface ProfileData {
   bio: string;
