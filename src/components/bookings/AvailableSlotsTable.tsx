@@ -19,7 +19,7 @@ export interface SlotData {
   location: string | null;
   slot: string;
   timeDuration: string | null;
-  pricePerHour: number | null;
+  pricePerHour: number | 0;
   tutorProfile: {
     title: string;
     pricePerHour: number;
@@ -168,7 +168,9 @@ export function AvailableSlotsTable({
                     <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
                       <span className="flex items-center gap-0.5 font-bold px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
                         <DollarSign className="w-3 h-3" />
-                        {item.pricePerHour
+                        {item.pricePerHour !== undefined &&
+                        item.pricePerHour !== null &&
+                        item.pricePerHour !== 0
                           ? `${item.pricePerHour}/hr`
                           : "Free Session"}
                       </span>

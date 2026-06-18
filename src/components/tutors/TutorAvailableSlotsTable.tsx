@@ -10,6 +10,7 @@ export interface TutorSlotData {
   location: string | null;
   slot: string;
   timeDuration: string | null;
+  pricePerHour: number | 0;
 }
 
 interface TutorAvailableSlotsTableProps {
@@ -116,7 +117,12 @@ export function TutorAvailableSlotsTable({
 
                     <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
                       <span className="flex items-center gap-0.5 font-bold text-emerald-600 dark:text-emerald-400">
-                        <DollarSign className="w-3 h-3" /> Rate Included
+                        <DollarSign className="w-3 h-3" />{" "}
+                        {item.pricePerHour !== undefined &&
+                        item.pricePerHour !== null &&
+                        item.pricePerHour !== 0
+                          ? `${item.pricePerHour}/hr`
+                          : "Free Session"}
                       </span>
                       <span className="flex items-center gap-1 font-medium">
                         <Clock className="w-3 h-3" />
