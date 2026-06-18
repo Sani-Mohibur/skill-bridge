@@ -1,18 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BookingsHero } from "@/components/bookings/BookingsHero";
-import { BookingsTabs } from "@/components/bookings/BookingsTabs";
-import { UpcomingBookingsList } from "@/components/bookings/UpcomingBookingsList";
-import { PastBookingsList } from "@/components/bookings/PastBookingsList";
-import { MyReviewsList } from "@/components/bookings/MyReviewsList";
+import { BookingsHero } from "@/components/bookings/student/BookingsHero";
+import { BookingsTabs } from "@/components/bookings/student/BookingsTabs";
+import { PastBookingsList } from "@/components/bookings/student/PastBookingsList";
+import { MyReviewsList } from "@/components/bookings/student/MyReviewsList";
 import {
   AvailableSlotsTable,
   SlotData,
-} from "@/components/bookings/AvailableSlotsTable";
-import { AddReviewModal } from "@/components/bookings/AddReviewModal";
-import { BookingData } from "@/components/bookings/BookingCard";
-import { ReviewData } from "@/components/bookings/ReviewCard";
+} from "@/components/bookings/student/AvailableSlotsTable";
+import { BookingData } from "@/components/bookings/student/BookingCard";
+import { ReviewData } from "@/components/bookings/student/ReviewCard";
+import { AddReviewModal } from "@/components/bookings/student/AddReviewModal";
+import { UpcomingBookingsList } from "@/components/bookings/student/UpcomingBookingsList";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 

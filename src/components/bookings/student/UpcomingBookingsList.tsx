@@ -1,7 +1,7 @@
 "use client";
 
-import { BookingCard, BookingData } from "./BookingCard";
 import { CalendarDays } from "lucide-react";
+import { BookingCard, BookingData } from "./BookingCard";
 
 interface UpcomingBookingsListProps {
   bookings: BookingData[];
