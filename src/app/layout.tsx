@@ -20,6 +20,15 @@ export const metadata: Metadata = {
   title: "Skill Bridge - Tutor Marketplace",
   description:
     "Find expert tutors for your learning sessions with flexible scheduling",
+  // icons: {
+  //   icon: [
+  //     {
+  //       url: "/icon.svg",
+  //       sizes: "32x32", // Or any target size
+  //       type: "image/svg+xml",
+  //     },
+  //   ],
+  // },
 };
 
 export default function RootLayout({

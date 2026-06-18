@@ -10,6 +10,7 @@ import { authClient } from "@/lib/auth-client";
 import { NavLinks } from "./NavLinks";
 import { UserDropdown } from "./UserDropdown";
 import { MobileDrawer } from "./MobileDrawer";
+import { BrandLogo } from "./BrandLogo";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,16 +25,18 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Brand Logo */}
+
           <div className="flex-shrink-0">
             <Link
               href="/"
-              className="flex items-center gap-2 text-lg font-black tracking-tight text-foreground group transition-colors"
+              className="flex items-center gap-1 text-lg font-black tracking-tight text-foreground group transition-colors"
             >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-300">
-                <Sparkles className="w-4 h-4 fill-white/20" />
+              <div className="w-16 h-16 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                <BrandLogo />
               </div>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground to-muted-foreground group-hover:text-foreground transition-all duration-300">
-                Skill Bridge
+
+              <span className="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground to-muted-foreground group-hover:text-foreground transition-all duration-300">
+                SkillBridge
               </span>
             </Link>
           </div>
