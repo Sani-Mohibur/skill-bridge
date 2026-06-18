@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Loader2, Settings } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Settings } from "lucide-react";
 import { ProfileDisplayView } from "@/components/profile/ProfileDisplayView";
-import { ProfileEdit } from "@/components/profile/ProfileEdit";
 
 interface ProfileData {
   bio: string;
@@ -21,18 +21,9 @@ interface ProfileData {
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 export default function StudentProfilePage() {
+  const router = useRouter();
   const [profile, setProfile] = useState<ProfileData | null>(null);
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [formData, setFormData] = useState({
-    bio: "",
-    education: "",
-    phone: "",
-    address: "",
-  });
-
   const [isLoading, setIsLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveSuccess, setSaveSuccess] = useState(false);
 
   useEffect(() => {
     fetchProfileData();
@@ -47,12 +38,6 @@ export default function StudentProfilePage() {
       const json = await res.json();
       if (json.success && json.data) {
         setProfile(json.data);
-        setFormData({
-          bio: json.data.bio || "",
-          education: json.data.education || "",
-          phone: json.data.phone || "",
-          address: json.data.address || "",
-        });
       }
     } catch (err) {
       console.error("Error fetching profile contextual attributes layer:", err);
@@ -60,56 +45,6 @@ export default function StudentProfilePage() {
       setIsLoading(false);
     }
   };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (saveSuccess) setSaveSuccess(false);
-  };
-
-  const handleCancelEditing = () => {
-    if (profile) {
-      setFormData({
-        bio: profile.bio || "",
-        education: profile.education || "",
-        phone: profile.phone || "",
-        address: profile.address || "",
-      });
-    }
-    setIsEditMode(false);
-  };
-
-  const handleSubmitProfile = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      setIsSaving(true);
-      const res = await fetch(`${API_BASE}/profile/update`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-        credentials: "include",
-      });
-      const json = await res.json();
-      if (json.success) {
-        setSaveSuccess(true);
-        setProfile((prev: any) => ({ ...prev, ...formData }));
-        setIsEditMode(false);
-        setTimeout(() => setSaveSuccess(false), 3000);
-      }
-    } catch (err) {
-      console.error("Profile update matrix failure:", err);
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  const isDirty =
-    formData.bio !== (profile?.bio || "") ||
-    formData.education !== (profile?.education || "") ||
-    formData.phone !== (profile?.phone || "") ||
-    formData.address !== (profile?.address || "");
 
   if (isLoading) {
     return (
@@ -129,57 +64,15 @@ export default function StudentProfilePage() {
             Workspace Management
           </h2>
         </div>
-        <div>
-          {saveSuccess && (
-            <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-              ✓ Profile synchronized.
-            </span>
-          )}
-        </div>
       </div>
 
       {/* Main Structural Layout Area */}
       <div className="bg-zinc-50/50 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800/80 rounded-2xl p-6 md:p-8 shadow-xs w-full">
-        {!isEditMode && profile ? (
+        {profile && (
           <ProfileDisplayView
             profile={profile}
-            onEditToggle={() => setIsEditMode(true)}
+            onEditToggle={() => router.push("/profile/edit")}
           />
-        ) : (
-          <form onSubmit={handleSubmitProfile} className="w-full space-y-6">
-            <ProfileEdit
-              formData={formData}
-              readOnlyData={{
-                name: profile?.user.name || "",
-                email: profile?.user.email || "",
-              }}
-              onChange={handleInputChange}
-              onCancel={handleCancelEditing}
-            />
-
-            {/* Bottom Form Submission Panel Row */}
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800/80 w-full">
-              <button
-                type="button"
-                onClick={handleCancelEditing}
-                className="px-4 py-2 text-xs font-bold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800/60 dark:hover:bg-zinc-800 rounded-xl transition-all border border-zinc-300 dark:border-zinc-700/80 cursor-pointer"
-              >
-                Cancel
-              </button>
-
-              <button
-                type="submit"
-                disabled={isSaving || !isDirty}
-                className="px-6 py-2.5 text-xs font-bold text-white rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 disabled:opacity-30 disabled:pointer-events-none shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer flex items-center justify-center min-w-[75px]"
-              >
-                {isSaving ? (
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                ) : (
-                  "Save"
-                )}
-              </button>
-            </div>
-          </form>
         )}
       </div>
     </main>

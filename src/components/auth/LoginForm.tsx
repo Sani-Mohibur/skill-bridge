@@ -28,7 +28,7 @@ export default function LoginForm() {
 
             // Let the toast render, then smoothly push the user to the protected route dashboard
             setTimeout(() => {
-              router.push("/dashboard");
+              router.push("/tutors");
               router.refresh();
             }, 800); // 180ms delay gives the notification time to fully slide in and register visually
           },

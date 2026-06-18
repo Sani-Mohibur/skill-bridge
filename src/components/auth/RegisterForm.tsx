@@ -41,7 +41,7 @@ export default function RegisterForm() {
       await authClient.signIn.email({
         email: formData.email,
         password: formData.password,
-        callbackURL: role === "tutor" ? "/onboarding" : "/dashboard",
+        callbackURL: role === "tutor" ? "/onboarding" : "/profile/edit",
       });
 
       toast.success("Access authorized! Redirecting...");
