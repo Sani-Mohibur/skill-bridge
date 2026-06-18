@@ -4,13 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
-import { Menu, X, Sun, Moon, Sparkles } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { NavLinks } from "./NavLinks";
 import { UserDropdown } from "./UserDropdown";
-import { MobileDrawer } from "./MobileDrawer";
 import { BrandLogo } from "./BrandLogo";
+import { MobileDrawer } from "./drawer/MobileDrawer";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,13 +19,14 @@ export default function Navbar() {
 
   const { data: session, isPending } = authClient.useSession();
   const isLoggedIn = !!session;
+  // Safely capture the dynamic user role string from the login session state
+  const userRole = session?.user?.role;
 
   return (
     <nav className="w-full border-b border-border/60 bg-background/70 backdrop-blur-xl sticky top-0 z-50 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Brand Logo */}
-
           <div className="flex-shrink-0">
             <Link
               href="/"
@@ -42,7 +43,11 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Central Links Component Extract */}
-          <NavLinks pathname={pathname} isLoggedIn={isLoggedIn} />
+          <NavLinks
+            pathname={pathname}
+            isLoggedIn={isLoggedIn}
+            userRole={userRole}
+          />
 
           {/* Desktop Utilities + Auth Interaction Area */}
           <div className="hidden md:flex items-center space-x-3">
@@ -124,6 +129,7 @@ export default function Navbar() {
         pathname={pathname}
         isLoggedIn={isLoggedIn}
         session={session}
+        userRole={userRole}
       />
     </nav>
   );

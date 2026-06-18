@@ -4,26 +4,32 @@ import React from "react";
 import Link from "next/link";
 import { ROLES } from "@/constants/roles";
 
-interface NavLinksProps {
+interface MobileNavLinksProps {
   pathname: string;
+  setIsOpen: (open: boolean) => void;
   isLoggedIn: boolean;
   userRole?: string;
 }
 
-export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
+export function MobileNavLinks({
+  pathname,
+  setIsOpen,
+  isLoggedIn,
+  userRole,
+}: MobileNavLinksProps) {
   const isActive = (path: string) => pathname === path;
   const isTutor = userRole === ROLES.TUTOR;
 
   return (
-    <div className="hidden md:flex items-center space-x-1">
-      {/* Role Conditional Link: Students find tutors, Tutors manage slots */}
+    <>
       {isTutor ? (
         <Link
           href="/slots"
-          className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
+          onClick={() => setIsOpen(false)}
+          className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
             isActive("/slots")
               ? "text-emerald-500 bg-emerald-500/5"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+              : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
           }`}
         >
           Manage Slots
@@ -31,10 +37,11 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
       ) : (
         <Link
           href="/tutors"
-          className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
+          onClick={() => setIsOpen(false)}
+          className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
             isActive("/tutors")
               ? "text-emerald-500 bg-emerald-500/5"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+              : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
           }`}
         >
           Find Tutors
@@ -43,10 +50,11 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
 
       <Link
         href="/how-it-works"
-        className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
+        onClick={() => setIsOpen(false)}
+        className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
           isActive("/how-it-works")
             ? "text-emerald-500 bg-emerald-500/5"
-            : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+            : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
         }`}
       >
         How It Works
@@ -54,10 +62,11 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
 
       <Link
         href="/about"
-        className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
+        onClick={() => setIsOpen(false)}
+        className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
           isActive("/about")
             ? "text-emerald-500 bg-emerald-500/5"
-            : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+            : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
         }`}
       >
         About
@@ -67,23 +76,24 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
         <>
           <Link
             href="/bookings"
-            className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
+            onClick={() => setIsOpen(false)}
+            className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
               isActive("/bookings")
                 ? "text-emerald-500 bg-emerald-500/5"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
             }`}
           >
             Bookings
           </Link>
 
-          {/* Extra Role Conditional Link: Tutors get Reviews */}
           {isTutor && (
             <Link
               href="/reviews"
-              className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
+              onClick={() => setIsOpen(false)}
+              className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
                 isActive("/reviews")
                   ? "text-emerald-500 bg-emerald-500/5"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                  : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
               }`}
             >
               Reviews
@@ -93,15 +103,16 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
       ) : (
         <Link
           href="/register?role=tutor"
-          className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
+          onClick={() => setIsOpen(false)}
+          className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
             isActive("/register")
               ? "text-emerald-500 bg-emerald-500/5"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+              : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
           }`}
         >
           Become a Tutor
         </Link>
       )}
-    </div>
+    </>
   );
 }
