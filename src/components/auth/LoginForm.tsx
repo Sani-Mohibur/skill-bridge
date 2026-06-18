@@ -21,16 +21,21 @@ export default function LoginForm() {
       await authClient.signIn.email({
         email: formData.email,
         password: formData.password,
-        // Remove the global callbackURL string from here so it doesn't instantly force a hard refresh
         fetchOptions: {
-          onSuccess: () => {
+          onSuccess: async (ctx) => {
             toast.success("Welcome back! Access granted.");
 
-            // Let the toast render, then smoothly push the user to the protected route dashboard
+            // Pull the user role from the response context or auth client state
+            const userRole = ctx?.data?.user?.role;
+
             setTimeout(() => {
-              router.push("/tutors");
+              if (userRole === "tutor") {
+                router.push("/manage-slots");
+              } else {
+                router.push("/tutors");
+              }
               router.refresh();
-            }, 800); // 180ms delay gives the notification time to fully slide in and register visually
+            }, 800);
           },
           onError: (ctx) => {
             toast.error(
