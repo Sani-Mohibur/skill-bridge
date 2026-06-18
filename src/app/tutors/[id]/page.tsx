@@ -51,7 +51,6 @@ export default function TutorProfileDetailsPage() {
   const fetchTutorSlots = async () => {
     try {
       setIsSlotsLoading(true);
-      // Reusing your optimized backend logic filter by passing the query param
       const res = await fetch(
         `${API_BASE}/availability/upcoming?tutorId=${id}`,
         {
@@ -78,7 +77,7 @@ export default function TutorProfileDetailsPage() {
       const json = await res.json();
       if (json.success) {
         alert("Class booked successfully!");
-        fetchTutorSlots(); // Refresh local list instantly
+        fetchTutorSlots();
       } else {
         alert(json.message || "Booking failed.");
       }
@@ -146,7 +145,6 @@ export default function TutorProfileDetailsPage() {
               </p>
             </div>
 
-            {/* Added Qualifications Dynamic Section */}
             {tutor.qualifications && (
               <div className="space-y-2 pt-2">
                 <h3 className="font-semibold text-foreground text-sm">
@@ -158,7 +156,6 @@ export default function TutorProfileDetailsPage() {
               </div>
             )}
 
-            {/* Core Skills Tags Array */}
             {tutor.skills?.length > 0 && (
               <div className="space-y-2 pt-2">
                 <h3 className="font-semibold text-foreground text-sm">
@@ -178,7 +175,6 @@ export default function TutorProfileDetailsPage() {
             )}
           </div>
 
-          {/* NEW LIVE DIRECT AVAILABILITY SLOTS VIEW */}
           <div className="space-y-4">
             <h2 className="text-lg font-bold flex items-center gap-2 px-1">
               <CalendarDays className="w-5 h-5 text-primary" /> Direct Live
@@ -191,7 +187,6 @@ export default function TutorProfileDetailsPage() {
             />
           </div>
 
-          {/* Student Reviews Segment */}
           <div className="space-y-4">
             <h2 className="text-lg font-bold flex items-center gap-2 px-1">
               <MessageSquare className="w-5 h-5 text-primary" /> Student
@@ -231,36 +226,52 @@ export default function TutorProfileDetailsPage() {
           </div>
         </div>
 
-        {/* Action Sidebar: Column 3 */}
-        <div className="bg-card border border-border rounded-xl p-6 shadow-sm space-y-6 lg:sticky lg:top-24">
-          <div>
-            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              Hourly Rate
+        {/* Action Sidebar Column Wrapper (Column 3) */}
+        <div className="space-y-6 lg:sticky lg:top-24">
+          {/* Box 1: Hourly Rate Content */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm space-y-6">
+            <div>
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                Hourly Rate
+              </div>
+              <div className="flex items-baseline gap-1 mt-1">
+                <span className="text-3xl font-extrabold text-foreground">
+                  ${tutor.pricePerHour}
+                </span>
+                <span className="text-muted-foreground text-sm">/ hour</span>
+              </div>
             </div>
-            <div className="flex items-baseline gap-1 mt-1">
-              <span className="text-3xl font-extrabold text-foreground">
-                ${tutor.pricePerHour}
-              </span>
-              <span className="text-muted-foreground text-sm">/ hour</span>
+
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2.5">
+                <Briefcase className="w-4 h-4 text-primary" />
+                <span>{tutor.experienceYears} Years Experience</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-primary" />
+                <span className="truncate">{tutor.user?.email}</span>
+              </div>
             </div>
           </div>
 
-          <div className="space-y-3 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2.5">
-              <Briefcase className="w-4 h-4 text-primary" />
-              <span>{tutor.experienceYears} Years Experience</span>
+          {/* Box 2: Categories Display Container */}
+          {tutor.categories?.length > 0 && (
+            <div className="bg-card border border-border rounded-xl p-6 shadow-sm space-y-4">
+              <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                Expertise Categories
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {tutor.categories.map((categoryName: string, index: number) => (
+                  <span
+                    key={index}
+                    className="text-[11px] font-bold tracking-wide px-2.5 py-1 rounded-md bg-emerald-500/5 border border-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                  >
+                    {categoryName}
+                  </span>
+                ))}
+              </div>
             </div>
-            {/* totalHoursTaught preserved inside comment metrics layer safely
-            <div className="flex items-center gap-2.5">
-              <Clock className="w-4 h-4 text-primary" />
-              <span>{tutor.totalHoursTaught} Hours Instructed</span>
-            </div> 
-            */}
-            <div className="flex items-center gap-2.5">
-              <Mail className="w-4 h-4 text-primary" />
-              <span className="truncate">{tutor.user?.email}</span>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </main>
