@@ -9,11 +9,14 @@ import {
   CheckCircle2,
   MessageSquare,
   CalendarDays,
+  ShieldCheck,
+  Award,
 } from "lucide-react";
 import {
   TutorAvailableSlotsTable,
   TutorSlotData,
 } from "@/components/tutors/TutorAvailableSlotsTable";
+import { toast } from "sonner";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -65,6 +68,7 @@ export default function TutorProfileDetailsPage() {
   };
 
   const handleBookSlot = async (slotId: string) => {
+    const toastId = toast.loading("Booking your slot...");
     try {
       const res = await fetch(`${API_BASE}/bookings/book`, {
         method: "POST",
@@ -74,13 +78,14 @@ export default function TutorProfileDetailsPage() {
       });
       const json = await res.json();
       if (json.success) {
-        alert("Class booked successfully!");
+        toast.success("Class booked successfully!", { id: toastId });
         fetchTutorSlots();
       } else {
-        alert(json.message || "Booking failed.");
+        toast.error(json.message || "Failed to book slot.", { id: toastId });
       }
     } catch (err) {
       console.error("Booking handler error:", err);
+      toast.error("An error occurred while booking.", { id: toastId });
     }
   };
 
@@ -105,19 +110,45 @@ export default function TutorProfileDetailsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Main Content Info Block: Column 1 & 2 */}
         <div className="lg:col-span-2 space-y-8">
-          <div className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-sm space-y-4">
+          <div
+            className={`relative bg-card border rounded-xl p-6 md:p-8 shadow-sm space-y-4 overflow-hidden ${
+              tutor.isFeatured
+                ? "border-amber-500/100 dark:amber-500/30"
+                : "border-border"
+            }`}
+          >
+            {/* Top Subtle Featured Line Banner Indicator */}
+            {/* {tutor.isFeatured && (
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500" />
+            )} */}
+
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-400 dark:text-blue-400 flex items-center justify-center font-bold text-2xl uppercase">
-                  {tutor.name.charAt(0)}
+                <div className="relative shrink-0">
+                  <div className="w-16 h-16 rounded-full bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-400 dark:text-blue-400 flex items-center justify-center font-bold text-2xl uppercase">
+                    {tutor.name.charAt(0)}
+                  </div>
+                  {tutor.isVerified && (
+                    <div className="absolute -bottom-1 -right-1 bg-background dark:bg-card rounded-full p-0.5 shadow-xs">
+                      <ShieldCheck className="w-5 h-5 fill-emerald-500 dark:fill-blue-500 text-white dark:text-background" />
+                    </div>
+                  )}
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <h1 className="text-2xl font-bold text-card-foreground">
                       {tutor.name}
                     </h1>
                     {tutor.isVerified && (
                       <CheckCircle2 className="w-5 h-5 text-emerald-500 dark:text-blue-500 fill-emerald-500/10 dark:fill-blue-500/10" />
+                    )}
+
+                    {/* Premium Featured Tag Badge */}
+                    {tutor.isFeatured && (
+                      <span className="inline-flex items-center gap-0.5 text-[9px] font-black tracking-wide uppercase px-2 py-0.5 rounded-md bg-amber-500/10 dark:bg-blue-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 dark:border-blue-500/20 shadow-xs">
+                        <Award className="w-3 h-3" />
+                        Featured Tutor
+                      </span>
                     )}
                   </div>
                   <p className="text-primary font-medium text-sm mt-0.5">

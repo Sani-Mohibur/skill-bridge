@@ -13,6 +13,7 @@ import { BookingData } from "@/components/bookings/student/BookingCard";
 import { ReviewData } from "@/components/bookings/student/ReviewCard";
 import { AddReviewModal } from "@/components/bookings/student/AddReviewModal";
 import { UpcomingBookingsList } from "@/components/bookings/student/UpcomingBookingsList";
+import { toast } from "sonner";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -21,6 +22,8 @@ export default function BookingsPage() {
   const [reviews, setReviews] = useState<ReviewData[]>([]);
   const [availableSlots, setAvailableSlots] = useState<SlotData[]>([]);
 
+  const [isBooking, setIsBooking] = useState(false);
+  const [isCanceling, setIsCanceling] = useState(false);
   const [isBookingsLoading, setIsBookingsLoading] = useState(true);
   const [isReviewsLoading, setIsReviewsLoading] = useState(true);
   const [isSlotsLoading, setIsSlotsLoading] = useState(true);
@@ -82,6 +85,8 @@ export default function BookingsPage() {
   };
 
   const handleBookSlot = async (slotId: string) => {
+    setIsBooking(true);
+    const toastId = toast.loading("Booking your slot...");
     try {
       const res = await fetch(`${API_BASE}/bookings/book`, {
         method: "POST",
@@ -91,26 +96,46 @@ export default function BookingsPage() {
       });
       const json = await res.json();
       if (json.success) {
-        alert("Class booked successfully!");
+        toast.success("Class booked successfully!", { id: toastId });
         await Promise.all([fetchBookings(), fetchAvailableSlots()]);
+      } else {
+        toast.error(json.message || "Failed to book slot.", { id: toastId });
       }
     } catch (err) {
       console.error("Booking error:", err);
+      toast.error("An error occurred while booking.", { id: toastId });
+    } finally {
+      setIsBooking(false);
     }
   };
 
   const handleCancelBooking = async (bookingId: string) => {
     if (!confirm("Are you sure you want to cancel this class booking?")) return;
+
+    setIsCanceling(true);
+    const toastId = toast.loading("Canceling your booking...");
+
     try {
       const res = await fetch(`${API_BASE}/bookings/cancel/${bookingId}`, {
         method: "DELETE",
         credentials: "include",
       });
+
       const json = await res.json();
-      if (json.success)
+
+      if (json.success) {
+        toast.success("Booking canceled successfully!", { id: toastId });
         await Promise.all([fetchBookings(), fetchAvailableSlots()]);
+      } else {
+        toast.error(json.message || "Failed to cancel booking.", {
+          id: toastId,
+        });
+      }
     } catch (err) {
       console.error("Error canceling booking:", err);
+      toast.error("An error occurred while canceling.", { id: toastId });
+    } finally {
+      setIsCanceling(false);
     }
   };
 
@@ -127,9 +152,15 @@ export default function BookingsPage() {
         body: JSON.stringify(payload),
       });
       const json = await res.json();
-      if (json.success) await Promise.all([fetchBookings(), fetchMyReviews()]);
+      if (json.success) {
+        toast.success("Review submitted successfully!");
+        await Promise.all([fetchBookings(), fetchMyReviews()]);
+      } else {
+        toast.error(json.message || "Failed to submit review.");
+      }
     } catch (err) {
       console.error("Error submitting review:", err);
+      toast.error("An error occurred while submitting.");
     }
   };
 
