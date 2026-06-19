@@ -1,4 +1,4 @@
-import Link from "next/link";
+import React from "react";
 
 interface CategoryCard {
   title: string;
@@ -40,40 +40,39 @@ const POPULAR_CATEGORIES: CategoryCard[] = [
 
 export default function FeaturedCategories() {
   return (
-    <section className="w-full py-16 md:py-20 border-y border-card-border bg-muted-surface/30">
+    <section className="w-full py-20 border-b border-card-border bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
-        <div className="text-center md:text-left mb-10">
-          <h2 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
-            Explore Popular Subjects
+        <div className="text-center md:text-left mb-12">
+          <h2 className="text-3xl font-black tracking-tight text-foreground sm:text-4xl">
+            Most Trending Subjects
           </h2>
-          <p className="mt-2 text-sm text-muted-text">
-            Select a specialized technical vertical to find matching engineering
-            mentors.
+          <p className="mt-3 text-sm font-medium text-muted-foreground max-w-xl leading-relaxed">
+            Discover the most popular topics you want to learn, explore
+            specialized skills, and find the perfect mentor to help you succeed.
           </p>
         </div>
 
         {/* Categories Grid Layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {POPULAR_CATEGORIES.map((category) => (
-            <Link
+            <div
               key={category.slug}
-              href={`/tutors?category=${category.slug}`}
-              className="group block p-6 rounded-xl border border-card-border bg-card hover:border-brand-accent/50 hover:shadow-md hover:shadow-brand-accent/5 transition-all duration-300 relative overflow-hidden"
+              className="group p-6 rounded-2xl border border-card-border bg-card hover:border-brand-accent/50 dark:hover:border-blue-500/50 hover:shadow-xl hover:shadow-brand-accent/5 dark:hover:shadow-blue-500/5 transition-all duration-300 relative overflow-hidden"
             >
-              {/* Subtle top accent bar that lights up on hover */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-brand-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              {/* Top Accent Bar: Emerald in Light, Blue/Cyan in Dark */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-brand-accent dark:bg-gradient-to-r dark:from-blue-500 dark:to-cyan-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
               <div className="text-3xl mb-4 filter drop-shadow-sm group-hover:scale-110 transition-transform duration-300 inline-block">
                 {category.icon}
               </div>
-              <h3 className="text-base font-bold text-foreground transition-colors">
+              <h3 className="text-base font-bold text-foreground transition-colors tracking-tight">
                 {category.title}
               </h3>
-              <p className="mt-2 text-xs leading-relaxed text-muted-text">
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground font-medium">
                 {category.description}
               </p>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
