@@ -159,7 +159,7 @@ export default function AdminUserDirectoryPage() {
                     <span
                       className={`inline-flex items-center gap-1.5 text-[10px] font-bold ${
                         user.status === "ACTIVE"
-                          ? "text-emerald-600 dark:text-emerald-400"
+                          ? "text-emerald-600 dark:text-blue-500"
                           : user.status === "PENDING"
                             ? "text-amber-600 dark:text-amber-400"
                             : "text-red-600 dark:text-red-400"
@@ -168,7 +168,7 @@ export default function AdminUserDirectoryPage() {
                       <span
                         className={`w-1.5 h-1.5 rounded-full fill-current ${
                           user.status === "ACTIVE"
-                            ? "bg-emerald-500"
+                            ? "bg-emerald-500 dark:bg-blue-500"
                             : user.status === "PENDING"
                               ? "bg-amber-500"
                               : "bg-red-500"

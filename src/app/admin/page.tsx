@@ -162,19 +162,19 @@ export default function AdminOverviewPage() {
                 node: "Stripe Micro-Escrow Engine",
                 status: "Operational",
                 color:
-                  "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
+                  "text-emerald-500 bg-emerald-500/10 border-emerald-500/20 dark:text-blue-400 dark:bg-blue-500/5 dark:border-blue-500/10",
               },
               {
                 node: "Socket Real-time Router",
                 status: "Operational",
                 color:
-                  "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
+                  "text-emerald-500 bg-emerald-500/10 border-emerald-500/20 dark:text-blue-400 dark:bg-blue-500/5 dark:border-blue-500/10",
               },
               {
                 node: "Metadata Search Index Vector",
                 status: "Operational",
                 color:
-                  "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
+                  "text-emerald-500 bg-emerald-500/10 border-emerald-500/20 dark:text-blue-400 dark:bg-blue-500/5 dark:border-blue-500/10",
               },
             ].map((system, i) => (
               <div
