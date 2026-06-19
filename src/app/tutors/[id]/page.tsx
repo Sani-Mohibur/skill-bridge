@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import {
   Star,
   Mail,
   Briefcase,
-  Clock,
-  DollarSign,
   CheckCircle2,
   MessageSquare,
   CalendarDays,
@@ -110,7 +108,7 @@ export default function TutorProfileDetailsPage() {
           <div className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-sm space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-2xl uppercase">
+                <div className="w-16 h-16 rounded-full bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-400 dark:text-blue-400 flex items-center justify-center font-bold text-2xl uppercase">
                   {tutor.name.charAt(0)}
                 </div>
                 <div>
@@ -119,7 +117,7 @@ export default function TutorProfileDetailsPage() {
                       {tutor.name}
                     </h1>
                     {tutor.isVerified && (
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 fill-emerald-500/10" />
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500 dark:text-blue-500 fill-emerald-500/10 dark:fill-blue-500/10" />
                     )}
                   </div>
                   <p className="text-primary font-medium text-sm mt-0.5">
@@ -165,7 +163,7 @@ export default function TutorProfileDetailsPage() {
                   {tutor.skills.map((skill: string, index: number) => (
                     <span
                       key={index}
-                      className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+                      className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-600 dark:text-blue-400 border border-emerald-500/20 dark:border-blue-500/20"
                     >
                       {skill}
                     </span>
@@ -177,8 +175,8 @@ export default function TutorProfileDetailsPage() {
 
           <div className="space-y-4">
             <h2 className="text-lg font-bold flex items-center gap-2 px-1">
-              <CalendarDays className="w-5 h-5 text-primary" /> Direct Live
-              Booking Slots
+              <CalendarDays className="w-5 h-5 text-emerald-500 dark:text-blue-500" />{" "}
+              Direct Live Booking Slots
             </h2>
             <TutorAvailableSlotsTable
               slots={slots}
@@ -189,8 +187,8 @@ export default function TutorProfileDetailsPage() {
 
           <div className="space-y-4">
             <h2 className="text-lg font-bold flex items-center gap-2 px-1">
-              <MessageSquare className="w-5 h-5 text-primary" /> Student
-              Feedback
+              <MessageSquare className="w-5 h-5 text-emerald-500 dark:text-blue-500" />{" "}
+              Student Feedback
             </h2>
 
             {!tutor.reviews || tutor.reviews.length === 0 ? (
@@ -244,11 +242,11 @@ export default function TutorProfileDetailsPage() {
 
             <div className="space-y-3 text-sm text-muted-foreground">
               <div className="flex items-center gap-2.5">
-                <Briefcase className="w-4 h-4 text-primary" />
+                <Briefcase className="w-4 h-4 text-emerald-500 dark:text-blue-500" />
                 <span>{tutor.experienceYears} Years Experience</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-primary" />
+                <Mail className="w-4 h-4 text-emerald-500 dark:text-blue-500" />
                 <span className="truncate">{tutor.user?.email}</span>
               </div>
             </div>
@@ -264,7 +262,7 @@ export default function TutorProfileDetailsPage() {
                 {tutor.categories.map((categoryName: string, index: number) => (
                   <span
                     key={index}
-                    className="text-[11px] font-bold tracking-wide px-2.5 py-1 rounded-md bg-emerald-500/5 border border-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                    className="text-[11px] font-bold tracking-wide px-2.5 py-1 rounded-md bg-emerald-500/5 dark:bg-blue-500/5 border border-emerald-500/10 dark:border-blue-500/10 text-emerald-600 dark:text-blue-400"
                   >
                     {categoryName}
                   </span>

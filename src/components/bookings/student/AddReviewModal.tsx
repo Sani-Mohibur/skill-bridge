@@ -131,7 +131,7 @@ export function AddReviewModal({
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="What went well? How could the session be improved?..."
-              className="w-full text-xs bg-muted/20 border border-border/40 focus:border-emerald-500 rounded-lg p-2.5 outline-hidden resize-none transition-colors disabled:opacity-60"
+              className="w-full text-xs bg-muted/20 border border-border/40 focus:border-emerald-500 dark:focus:border-blue-500 rounded-lg p-2.5 outline-hidden resize-none transition-colors disabled:opacity-60"
             />
           </div>
 
@@ -148,7 +148,7 @@ export function AddReviewModal({
             <button
               type="submit"
               disabled={isPending}
-              className="px-3 py-1.5 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/50 rounded-lg cursor-pointer transition-colors"
+              className="px-3 py-1.5 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-blue-600 dark:hover:bg-blue-700 disabled:bg-emerald-600/50 dark:disabled:bg-blue-600/50 rounded-lg cursor-pointer transition-colors"
             >
               {isPending ? "Submitting..." : "Submit Review"}
             </button>

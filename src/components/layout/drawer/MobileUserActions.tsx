@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LayoutDashboard, LogOut, User } from "lucide-react";
@@ -35,7 +34,7 @@ export function MobileUserActions({ setIsOpen }: MobileUserActionsProps) {
           variant="outline"
           className="w-full text-sm font-bold tracking-wide h-10 rounded-xl gap-2 cursor-pointer border-border/60 justify-start px-4"
         >
-          <User className="w-4 h-4 text-emerald-500" />
+          <User className="w-4 h-4 text-emerald-500 dark:text-blue-500" />
           My Profile
         </Button>
       </Link>

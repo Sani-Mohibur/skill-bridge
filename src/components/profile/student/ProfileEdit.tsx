@@ -34,8 +34,8 @@ export function ProfileEdit({
       {/* Account Info Section Container */}
       <div className="space-y-4">
         <h3 className="text-xs font-black uppercase tracking-wider text-zinc-400 dark:text-zinc-500 flex items-center gap-1.5">
-          <Shield className="w-3.5 h-3.5 text-emerald-500" /> Core Account
-          Metadata (Read-Only)
+          <Shield className="w-3.5 h-3.5 text-emerald-500 dark:text-blue-400" />{" "}
+          Core Account Metadata (Read-Only)
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -87,7 +87,7 @@ export function ProfileEdit({
               value={formData.phone}
               onChange={onChange}
               placeholder="e.g., +880 17XXXXXXXX"
-              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-emerald-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
+              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-blue-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
             />
           </div>
 
@@ -102,7 +102,7 @@ export function ProfileEdit({
               value={formData.education}
               onChange={onChange}
               placeholder="e.g., Undergraduate, High School"
-              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-emerald-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
+              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-blue-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
             />
           </div>
         </div>
@@ -118,7 +118,7 @@ export function ProfileEdit({
             value={formData.address}
             onChange={onChange}
             placeholder="Enter your current street location address parameters"
-            className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-emerald-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
+            className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-blue-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
           />
         </div>
 
@@ -133,7 +133,7 @@ export function ProfileEdit({
             value={formData.bio}
             onChange={onChange}
             placeholder="Describe your learning trajectory or specific tech framework targets..."
-            className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-emerald-500/60 rounded-lg px-3.5 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs resize-none leading-relaxed"
+            className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-blue-500/60 rounded-lg px-3.5 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs resize-none leading-relaxed"
           />
         </div>
       </div>

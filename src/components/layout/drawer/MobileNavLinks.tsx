@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { ROLES } from "@/constants/roles";
 
@@ -28,7 +27,7 @@ export function MobileNavLinks({
           onClick={() => setIsOpen(false)}
           className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
             isActive("/slots")
-              ? "text-emerald-500 bg-emerald-500/5"
+              ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/5 dark:bg-blue-500/5"
               : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
           }`}
         >
@@ -40,7 +39,7 @@ export function MobileNavLinks({
           onClick={() => setIsOpen(false)}
           className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
             isActive("/tutors")
-              ? "text-emerald-500 bg-emerald-500/5"
+              ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/5 dark:bg-blue-500/5"
               : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
           }`}
         >
@@ -53,7 +52,7 @@ export function MobileNavLinks({
         onClick={() => setIsOpen(false)}
         className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
           isActive("/how-it-works")
-            ? "text-emerald-500 bg-emerald-500/5"
+            ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/5 dark:bg-blue-500/5"
             : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
         }`}
       >
@@ -65,7 +64,7 @@ export function MobileNavLinks({
         onClick={() => setIsOpen(false)}
         className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
           isActive("/about")
-            ? "text-emerald-500 bg-emerald-500/5"
+            ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/5 dark:bg-blue-500/5"
             : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
         }`}
       >
@@ -79,7 +78,7 @@ export function MobileNavLinks({
             onClick={() => setIsOpen(false)}
             className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
               isActive("/bookings")
-                ? "text-emerald-500 bg-emerald-500/5"
+                ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/5 dark:bg-blue-500/5"
                 : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
             }`}
           >
@@ -92,7 +91,7 @@ export function MobileNavLinks({
               onClick={() => setIsOpen(false)}
               className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
                 isActive("/reviews")
-                  ? "text-emerald-500 bg-emerald-500/5"
+                  ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/5 dark:bg-blue-500/5"
                   : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
               }`}
             >
@@ -106,7 +105,7 @@ export function MobileNavLinks({
           onClick={() => setIsOpen(false)}
           className={`block px-3 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
             isActive("/register")
-              ? "text-emerald-500 bg-emerald-500/5"
+              ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/5 dark:bg-blue-500/5"
               : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
           }`}
         >

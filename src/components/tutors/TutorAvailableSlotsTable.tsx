@@ -82,7 +82,7 @@ export function TutorAvailableSlotsTable({
               return (
                 <tr
                   key={item.id}
-                  className="group hover:bg-emerald-500/[0.02] transition-colors duration-150"
+                  className="group hover:bg-emerald-500/[0.02] dark:hover:bg-blue-500/[0.02] transition-colors duration-150"
                 >
                   {/* Session Topic Column */}
                   <td className="p-4 pl-5 space-y-1 max-w-[320px]">
@@ -94,7 +94,7 @@ export function TutorAvailableSlotsTable({
                         "Tailored project timeline analysis, live optimization walkthroughs, and clean code review targets."}
                     </p>
                     <div className="flex items-center gap-1 text-[10px] text-muted-foreground mt-1">
-                      <MapPin className="w-3 h-3 text-emerald-500" />
+                      <MapPin className="w-3 h-3 text-emerald-500 dark:text-blue-500" />
                       <span className="truncate">
                         {item.location || "Remote (Google Meet / Zoom)"}
                       </span>
@@ -116,7 +116,7 @@ export function TutorAvailableSlotsTable({
                     </div>
 
                     <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
-                      <span className="flex items-center gap-0.5 font-bold text-emerald-600 dark:text-emerald-400">
+                      <span className="flex items-center gap-0.5 font-bold text-emerald-600 dark:text-blue-400">
                         <DollarSign className="w-3 h-3" />{" "}
                         {item.pricePerHour !== undefined &&
                         item.pricePerHour !== null &&
@@ -139,7 +139,7 @@ export function TutorAvailableSlotsTable({
                       type="button"
                       disabled={bookingId !== null}
                       onClick={() => handleBookingClick(item.id)}
-                      className="px-4 py-2 text-[11px] font-bold text-white rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 disabled:opacity-50 transition-all cursor-pointer"
+                      className="px-4 py-2 text-[11px] font-bold text-white rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 dark:from-blue-600 dark:to-cyan-500 dark:hover:from-blue-500 dark:hover:to-cyan-400 disabled:opacity-50 transition-all cursor-pointer"
                     >
                       {isCurrentRowBooking ? "Booking..." : "Book Class"}
                     </button>

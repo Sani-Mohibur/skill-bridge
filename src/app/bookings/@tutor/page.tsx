@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { TutorBookingHeader } from "@/components/bookings/tutor/TutorBookingHeader";
 import { TutorBookingRow } from "@/components/bookings/tutor/TutorBookingRow";
 import { SlotData } from "@/components/slots/types";
@@ -68,7 +68,7 @@ export default function TutorBookingsDashboard() {
               onClick={() => setActiveTab("upcoming")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 activeTab === "upcoming"
-                  ? "bg-background text-foreground shadow-xs"
+                  ? "bg-background text-foreground dark:text-blue-400 shadow-xs"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -79,7 +79,7 @@ export default function TutorBookingsDashboard() {
               onClick={() => setActiveTab("past")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 activeTab === "past"
-                  ? "bg-background text-foreground shadow-xs"
+                  ? "bg-background text-foreground dark:text-blue-400 shadow-xs"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >

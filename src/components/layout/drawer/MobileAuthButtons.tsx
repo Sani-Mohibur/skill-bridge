@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -21,7 +20,7 @@ export function MobileAuthButtons({ setIsOpen }: MobileAuthButtonsProps) {
       </Link>
 
       <Link href="/register" onClick={() => setIsOpen(false)} passHref>
-        <Button className="w-full text-sm font-bold tracking-wide h-10 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white cursor-pointer border-none">
+        <Button className="w-full text-sm font-bold tracking-wide h-10 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-blue-600 dark:to-cyan-600 text-white cursor-pointer border-none">
           Sign Up
         </Button>
       </Link>

@@ -31,7 +31,7 @@ export function ReviewAnalyticsHeader({ reviews }: ReviewAnalyticsHeaderProps) {
     <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
       {/* Card 1: Core Score Breakdown */}
       <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-3">
-        <span className="text-[10px] font-extrabold tracking-widest text-emerald-600 dark:text-emerald-400 uppercase bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 w-fit">
+        <span className="text-[10px] font-extrabold tracking-widest text-emerald-600 dark:text-blue-400 uppercase bg-emerald-500/10 dark:bg-blue-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 dark:border-blue-500/20 w-fit">
           Reputation Score
         </span>
         <div className="flex items-baseline gap-2">
@@ -55,7 +55,7 @@ export function ReviewAnalyticsHeader({ reviews }: ReviewAnalyticsHeaderProps) {
       {/* Card 2: Total Feedback */}
       <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl flex items-center gap-4">
         <div className="p-3 bg-blue-500/10 text-primary rounded-xl border border-blue-500/20">
-          <MessageSquare className="w-5 h-5" />
+          <MessageSquare className="w-5 h-5 dark:text-blue-500" />
         </div>
         <div>
           <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">
@@ -69,7 +69,7 @@ export function ReviewAnalyticsHeader({ reviews }: ReviewAnalyticsHeaderProps) {
 
       {/* Card 3: 5-Star Ratio */}
       <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl flex items-center gap-4">
-        <div className="p-3 bg-emerald-500/10 text-emerald-500 rounded-xl border border-emerald-500/20">
+        <div className="p-3 bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-500 dark:text-blue-400 rounded-xl border border-emerald-500/20 dark:border-blue-500/20">
           <Award className="w-5 h-5" />
         </div>
         <div>

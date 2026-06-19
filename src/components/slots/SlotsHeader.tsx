@@ -14,7 +14,7 @@ export function SlotsHeader() {
 
       <div className="space-y-4 max-w-2xl relative z-10">
         {/* PRESERVED: Micro Announcement Badge Style */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/5 border border-emerald-500/20 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 tracking-wide animate-pulse">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-blue-500/10 border border-emerald-500/20 dark:border-blue-500/20 text-[11px] font-bold text-emerald-600 dark:text-blue-400 tracking-wide animate-pulse">
           <span>✨ Manage Your Availability Calendars</span>
         </div>
 
@@ -22,7 +22,7 @@ export function SlotsHeader() {
         <div className="space-y-2">
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground leading-tight">
             Configure Your{" "}
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(16,185,129,0.1)]">
+            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 dark:from-blue-500 dark:to-cyan-500 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(16,185,129,0.1)]">
               Slots
             </span>
           </h1>
@@ -38,7 +38,7 @@ export function SlotsHeader() {
       <div className="relative max-w-md group relative z-10">
         <button
           onClick={() => router.push("/slots/create")}
-          className="w-full h-12 px-5 flex items-center justify-center gap-2 text-xs font-bold bg-emerald-500 hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white rounded-xl shadow-md transition-all active:scale-[0.99] cursor-pointer"
+          className="w-full h-12 px-5 flex items-center justify-center gap-2 text-xs font-bold bg-emerald-500 hover:bg-emerald-600 dark:bg-blue-600 dark:hover:bg-blue-500 text-white rounded-xl shadow-md transition-all active:scale-[0.99] cursor-pointer"
         >
           <PlusCircle className="w-4 h-4" />
           Create New Appointment Slot

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Search, ChevronDown, ChevronUp, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -65,7 +65,7 @@ export function CategoryFilter({
           placeholder="Search categories..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full h-8 pl-8 pr-3 text-xs bg-muted/40 hover:bg-muted/60 focus:bg-background border border-border/50 focus:border-emerald-500/50 rounded-lg outline-hidden transition-all placeholder:text-muted-foreground/60"
+          className="w-full h-8 pl-8 pr-3 text-xs bg-muted/40 hover:bg-muted/60 focus:bg-background border border-border/50 focus:border-emerald-500/50 dark:focus:border-blue-500/50 rounded-lg outline-hidden transition-all placeholder:text-muted-foreground/60"
         />
       </div>
 
@@ -83,7 +83,7 @@ export function CategoryFilter({
                 className={cn(
                   "flex items-center gap-2.5 w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium cursor-pointer transition-colors group",
                   isChecked
-                    ? "bg-emerald-500/5 text-emerald-600 dark:text-emerald-400"
+                    ? "bg-emerald-500/5 dark:bg-blue-500/5 text-emerald-600 dark:text-blue-400"
                     : "text-muted-foreground hover:bg-muted/40 hover:text-foreground",
                 )}
               >
@@ -92,7 +92,7 @@ export function CategoryFilter({
                   className={cn(
                     "w-4 h-4 rounded-md border flex items-center justify-center transition-all duration-200 shrink-0",
                     isChecked
-                      ? "border-emerald-600 bg-emerald-500 text-white dark:border-emerald-500"
+                      ? "border-emerald-600 bg-emerald-500 text-white dark:border-blue-500 dark:bg-blue-600"
                       : "border-neutral-400 dark:border-border/80 group-hover:border-neutral-600 dark:group-hover:border-muted-foreground/60 bg-background",
                   )}
                 >
@@ -114,7 +114,7 @@ export function CategoryFilter({
         <button
           type="button"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 cursor-pointer transition-colors pt-0.5"
+          className="flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-blue-400 hover:text-emerald-500 dark:hover:text-blue-500 cursor-pointer transition-colors pt-0.5"
         >
           {isExpanded ? (
             <>

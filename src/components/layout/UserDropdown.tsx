@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LayoutDashboard, User, LogOut } from "lucide-react";
@@ -55,7 +55,7 @@ export function UserDropdown({ session }: UserDropdownProps) {
               className="w-9 h-9 rounded-xl object-cover border border-border/80 shadow-inner"
             />
           ) : (
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xs font-black border border-emerald-500/20 shadow-xs">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 dark:from-blue-500/10 dark:to-cyan-500/10 text-emerald-600 dark:text-blue-400 flex items-center justify-center text-xs font-black border border-emerald-500/20 dark:border-blue-500/20 shadow-xs">
               {session?.user?.name?.charAt(0).toUpperCase() || "U"}
             </div>
           )}
@@ -80,7 +80,7 @@ export function UserDropdown({ session }: UserDropdownProps) {
                 onClick={() => setIsDropdownOpen(false)}
                 className="w-full flex items-center gap-2 px-2.5 py-2 text-xs font-semibold rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
               >
-                <User className="w-3.5 h-3.5 text-emerald-500" />
+                <User className="w-3.5 h-3.5 text-emerald-500 dark:text-blue-500" />
                 My Profile
               </Link>
 

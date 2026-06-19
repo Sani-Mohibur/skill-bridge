@@ -25,12 +25,12 @@ export default function HowItWorksPage() {
       <div className="w-full bg-gradient-to-br from-[#d0e7ff] via-[#e3f2fd] to-[#f0f4f8] dark:bg-gradient-to-br dark:from-[#0f172a] dark:via-[#090d16] dark:to-[#020617] border border-blue-300/40 dark:border-border/60 rounded-3xl p-6 sm:p-8 relative overflow-hidden">
         <div className="hidden dark:block absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
         <section className="text-center space-y-4 max-w-3xl mx-auto py-6 relative z-10">
-          <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-emerald-500/20">
+          <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-600 dark:text-blue-400 px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-emerald-500/20 dark:border-blue-500/20">
             <Zap className="w-3.5 h-3.5" /> Empowering Knowledge Commerce
           </div>
           <h1 className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
             How Skill Bridge{" "}
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 dark:from-blue-500 dark:to-cyan-500 bg-clip-text text-transparent">
               Works
             </span>
           </h1>
@@ -49,12 +49,12 @@ export default function HowItWorksPage() {
             onClick={() => setActiveTab("students")}
             className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${
               activeTab === "students"
-                ? "bg-background text-emerald-600 dark:text-emerald-400 shadow-sm border border-emerald-500/20"
+                ? "bg-background text-emerald-600 dark:text-blue-400 shadow-sm border border-emerald-500/20 dark:border-blue-500/20"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
             <GraduationCap
-              className={`w-4 h-4 ${activeTab === "students" ? "text-emerald-500" : ""}`}
+              className={`w-4 h-4 ${activeTab === "students" ? "text-emerald-500 dark:text-blue-500" : ""}`}
             />
             For Students
           </button>
@@ -62,12 +62,12 @@ export default function HowItWorksPage() {
             onClick={() => setActiveTab("tutors")}
             className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${
               activeTab === "tutors"
-                ? "bg-background text-teal-600 dark:text-teal-400 shadow-sm border border-teal-500/20"
+                ? "bg-background text-teal-600 dark:text-blue-400 shadow-sm border border-teal-500/20 dark:border-blue-500/20"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
             <Award
-              className={`w-4 h-4 ${activeTab === "tutors" ? "text-teal-500" : ""}`}
+              className={`w-4 h-4 ${activeTab === "tutors" ? "text-teal-500 dark:text-blue-500" : ""}`}
             />
             For Tutors
           </button>
@@ -79,15 +79,15 @@ export default function HowItWorksPage() {
         {activeTab === "students" ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Student Step 1 */}
-            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-emerald-500/40 transition-all shadow-xs">
+            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-emerald-500/40 dark:hover:border-blue-500/40 transition-all shadow-xs">
               <div className="absolute top-0 right-0 text-7xl font-black text-muted/10 translate-x-2 -translate-y-4 select-none">
                 01
               </div>
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 text-emerald-500">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 dark:bg-blue-500/10 flex items-center justify-center border border-emerald-500/20 dark:border-blue-500/20 text-emerald-500 dark:text-blue-500">
                 <Search className="w-5 h-5" />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-foreground group-hover:text-emerald-500 transition-colors">
+                <h3 className="text-lg font-bold text-foreground group-hover:text-emerald-500 dark:group-hover:text-blue-500 transition-colors">
                   1. Discover Your Mentor
                 </h3>
                 <p className="text-muted-foreground text-xs leading-relaxed">
@@ -99,15 +99,15 @@ export default function HowItWorksPage() {
             </div>
 
             {/* Student Step 2 */}
-            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-emerald-500/40 transition-all shadow-xs">
+            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-emerald-500/40 dark:hover:border-blue-500/40 transition-all shadow-xs">
               <div className="absolute top-0 right-0 text-7xl font-black text-muted/10 translate-x-2 -translate-y-4 select-none">
                 02
               </div>
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 text-emerald-500">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 dark:bg-blue-500/10 flex items-center justify-center border border-emerald-500/20 dark:border-blue-500/20 text-emerald-500 dark:text-blue-500">
                 <Calendar className="w-5 h-5" />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-foreground group-hover:text-emerald-500 transition-colors">
+                <h3 className="text-lg font-bold text-foreground group-hover:text-emerald-500 dark:group-hover:text-blue-500 transition-colors">
                   2. Book Real-Time Slots
                 </h3>
                 <p className="text-muted-foreground text-xs leading-relaxed">
@@ -119,15 +119,15 @@ export default function HowItWorksPage() {
             </div>
 
             {/* Student Step 3 */}
-            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-emerald-500/40 transition-all shadow-xs">
+            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-emerald-500/40 dark:hover:border-blue-500/40 transition-all shadow-xs">
               <div className="absolute top-0 right-0 text-7xl font-black text-muted/10 translate-x-2 -translate-y-4 select-none">
                 03
               </div>
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 text-emerald-500">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 dark:bg-blue-500/10 flex items-center justify-center border border-emerald-500/20 dark:border-blue-500/20 text-emerald-500 dark:text-blue-500">
                 <CreditCard className="w-5 h-5" />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-foreground group-hover:text-emerald-500 transition-colors">
+                <h3 className="text-lg font-bold text-foreground group-hover:text-emerald-500 dark:group-hover:text-blue-500 transition-colors">
                   3. Secure Payment Hold
                 </h3>
                 <p className="text-muted-foreground text-xs leading-relaxed">
@@ -141,15 +141,15 @@ export default function HowItWorksPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Tutor Step 1 */}
-            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-teal-500/40 transition-all shadow-xs">
+            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-teal-500/40 dark:hover:border-blue-500/40 transition-all shadow-xs">
               <div className="absolute top-0 right-0 text-7xl font-black text-muted/10 translate-x-2 -translate-y-4 select-none">
                 01
               </div>
-              <div className="w-12 h-12 rounded-xl bg-teal-500/10 flex items-center justify-center border border-teal-500/20 text-teal-500">
+              <div className="w-12 h-12 rounded-xl bg-teal-500/10 dark:bg-blue-500/10 flex items-center justify-center border border-teal-500/20 dark:border-blue-500/20 text-teal-500 dark:text-blue-500">
                 <UserCheck className="w-5 h-5" />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-foreground group-hover:text-teal-500 transition-colors">
+                <h3 className="text-lg font-bold text-foreground group-hover:text-teal-500 dark:group-hover:text-blue-500 transition-colors">
                   1. Setup Profile
                 </h3>
                 <p className="text-muted-foreground text-xs leading-relaxed">
@@ -161,15 +161,15 @@ export default function HowItWorksPage() {
             </div>
 
             {/* Tutor Step 2 */}
-            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-teal-500/40 transition-all shadow-xs">
+            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-teal-500/40 dark:hover:border-blue-500/40 transition-all shadow-xs">
               <div className="absolute top-0 right-0 text-7xl font-black text-muted/10 translate-x-2 -translate-y-4 select-none">
                 02
               </div>
-              <div className="w-12 h-12 rounded-xl bg-teal-500/10 flex items-center justify-center border border-teal-500/20 text-teal-500">
+              <div className="w-12 h-12 rounded-xl bg-teal-500/10 dark:bg-blue-500/10 flex items-center justify-center border border-teal-500/20 dark:border-blue-500/20 text-teal-500 dark:text-blue-500">
                 <Clock className="w-5 h-5" />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-foreground group-hover:text-teal-500 transition-colors">
+                <h3 className="text-lg font-bold text-foreground group-hover:text-teal-500 dark:group-hover:text-blue-500 transition-colors">
                   2. Live Scheduling Control
                 </h3>
                 <p className="text-muted-foreground text-xs leading-relaxed">
@@ -181,15 +181,15 @@ export default function HowItWorksPage() {
             </div>
 
             {/* Tutor Step 3 */}
-            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-teal-500/40 transition-all shadow-xs">
+            <div className="bg-card border border-border/50 p-8 rounded-2xl space-y-5 relative overflow-hidden group hover:border-teal-500/40 dark:hover:border-blue-500/40 transition-all shadow-xs">
               <div className="absolute top-0 right-0 text-7xl font-black text-muted/10 translate-x-2 -translate-y-4 select-none">
                 03
               </div>
-              <div className="w-12 h-12 rounded-xl bg-teal-500/10 flex items-center justify-center border border-teal-500/20 text-teal-500">
+              <div className="w-12 h-12 rounded-xl bg-teal-500/10 dark:bg-blue-500/10 flex items-center justify-center border border-teal-500/20 dark:border-blue-500/20 text-teal-500 dark:text-blue-500">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-foreground group-hover:text-teal-500 transition-colors">
+                <h3 className="text-lg font-bold text-foreground group-hover:text-teal-500 dark:group-hover:text-blue-500 transition-colors">
                   3. Automated Financial Payout
                 </h3>
                 <p className="text-muted-foreground text-xs leading-relaxed">
@@ -210,14 +210,14 @@ export default function HowItWorksPage() {
             Marketplace Architecture Safeguards
           </h2>
           <p className="text-muted-foreground text-xs">
-            Engineered from the ground up for strict security, state data
+            Engineed from the ground up for strict security, state data
             reliability, and performance consistency.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
           <div className="flex items-start gap-4">
-            <div className="p-2.5 bg-background border border-border/60 rounded-xl text-emerald-500 shrink-0">
+            <div className="p-2.5 bg-background border border-border/60 rounded-xl text-emerald-500 dark:text-blue-500 shrink-0">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div className="space-y-1">
@@ -234,7 +234,7 @@ export default function HowItWorksPage() {
           </div>
 
           <div className="flex items-start gap-4">
-            <div className="p-2.5 bg-background border border-border/60 rounded-xl text-emerald-500 shrink-0">
+            <div className="p-2.5 bg-background border border-border/60 rounded-xl text-emerald-500 dark:text-blue-500 shrink-0">
               <Zap className="w-5 h-5" />
             </div>
             <div className="space-y-1">
@@ -265,9 +265,9 @@ export default function HowItWorksPage() {
 
         <div className="grid grid-cols-1 gap-4">
           {/* FAQ Item 1 */}
-          <div className="bg-card border border-border/50 rounded-2xl p-6 transition-all hover:border-emerald-500/20 group">
-            <h4 className="text-sm font-bold text-foreground flex items-center gap-2 group-hover:text-emerald-500 transition-colors">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          <div className="bg-card border border-border/50 rounded-2xl p-6 transition-all hover:border-emerald-500/20 dark:hover:border-blue-500/20 group">
+            <h4 className="text-sm font-bold text-foreground flex items-center gap-2 group-hover:text-emerald-500 dark:group-hover:text-blue-500 transition-colors">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-blue-500" />
               How does the 3-day payment hold protect me?
             </h4>
             <p className="text-muted-foreground text-xs leading-relaxed pl-3.5 mt-2">
@@ -280,9 +280,9 @@ export default function HowItWorksPage() {
           </div>
 
           {/* FAQ Item 2 */}
-          <div className="bg-card border border-border/50 rounded-2xl p-6 transition-all hover:border-teal-500/20 group">
-            <h4 className="text-sm font-bold text-foreground flex items-center gap-2 group-hover:text-teal-500 transition-colors">
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
+          <div className="bg-card border border-border/50 rounded-2xl p-6 transition-all hover:border-teal-500/20 dark:hover:border-blue-500/20 group">
+            <h4 className="text-sm font-bold text-foreground flex items-center gap-2 group-hover:text-teal-500 dark:group-hover:text-blue-500 transition-colors">
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-500 dark:bg-blue-500" />
               What happens if a mentor needs to reschedule?
             </h4>
             <p className="text-muted-foreground text-xs leading-relaxed pl-3.5 mt-2">
@@ -295,9 +295,9 @@ export default function HowItWorksPage() {
           </div>
 
           {/* FAQ Item 3 */}
-          <div className="bg-card border border-border/50 rounded-2xl p-6 transition-all hover:border-emerald-500/20 group">
-            <h4 className="text-sm font-bold text-foreground flex items-center gap-2 group-hover:text-emerald-500 transition-colors">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          <div className="bg-card border border-border/50 rounded-2xl p-6 transition-all hover:border-emerald-500/20 dark:hover:border-blue-500/20 group">
+            <h4 className="text-sm font-bold text-foreground flex items-center gap-2 group-hover:text-emerald-500 dark:group-hover:text-blue-500 transition-colors">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-blue-500" />
               Are the profiles and expert categories verified?
             </h4>
             <p className="text-muted-foreground text-xs leading-relaxed pl-3.5 mt-2">

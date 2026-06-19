@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { MobileNavLinks } from "./MobileNavLinks";
 import { MobileAuthButtons } from "./MobileAuthButtons";
 import { MobileUserProfile } from "./MobileUserProfile";

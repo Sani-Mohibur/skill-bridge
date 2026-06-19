@@ -111,7 +111,7 @@ export default function StudentProfileEditPage() {
       {/* Workspace Dashboard Header */}
       <div className="w-full flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
         <div className="flex items-center gap-2">
-          <Settings className="w-4 h-4 text-emerald-500" />
+          <Settings className="w-4 h-4 text-emerald-500 dark:text-blue-400" />
           <h2 className="text-sm font-black uppercase tracking-wider text-zinc-800 dark:text-zinc-200">
             Edit Profile Setup
           </h2>
@@ -144,7 +144,7 @@ export default function StudentProfileEditPage() {
             <button
               type="submit"
               disabled={isSaving || !isDirty}
-              className="px-6 py-2.5 text-xs font-bold text-white rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 disabled:opacity-30 disabled:pointer-events-none shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer flex items-center justify-center min-w-[75px]"
+              className="px-6 py-2.5 text-xs font-bold text-white rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 dark:from-blue-600 dark:to-cyan-500 dark:hover:from-blue-500 dark:hover:to-cyan-400 disabled:opacity-30 disabled:pointer-events-none shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer flex items-center justify-center min-w-[75px]"
             >
               {isSaving ? (
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />

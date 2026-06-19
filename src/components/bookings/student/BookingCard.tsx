@@ -92,7 +92,7 @@ export function BookingCard({
   }, [availability.slot, isCompleted]);
 
   return (
-    <div className="bg-card border border-border/50 p-6 rounded-2xl relative overflow-hidden shadow-xs space-y-4 hover:border-emerald-500/20 transition-all group">
+    <div className="bg-card border border-border/50 p-6 rounded-2xl relative overflow-hidden shadow-xs space-y-4 hover:border-emerald-500/20 dark:hover:border-blue-500/20 transition-all group">
       {/* Top Banner: Status & Context Layout */}
       <div className="flex items-center justify-between gap-2">
         {isCompleted ? (
@@ -110,7 +110,7 @@ export function BookingCard({
         <span
           className={`text-[10px] uppercase font-black tracking-wider px-2 py-0.5 rounded ${
             isCompleted
-              ? "bg-emerald-500/10 text-emerald-600"
+              ? "bg-emerald-500/10 text-emerald-600 dark:bg-blue-500/10 dark:text-blue-400"
               : "bg-amber-500/10 text-amber-500"
           }`}
         >
@@ -121,7 +121,7 @@ export function BookingCard({
       {/* Title Area */}
       <div className="space-y-1">
         {availability.subject && (
-          <span className="text-[9px] uppercase tracking-widest font-extrabold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
+          <span className="text-[9px] uppercase tracking-widest font-extrabold text-emerald-600 dark:text-blue-400 bg-emerald-500/10 dark:bg-blue-500/10 px-2 py-0.5 rounded">
             {availability.subject}
           </span>
         )}
@@ -140,7 +140,7 @@ export function BookingCard({
           <button
             type="button"
             onClick={() => setShowBio(!showBio)}
-            className="flex items-center gap-1.5 text-muted-foreground font-medium hover:text-emerald-500 transition-colors text-left cursor-pointer"
+            className="flex items-center gap-1.5 text-muted-foreground font-medium hover:text-emerald-500 dark:hover:text-blue-500 transition-colors text-left cursor-pointer"
           >
             <User className="w-3.5 h-3.5 text-muted-foreground/60" />
             <span>
@@ -176,10 +176,10 @@ export function BookingCard({
           </div>
 
           <div className="flex items-center gap-1.5 text-muted-foreground font-medium">
-            <DollarSign className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+            <DollarSign className="w-3.5 h-3.5 text-emerald-600 dark:text-blue-500" />
             <span>
               Total Value:{" "}
-              <strong className="text-emerald-600 dark:text-emerald-400 font-bold">
+              <strong className="text-emerald-600 dark:text-blue-500 font-bold">
                 {totalCost === 0 ? "Free Session" : `$${totalCost.toFixed(2)}`}
               </strong>
             </span>
@@ -207,7 +207,7 @@ export function BookingCard({
       {/* Footer Area: Handles Conditional Actions Rendering */}
       <div className="flex items-center justify-between gap-4 pt-1">
         <div className="flex items-center gap-1 text-[11px] font-medium text-muted-foreground max-w-[65%]">
-          <MapPin className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+          <MapPin className="w-3.5 h-3.5 text-emerald-500 dark:text-blue-500 shrink-0" />
           <span className="truncate">
             {availability.location || "Remote (Zoom / Meet)"}
           </span>
@@ -215,14 +215,14 @@ export function BookingCard({
 
         {isCompleted ? (
           booking.review ? (
-            <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-500/5 px-2.5 py-1.5 rounded-lg border border-emerald-500/10">
+            <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-500/5 dark:text-blue-400 dark:bg-blue-500/5 px-2.5 py-1.5 rounded-lg border border-emerald-500/10 dark:border-blue-500/10">
               Reviewed
             </span>
           ) : (
             <button
               type="button"
               onClick={() => onOpenReviewModal?.(booking)}
-              className="px-3 py-1.5 text-[11px] font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer"
+              className="px-3 py-1.5 text-[11px] font-semibold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer"
             >
               Add Review
             </button>

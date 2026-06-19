@@ -74,13 +74,13 @@ export default function Navbar() {
                 <Link href="/login" passHref>
                   <Button
                     variant="ghost"
-                    className="text-xs font-bold tracking-wide rounded-xl h-9 px-4 cursor-pointer bg-gray-400 hover:bg-slate-200/90 dark:bg-muted/50 dark:hover:bg-muted/80 text-slate-900 dark:text-foreground transition-all"
+                    className="text-xs font-bold tracking-wide rounded-xl h-9 px-4 cursor-pointer border border-border/60 bg-background/50 text-muted-foreground hover:bg-muted hover:text-foreground transition-all"
                   >
                     Log In
                   </Button>
                 </Link>
                 <Link href="/register" passHref>
-                  <Button className="text-xs font-bold tracking-wide rounded-xl h-9 px-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white shadow-sm cursor-pointer border-none">
+                  <Button className="text-xs font-bold tracking-wide rounded-xl h-9 px-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 dark:from-blue-500 dark:to-cyan-500 dark:hover:from-blue-400 dark:hover:to-cyan-400 text-white shadow-sm cursor-pointer border-none">
                     Sign Up
                   </Button>
                 </Link>

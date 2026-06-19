@@ -23,12 +23,12 @@ export default function SupportContactPage() {
       <div className="w-full bg-gradient-to-br from-[#d0e7ff] via-[#e3f2fd] to-[#f0f4f8] dark:bg-gradient-to-br dark:from-[#0f172a] dark:via-[#090d16] dark:to-[#020617] border border-blue-300/40 dark:border-border/60 rounded-3xl p-6 sm:p-8 relative overflow-hidden">
         <div className="hidden dark:block absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
         <section className="text-center space-y-4 max-w-3xl mx-auto py-6 relative z-10">
-          <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-emerald-500/20">
+          <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-600 dark:text-blue-400 px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-emerald-500/20 dark:border-blue-500/20">
             <Zap className="w-3.5 h-3.5" /> 24/7 Operations Hub
           </div>
           <h1 className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
             Support{" "}
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 dark:from-blue-500 dark:to-cyan-500 bg-clip-text text-transparent">
               Contact
             </span>
           </h1>
@@ -54,8 +54,8 @@ export default function SupportContactPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
           {/* Card 1 - Email Inquiries */}
-          <div className="bg-card border border-border/50 p-6 rounded-2xl flex flex-col items-center text-center space-y-4 relative group hover:border-emerald-500/30 transition-all duration-300">
-            <div className="p-3 bg-background border border-border/60 rounded-xl text-emerald-500">
+          <div className="bg-card border border-border/50 p-6 rounded-2xl flex flex-col items-center text-center space-y-4 relative group hover:border-emerald-500/30 dark:hover:border-blue-500/30 transition-all duration-300">
+            <div className="p-3 bg-background border border-border/60 rounded-xl text-emerald-500 dark:text-blue-500">
               <Mail className="w-5 h-5" />
             </div>
             <div className="space-y-1 w-full">
@@ -71,7 +71,7 @@ export default function SupportContactPage() {
               >
                 {copiedText ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-emerald-500" />
+                    <Check className="w-3.5 h-3.5 text-emerald-500 dark:text-blue-500" />
                     Copied Address
                   </>
                 ) : (
@@ -85,8 +85,8 @@ export default function SupportContactPage() {
           </div>
 
           {/* Card 2 - Operational Timelines */}
-          <div className="bg-card border border-border/50 p-6 rounded-2xl flex flex-col items-center text-center space-y-4 relative group hover:border-emerald-500/30 transition-all duration-300">
-            <div className="p-3 bg-background border border-border/60 rounded-xl text-emerald-500">
+          <div className="bg-card border border-border/50 p-6 rounded-2xl flex flex-col items-center text-center space-y-4 relative group hover:border-emerald-500/30 dark:hover:border-blue-500/30 transition-all duration-300">
+            <div className="p-3 bg-background border border-border/60 rounded-xl text-emerald-500 dark:text-blue-500">
               <Clock className="w-5 h-5" />
             </div>
             <div className="space-y-1">
@@ -105,8 +105,8 @@ export default function SupportContactPage() {
           </div>
 
           {/* Card 3 - Escrow Assistance */}
-          <div className="bg-card border border-border/50 p-6 rounded-2xl flex flex-col items-center text-center space-y-4 relative group hover:border-emerald-500/30 transition-all duration-300">
-            <div className="p-3 bg-background border border-border/60 rounded-xl text-emerald-500">
+          <div className="bg-card border border-border/50 p-6 rounded-2xl flex flex-col items-center text-center space-y-4 relative group hover:border-emerald-500/30 dark:hover:border-blue-500/30 transition-all duration-300">
+            <div className="p-3 bg-background border border-border/60 rounded-xl text-emerald-500 dark:text-blue-500">
               <ShieldAlert className="w-5 h-5" />
             </div>
             <div className="space-y-1">

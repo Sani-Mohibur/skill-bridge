@@ -5,11 +5,9 @@ import {
   ShieldCheck,
   Cpu,
   Code2,
-  LineChart,
   SearchCode,
   GitBranch,
   Terminal,
-  HelpCircle,
 } from "lucide-react";
 
 export default function AboutPage() {
@@ -19,13 +17,13 @@ export default function AboutPage() {
       <div className="w-full bg-gradient-to-br from-[#d0e7ff] via-[#e3f2fd] to-[#f0f4f8] dark:bg-gradient-to-br dark:from-[#0f172a] dark:via-[#090d16] dark:to-[#020617] border border-blue-300/40 dark:border-border/60 rounded-3xl p-6 sm:p-8 relative overflow-hidden">
         <div className="hidden dark:block absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
         <section className="text-center space-y-4 max-w-3xl mx-auto py-6 relative z-10">
-          <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-emerald-500/20">
+          <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-600 dark:text-blue-400 px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-emerald-500/20 dark:border-blue-500/20">
             <Zap className="w-3.5 h-3.5" /> Bridging the Gap in Engineering
             Expertise
           </div>
           <h1 className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
             Our Identity &{" "}
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 dark:from-blue-500 dark:to-cyan-500 bg-clip-text text-transparent">
               Vision
             </span>
           </h1>
@@ -39,7 +37,7 @@ export default function AboutPage() {
 
       {/* 2. OUR MISSION STATEMENT */}
       <section className="max-w-4xl mx-auto text-center space-y-4">
-        <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-500">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-500 dark:text-blue-500">
           The Mission
         </h2>
         <p className="text-xl md:text-2xl font-medium tracking-tight text-foreground leading-relaxed">
@@ -54,7 +52,7 @@ export default function AboutPage() {
       {/* 3. THE ENGINEERING MANIFESTO */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
         <div className="space-y-4">
-          <div className="text-xs font-bold uppercase tracking-widest text-teal-500">
+          <div className="text-xs font-bold uppercase tracking-widest text-teal-500 dark:text-blue-500">
             Our Manifesto
           </div>
           <h3 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">
@@ -73,7 +71,7 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="bg-muted/40 border border-border/60 rounded-2xl p-6 font-mono text-[11px] text-muted-foreground space-y-2 shadow-xs">
-          <div className="flex items-center gap-1.5 text-emerald-500">
+          <div className="flex items-center gap-1.5 text-emerald-500 dark:text-blue-500">
             <Terminal className="w-3.5 h-3.5" />{" "}
             <span>skillbridge-manifesto.ts</span>
           </div>
@@ -83,7 +81,7 @@ export default function AboutPage() {
           <p className="pl-4">syntaxCopyPaste: false,</p>
           <p className="pl-4">systemDesignValidation: true,</p>
           <p className="pl-4">runtimeEfficiency: "O(1) Access",</p>
-          <p className="pl-4 text-emerald-500">
+          <p className="pl-4 text-emerald-500 dark:text-blue-500">
             mentorshipPipeline: "On-Demand Vetted Masters"
           </p>
           <p className="text-foreground/70">&#125;;</p>
@@ -101,8 +99,8 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-card border border-border/50 p-6 rounded-2xl space-y-4 hover:border-emerald-500/20 transition-all shadow-xs">
-            <Cpu className="w-5 h-5 text-emerald-500" />
+          <div className="bg-card border border-border/50 p-6 rounded-2xl space-y-4 hover:border-emerald-500/20 dark:hover:border-blue-500/20 transition-all shadow-xs">
+            <Cpu className="w-5 h-5 text-emerald-500 dark:text-blue-500" />
             <h4 className="text-sm font-bold text-foreground">
               Uncompromising Quality
             </h4>
@@ -112,8 +110,8 @@ export default function AboutPage() {
               holding verified deployment experience.
             </p>
           </div>
-          <div className="bg-card border border-border/50 p-6 rounded-2xl space-y-4 hover:border-teal-500/20 transition-all shadow-xs">
-            <ShieldCheck className="w-5 h-5 text-teal-500" />
+          <div className="bg-card border border-border/50 p-6 rounded-2xl space-y-4 hover:border-teal-500/20 dark:hover:border-blue-500/20 transition-all shadow-xs">
+            <ShieldCheck className="w-5 h-5 text-teal-500 dark:text-blue-500" />
             <h4 className="text-sm font-bold text-foreground">
               Absolute Security
             </h4>
@@ -123,8 +121,8 @@ export default function AboutPage() {
               3 days to protect all marketplace users.
             </p>
           </div>
-          <div className="bg-card border border-border/50 p-6 rounded-2xl space-y-4 hover:border-emerald-500/20 transition-all shadow-xs">
-            <Code2 className="w-5 h-5 text-emerald-500" />
+          <div className="bg-card border border-border/50 p-6 rounded-2xl space-y-4 hover:border-emerald-500/20 dark:hover:border-blue-500/20 transition-all shadow-xs">
+            <Code2 className="w-5 h-5 text-emerald-500 dark:text-blue-500" />
             <h4 className="text-sm font-bold text-foreground">
               Technical Transparency
             </h4>
@@ -150,7 +148,7 @@ export default function AboutPage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative before:hidden md:before:block before:absolute before:top-12 before:left-1/6 before:right-1/6 before:h-px before:bg-border before:z-0">
           <div className="bg-background relative z-10 text-center space-y-3 p-4">
-            <div className="w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center mx-auto text-xs font-bold text-emerald-500 shadow-xs">
+            <div className="w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center mx-auto text-xs font-bold text-emerald-500 dark:text-blue-500 shadow-xs">
               01
             </div>
             <h5 className="text-xs font-bold text-foreground">
@@ -162,7 +160,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="bg-background relative z-10 text-center space-y-3 p-4">
-            <div className="w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center mx-auto text-xs font-bold text-teal-500 shadow-xs">
+            <div className="w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center mx-auto text-xs font-bold text-teal-500 dark:text-blue-500 shadow-xs">
               02
             </div>
             <h5 className="text-xs font-bold text-foreground">
@@ -174,7 +172,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="bg-background relative z-10 text-center space-y-3 p-4">
-            <div className="w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center mx-auto text-xs font-bold text-emerald-500 shadow-xs">
+            <div className="w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center mx-auto text-xs font-bold text-emerald-500 dark:text-blue-500 shadow-xs">
               03
             </div>
             <h5 className="text-xs font-bold text-foreground">
@@ -191,7 +189,7 @@ export default function AboutPage() {
       {/* 6. TRUST & VERIFICATION ARCHITECTURE */}
       <section className="bg-muted/30 border border-border/40 rounded-3xl p-8 md:p-12 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
         <div className="md:col-span-1 space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-500">
+          <div className="w-10 h-10 rounded-xl bg-teal-500/10 dark:bg-blue-500/10 border border-teal-500/20 dark:border-blue-500/20 flex items-center justify-center text-teal-500 dark:text-blue-500">
             <SearchCode className="w-5 h-5" />
           </div>
           <h3 className="text-xl font-extrabold text-foreground tracking-tight">
@@ -205,7 +203,7 @@ export default function AboutPage() {
         </div>
         <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="bg-background/80 p-5 rounded-xl border border-border/40 space-y-1">
-            <span className="text-[10px] font-mono text-emerald-500 font-bold">
+            <span className="text-[10px] font-mono text-emerald-500 dark:text-blue-500 font-bold">
               STAGE_01
             </span>
             <h4 className="text-xs font-bold text-foreground">
@@ -217,7 +215,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="bg-background/80 p-5 rounded-xl border border-border/40 space-y-1">
-            <span className="text-[10px] font-mono text-teal-500 font-bold">
+            <span className="text-[10px] font-mono text-teal-500 dark:text-blue-500 font-bold">
               STAGE_02
             </span>
             <h4 className="text-xs font-bold text-foreground">
@@ -238,7 +236,7 @@ export default function AboutPage() {
             <div className="text-2xl md:text-3xl font-black text-foreground tracking-tight">
               50+
             </div>
-            <div className="text-[10px] uppercase tracking-wider text-emerald-500 font-bold">
+            <div className="text-[10px] uppercase tracking-wider text-emerald-500 dark:text-blue-500 font-bold">
               Verified Mentors
             </div>
           </div>
@@ -246,7 +244,7 @@ export default function AboutPage() {
             <div className="text-2xl md:text-3xl font-black text-foreground tracking-tight">
               2k+
             </div>
-            <div className="text-[10px] uppercase tracking-wider text-teal-500 font-bold">
+            <div className="text-[10px] uppercase tracking-wider text-teal-500 dark:text-blue-500 font-bold">
               Review Hours Logged
             </div>
           </div>
@@ -254,7 +252,7 @@ export default function AboutPage() {
             <div className="text-2xl md:text-3xl font-black text-foreground tracking-tight">
               90.8%
             </div>
-            <div className="text-[10px] uppercase tracking-wider text-emerald-500 font-bold">
+            <div className="text-[10px] uppercase tracking-wider text-emerald-500 dark:text-blue-500 font-bold">
               Pipeline Success Rate
             </div>
           </div>
@@ -262,7 +260,7 @@ export default function AboutPage() {
             <div className="text-2xl md:text-3xl font-black text-foreground tracking-tight">
               &lt; 15m
             </div>
-            <div className="text-[10px] uppercase tracking-wider text-teal-500 font-bold">
+            <div className="text-[10px] uppercase tracking-wider text-teal-500 dark:text-blue-500 font-bold">
               Average Match Latency
             </div>
           </div>
@@ -271,7 +269,7 @@ export default function AboutPage() {
 
       {/* 8. COMMITMENT TO OPEN SOURCE */}
       <section className="max-w-4xl mx-auto text-center space-y-4">
-        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 mx-auto">
+        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-blue-500/10 border border-emerald-500/20 dark:border-blue-500/20 flex items-center justify-center text-emerald-500 dark:text-blue-500 mx-auto">
           <GitBranch className="w-5 h-5" />
         </div>
         <h3 className="text-xl font-bold text-foreground tracking-tight">

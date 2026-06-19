@@ -17,7 +17,7 @@ export function SlotTabsFilter({
         onClick={() => setActiveTab("upcoming")}
         className={`cursor-pointer px-4 py-2.5 text-sm font-semibold transition-all -mb-[1px] ${
           activeTab === "upcoming"
-            ? "border-b-2 border-primary text-foreground"
+            ? "border-b-2 border-emerald-500 dark:border-blue-500 text-foreground"
             : "text-muted-foreground hover:text-foreground"
         }`}
       >
@@ -27,7 +27,7 @@ export function SlotTabsFilter({
         onClick={() => setActiveTab("past")}
         className={`cursor-pointer px-4 py-2.5 text-sm font-semibold transition-all -mb-[1px] ${
           activeTab === "past"
-            ? "border-b-2 border-primary text-foreground"
+            ? "border-b-2 border-emerald-500 dark:border-blue-500 text-foreground"
             : "text-muted-foreground hover:text-foreground"
         }`}
       >

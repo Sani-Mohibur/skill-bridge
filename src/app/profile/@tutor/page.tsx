@@ -67,7 +67,7 @@ export default function TutorProfilePage() {
       {/* Workspace Dashboard Header */}
       <div className="w-full flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
         <div className="flex items-center gap-2">
-          <Settings className="w-4 h-4 text-emerald-500" />
+          <Settings className="w-4 h-4 text-emerald-500 dark:text-blue-400" />
           <h2 className="text-sm font-black uppercase tracking-wider text-zinc-800 dark:text-zinc-200">
             Workspace Management
           </h2>

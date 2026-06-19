@@ -55,7 +55,7 @@ export default function LoginForm() {
   return (
     <div className="relative group w-full max-w-md">
       {/* Premium Ambient Background Glow effect */}
-      <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-teal-500 via-blue-500 to-indigo-600 opacity-20 blur-xl group-hover:opacity-30 transition duration-1000" />
+      <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-teal-500 via-blue-500 to-indigo-600 dark:from-blue-500 dark:via-cyan-500 dark:to-indigo-600 opacity-20 blur-xl group-hover:opacity-30 transition duration-1000" />
 
       {/* Glassmorphism Card Wrapper */}
       <div className="relative border border-border/80 bg-background/80 backdrop-blur-xl rounded-2xl p-8 shadow-2xl space-y-6">
@@ -114,7 +114,7 @@ export default function LoginForm() {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full h-11 rounded-xl bg-gradient-to-r from-teal-600 via-blue-600 to-indigo-600 hover:from-teal-500 hover:to-indigo-500 text-white font-bold tracking-wide shadow-lg shadow-blue-600/10 transition-all duration-300 mt-4 cursor-pointer"
+            className="w-full h-11 rounded-xl bg-gradient-to-r from-teal-600 via-blue-600 to-indigo-600 dark:from-blue-600 dark:via-cyan-600 dark:to-indigo-600 hover:from-teal-500 hover:to-indigo-500 dark:hover:from-blue-500 dark:hover:to-indigo-500 text-white font-bold tracking-wide shadow-lg shadow-blue-600/10 transition-all duration-300 mt-4 cursor-pointer"
           >
             {loading ? "Authenticating..." : "Authorize Login"}
           </Button>

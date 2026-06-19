@@ -23,10 +23,11 @@ const triggerClassName = `
 
   data-[state=active]:bg-emerald-500/10
   data-[state=active]:text-emerald-600
-  dark:data-[state=active]:text-emerald-400
+  dark:data-[state=active]:text-blue-400
   data-[state=active]:shadow-sm
   data-[state=active]:border
   data-[state=active]:border-emerald-500/30
+  dark:data-[state=active]:border-blue-500/30
 `;
 
 export function BookingsTabs({

@@ -28,7 +28,7 @@ export function PriceOverrideDialog({
     <AlertDialog open={isOpen}>
       <AlertDialogContent className="max-w-md rounded-2xl">
         <AlertDialogHeader className="space-y-3">
-          <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-400">
+          <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600">
             <AlertCircle className="w-5 h-5" />
           </div>
           <div className="space-y-1">
@@ -42,7 +42,7 @@ export function PriceOverrideDialog({
             </AlertDialogDescription>
           </div>
         </AlertDialogHeader>
-        <AlertDialogFooter className="mt-4 gap-2 sm:gap-0">
+        <AlertDialogFooter className="mt-4 gap-2 sm:gap-1.5">
           {/* Cancel maps to overriding/continuing custom edit */}
           <AlertDialogCancel
             onClick={onCancel}
@@ -54,7 +54,7 @@ export function PriceOverrideDialog({
           {/* Action maps to keeping profile base rate */}
           <AlertDialogAction
             onClick={onConfirm}
-            className="text-xs font-bold rounded-xl bg-amber-500 hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-500 text-white border-none"
+            className="text-xs font-bold rounded-xl bg-amber-500 hover:bg-amber-600 border-none"
           >
             Keep Base Rate
           </AlertDialogAction>

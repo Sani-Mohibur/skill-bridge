@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { SlotsHeader } from "@/components/slots/SlotsHeader";
 import { SlotTabsFilter } from "@/components/slots/SlotTabsFilter";
 import { SlotListCard } from "@/components/slots/SlotListCard";
@@ -45,7 +45,7 @@ export default function SlotsManagementPage() {
       {/* Exact Match Header Component */}
       <SlotsHeader />
 
-      {/* Timeline Tabs and Feed list */}
+      {/* Type-Safe Timeline Tabs and Feed list */}
       <div className="space-y-6">
         <SlotTabsFilter activeTab={activeTab} setActiveTab={setActiveTab} />
 

@@ -66,8 +66,8 @@ export function ProfileEdit({
       {/* Account Info Section Container */}
       <div className="space-y-4">
         <h3 className="text-xs font-black uppercase tracking-wider text-zinc-400 dark:text-zinc-500 flex items-center gap-1.5">
-          <Shield className="w-3.5 h-3.5 text-emerald-500" /> Core Account
-          Metadata (Read-Only)
+          <Shield className="w-3.5 h-3.5 text-emerald-500 dark:text-blue-400" />{" "}
+          Core Account Metadata (Read-Only)
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -116,7 +116,7 @@ export function ProfileEdit({
               value={formData.title}
               onChange={onChange}
               placeholder="e.g., Senior MERN Stack Mentor"
-              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-emerald-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
+              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-blue-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
             />
           </div>
 
@@ -130,7 +130,7 @@ export function ProfileEdit({
               value={formData.qualifications}
               onChange={onChange}
               placeholder="e.g., BSc in Computer Science"
-              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-emerald-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
+              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-blue-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
             />
           </div>
 
@@ -145,7 +145,7 @@ export function ProfileEdit({
               onChange={onChange}
               placeholder="e.g., 3"
               min={0}
-              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-emerald-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
+              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-blue-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
             />
           </div>
 
@@ -161,7 +161,7 @@ export function ProfileEdit({
               placeholder="e.g., 25.00"
               min={0}
               step="0.01"
-              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-emerald-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
+              className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-blue-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
             />
           </div>
         </div>
@@ -181,13 +181,13 @@ export function ProfileEdit({
                   onClick={() => toggleCategorySelection(cat.id)}
                   className={`flex items-center justify-between p-3 rounded-xl border text-left text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer ${
                     isSelected
-                      ? "bg-emerald-500/5 border-emerald-500 text-emerald-600 dark:text-emerald-400 shadow-xs"
+                      ? "bg-emerald-500/5 dark:bg-blue-500/5 border-emerald-500 dark:border-blue-500 text-emerald-600 dark:text-blue-400 shadow-xs"
                       : "bg-zinc-50/50 dark:bg-zinc-900/30 border-zinc-200 dark:border-zinc-800/80 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700"
                   }`}
                 >
                   <span>{cat.name}</span>
                   {isSelected && (
-                    <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 ml-2" />
+                    <Check className="w-3.5 h-3.5 text-emerald-500 dark:text-blue-500 shrink-0 ml-2" />
                   )}
                 </button>
               );
@@ -205,7 +205,7 @@ export function ProfileEdit({
             value={formData.skills ? formData.skills.join(", ") : ""}
             onChange={handleSkillsChange}
             placeholder="e.g., JavaScript, Node.js, Next.js, Prisma"
-            className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-emerald-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
+            className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-blue-500/60 rounded-lg px-3 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs"
           />
         </div>
 
@@ -219,7 +219,7 @@ export function ProfileEdit({
             value={formData.bio}
             onChange={onChange}
             placeholder="Describe your background, teaching methodology..."
-            className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-emerald-500/60 rounded-lg px-3.5 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs resize-none leading-relaxed"
+            className="w-full bg-zinc-50/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/80 focus:border-emerald-500 dark:focus:border-blue-500/60 rounded-lg px-3.5 py-2.5 text-xs font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none transition-colors shadow-xs resize-none leading-relaxed"
           />
         </div>
       </div>

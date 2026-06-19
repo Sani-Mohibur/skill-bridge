@@ -76,12 +76,12 @@ export default function TutorDashboardView() {
       <div className="w-full bg-gradient-to-br from-[#d0e7ff] via-[#e3f2fd] to-[#f0f4f8] dark:bg-gradient-to-br dark:from-[#0f172a] dark:via-[#090d16] dark:to-[#020617] border border-blue-300/40 dark:border-border/60 rounded-3xl p-6 sm:p-8 relative overflow-hidden">
         <div className="hidden dark:block absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
         <section className="text-center space-y-4 max-w-3xl mx-auto py-6 relative z-10">
-          <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-emerald-500/20">
+          <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-600 dark:text-blue-400 px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-emerald-500/20 dark:border-blue-500/20">
             ✨ Synchronized Knowledge Portal
           </div>
           <h1 className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
             Tutor Performance{" "}
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 dark:from-blue-500 dark:to-cyan-500 bg-clip-text text-transparent">
               Dashboard
             </span>
           </h1>
@@ -121,12 +121,12 @@ export default function TutorDashboardView() {
         </div>
 
         {/* Metric 2: Total Classes */}
-        <div className="group relative rounded-2xl bg-card border border-border/50 p-6 transition-all duration-300 hover:border-emerald-500/30 hover:shadow-md dark:hover:bg-emerald-500/[0.02]">
+        <div className="group relative rounded-2xl bg-card border border-border/50 p-6 transition-all duration-300 hover:border-emerald-500/30 dark:hover:border-blue-500/30 hover:shadow-md dark:hover:bg-blue-500/[0.02]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold tracking-wider uppercase text-muted-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+            <span className="text-xs font-bold tracking-wider uppercase text-muted-foreground group-hover:text-emerald-600 dark:group-hover:text-blue-400 transition-colors">
               Total Classes
             </span>
-            <div className="p-2 rounded-xl bg-emerald-500/5 text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 group-hover:bg-emerald-500/10 transition-all">
+            <div className="p-2 rounded-xl bg-emerald-500/5 text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-blue-400 group-hover:bg-emerald-500/10 dark:group-hover:bg-blue-500/10 transition-all">
               <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>

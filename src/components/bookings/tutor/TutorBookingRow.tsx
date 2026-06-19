@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   CheckCircle2,
   Users,
@@ -70,7 +70,7 @@ export function TutorBookingRow({
                 ? "bg-slate-500/10 text-slate-600 dark:text-slate-400 border border-slate-500/20"
                 : isTimeReached
                   ? "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
-                  : "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+                  : "bg-emerald-500/10 text-emerald-600 dark:text-blue-400 border border-emerald-500/20 dark:border-blue-500/20"
             }`}
           >
             {isAlreadyCompleted
@@ -111,7 +111,7 @@ export function TutorBookingRow({
         </div>
 
         <div className="flex items-center gap-1.5 col-span-2 md:col-span-1 text-foreground font-semibold bg-slate-200/40 dark:bg-slate-800/40 px-2.5 py-1 rounded-xl border border-slate-300/40 dark:border-slate-800/50">
-          <DollarSign className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+          <DollarSign className="w-3.5 h-3.5 text-emerald-500 dark:text-blue-500 shrink-0" />
           <span>
             Total: $
             {(
@@ -146,7 +146,7 @@ export function TutorBookingRow({
                 ? "Cannot complete prior to calendar scheduled session timestamp."
                 : "Mark as completed"
             }
-            className="h-9 px-3 rounded-xl bg-emerald-500 text-white hover:opacity-95 text-xs font-bold flex items-center gap-1.5 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            className="h-9 px-3 rounded-xl bg-emerald-500 dark:bg-blue-600 text-white hover:opacity-95 text-xs font-bold flex items-center gap-1.5 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />{" "}
             {isCompleting ? "Processing..." : "Complete"}

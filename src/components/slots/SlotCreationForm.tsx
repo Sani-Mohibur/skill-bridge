@@ -233,7 +233,7 @@ export function SlotCreationForm({ apiBase }: SlotCreationFormProps) {
               <button
                 type="button"
                 onClick={toggleFreeSession}
-                className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 cursor-pointer"
+                className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-blue-400 cursor-pointer"
               >
                 {isFree ? (
                   <CheckSquare className="w-4 h-4 fill-emerald-500/5 cursor-pointer" />
@@ -270,7 +270,7 @@ export function SlotCreationForm({ apiBase }: SlotCreationFormProps) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-11 text-xs font-bold rounded-xl bg-emerald-500 dark:bg-emerald-600 text-white hover:opacity-95 transition-opacity disabled:opacity-40 cursor-pointer"
+          className="w-full h-11 text-xs font-bold rounded-xl bg-emerald-500 dark:bg-blue-600 text-white hover:opacity-95 transition-opacity disabled:opacity-40 cursor-pointer"
         >
           {isSubmitting ? "Publishing Session..." : "Publish Availability Slot"}
         </button>

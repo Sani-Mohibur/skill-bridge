@@ -25,9 +25,9 @@ interface TutorCardProps {
 
 export function TutorCard({ tutor }: TutorCardProps) {
   return (
-    <div className="group relative bg-gradient-to-br from-slate-50 via-indigo-50/60 to-violet-100/40 dark:from-slate-950 dark:via-indigo-950/40 dark:to-violet-950/40 border border-border/70 hover:border-emerald-500/40 rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-lg hover:shadow-emerald-500/5">
+    <div className="group relative bg-gradient-to-br from-slate-50 via-indigo-50/60 to-violet-100/40 dark:from-slate-950 dark:via-indigo-950/40 dark:to-violet-950/40 border border-border/70 hover:border-emerald-500/40 dark:hover:border-blue-500/40 rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-lg hover:shadow-emerald-500/5 dark:hover:shadow-blue-500/5">
       <div>
-        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.12),transparent_40%),radial-gradient(circle_at_top_right,rgba(20,184,166,0.10),transparent_45%),radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)]" />
+        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.12),transparent_40%),radial-gradient(circle_at_top_right,rgba(20,184,166,0.10),transparent_45%),radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.12),transparent_40%),radial-gradient(circle_at_top_right,rgba(6,182,212,0.10),transparent_45%),radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)]" />
         {/* Top Header Card Info Row */}
         <div className="flex items-start gap-4">
           {/* Tutor Avatar Frame */}
@@ -39,14 +39,14 @@ export function TutorCard({ tutor }: TutorCardProps) {
                 className="w-14 h-14 rounded-xl object-cover border border-border/80"
               />
             ) : (
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg font-black border border-emerald-500/20 shadow-xs">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 dark:from-blue-500/10 dark:to-cyan-500/10 text-emerald-600 dark:text-blue-400 flex items-center justify-center text-lg font-black border border-emerald-500/20 dark:border-blue-500/20 shadow-xs">
                 {tutor.name.charAt(0).toUpperCase()}
               </div>
             )}
 
             {tutor.isVerified && (
               <div className="absolute -bottom-1 -right-1 bg-background rounded-full p-0.5 shadow-xs">
-                <ShieldCheck className="w-4 h-4 fill-emerald-500 text-white dark:text-background" />
+                <ShieldCheck className="w-4 h-4 fill-emerald-500 dark:fill-blue-500 text-white dark:text-background" />
               </div>
             )}
           </div>
@@ -94,11 +94,11 @@ export function TutorCard({ tutor }: TutorCardProps) {
         {/* Meta Timeline Tags */}
         <div className="flex items-center gap-3 mt-4 text-[11px] text-muted-foreground/80 font-medium">
           <div className="flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5 text-emerald-500/80" />
+            <Clock className="w-3.5 h-3.5 text-emerald-500/80 dark:text-blue-500/80" />
             <span>{tutor.experienceYears} Years Exp</span>
           </div>
           <div className="flex items-center gap-1">
-            <BookOpen className="w-3.5 h-3.5 text-teal-500/80" />
+            <BookOpen className="w-3.5 h-3.5 text-teal-500/80 dark:text-blue-500/80" />
             <span>Active Slots</span>
           </div>
         </div>
@@ -121,7 +121,7 @@ export function TutorCard({ tutor }: TutorCardProps) {
         </div>
 
         <Link href={`/tutors/${tutor.id}`} passHref className="shrink-0">
-          <Button className="h-9 px-3.5 text-xs font-bold rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white border-none cursor-pointer flex items-center gap-1 shadow-xs group-hover:px-4 transition-all duration-300">
+          <Button className="h-9 px-3.5 text-xs font-bold rounded-xl bg-emerald-500 hover:bg-emerald-400 dark:bg-blue-600 dark:hover:bg-blue-500 text-white border-none cursor-pointer flex items-center gap-1 shadow-xs group-hover:px-4 transition-all duration-300">
             View Profile
             <ChevronRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
           </Button>

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { GraduationCap } from "lucide-react";
 import { TutorCard, Tutor } from "./TutorCard";
 import { Pagination } from "@/components/shared/Pagination";
@@ -37,7 +36,7 @@ export function TutorsGrid({
     return (
       <div className="flex flex-col items-center justify-center text-center py-16 px-4 bg-background border border-dashed border-border/80 rounded-2xl w-full">
         <div className="w-12 h-12 rounded-xl bg-muted/60 flex items-center justify-center text-muted-foreground mb-4">
-          <GraduationCap className="w-6 h-6" />
+          <GraduationCap className="w-6 h-6 text-teal-500/80 dark:text-blue-500/80" />
         </div>
         <h3 className="text-sm font-bold text-foreground">
           No Tutors Match Filter Options

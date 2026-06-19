@@ -98,7 +98,7 @@ function TutorsContent() {
     };
 
     fetchTutorsData();
-  }, [searchParams]);
+  }, [searchParams, currentPage, filters]);
 
   const createQueryString = (
     page: number,

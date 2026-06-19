@@ -69,8 +69,8 @@ export function AvailableSlotsTable({
 
   if (slots.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-14 border border-dashed border-border/60 rounded-2xl bg-gradient-to-b from-muted/10 to-emerald-500/5 text-center">
-        <Calendar className="w-9 h-9 text-emerald-500/40 mb-2" />
+      <div className="flex flex-col items-center justify-center py-14 border border-dashed border-border/60 rounded-2xl bg-gradient-to-b from-muted/10 to-emerald-500/5 dark:to-blue-500/5 text-center">
+        <Calendar className="w-9 h-9 text-emerald-500/40 dark:text-blue-500/40 mb-2" />
         <p className="text-xs font-semibold text-muted-foreground">
           No upcoming open slots available right now.
         </p>
@@ -79,7 +79,7 @@ export function AvailableSlotsTable({
   }
 
   return (
-    <div className="border border-border/40 rounded-2xl overflow-hidden shadow-sm bg-gradient-to-b from-background via-background to-emerald-500/5">
+    <div className="border border-border/40 rounded-2xl overflow-hidden shadow-sm bg-gradient-to-b from-background via-background to-emerald-500/5 dark:to-blue-500/5">
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -106,11 +106,11 @@ export function AvailableSlotsTable({
               return (
                 <tr
                   key={item.id}
-                  className="group hover:bg-emerald-500/5 hover:shadow-sm transition-all duration-200"
+                  className="group hover:bg-emerald-500/5 dark:hover:bg-blue-500/5 hover:shadow-sm transition-all duration-200"
                 >
                   {/* Tutor Details */}
                   <td className="p-4 pl-5 space-y-1 max-w-[220px]">
-                    <div className="font-bold text-foreground group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-emerald-600 group-hover:to-teal-500 transition-all">
+                    <div className="font-bold text-foreground group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-emerald-600 group-hover:to-teal-500 dark:group-hover:from-blue-600 dark:group-hover:to-cyan-500 transition-all">
                       {item.tutorProfile.user.name}
                     </div>
 
@@ -124,7 +124,7 @@ export function AvailableSlotsTable({
                         .map((skill, index) => (
                           <span
                             key={index}
-                            className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20"
+                            className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-600 dark:text-blue-400 border border-emerald-500/20 dark:border-blue-500/20"
                           >
                             {skill}
                           </span>
@@ -144,7 +144,7 @@ export function AvailableSlotsTable({
                     </p>
 
                     <div className="flex items-center gap-1 text-[10px] font-medium text-muted-foreground bg-white/5 backdrop-blur border border-border/30 rounded-full px-2 py-1 w-fit">
-                      <MapPin className="w-3 h-3 text-emerald-500" />
+                      <MapPin className="w-3 h-3 text-emerald-500 dark:text-blue-500" />
                       <span className="truncate">
                         {item.location || "Remote (Google Meet / Zoom)"}
                       </span>
@@ -166,7 +166,7 @@ export function AvailableSlotsTable({
                     </div>
 
                     <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
-                      <span className="flex items-center gap-0.5 font-bold px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                      <span className="flex items-center gap-0.5 font-bold px-2 py-1 rounded-full bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-600 dark:text-blue-400 border border-emerald-500/20 dark:border-blue-500/20">
                         <DollarSign className="w-3 h-3" />
                         {item.pricePerHour !== undefined &&
                         item.pricePerHour !== null &&
@@ -197,7 +197,7 @@ export function AvailableSlotsTable({
                       type="button"
                       disabled={bookingId !== null}
                       onClick={() => handleBookingClick(item.id)}
-                      className="px-4 py-2 text-[11px] font-bold text-white rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 disabled:opacity-50 shadow-md hover:shadow-lg transition-all duration-200 group-hover:scale-[1.03] cursor-pointer"
+                      className="px-4 py-2 text-[11px] font-bold text-white rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 dark:from-blue-600 dark:to-cyan-500 dark:hover:from-blue-500 dark:hover:to-cyan-400 disabled:opacity-50 shadow-md hover:shadow-lg transition-all duration-200 group-hover:scale-[1.03] cursor-pointer"
                     >
                       {isCurrentRowBooking ? "Booking..." : "Book Class"}
                     </button>

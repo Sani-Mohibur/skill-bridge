@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -84,7 +83,7 @@ export function Pagination({
             onClick={() => onPageChange(page as number)}
             className={`h-10 w-10 rounded-2xl p-0 text-sm font-semibold transition-all duration-200 cursor-pointer ${
               isCurrent
-                ? "border-none bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/20 hover:scale-105"
+                ? "border-none bg-gradient-to-r from-emerald-500 to-teal-500 dark:from-blue-500 dark:to-cyan-500 text-white shadow-lg shadow-emerald-500/20 dark:shadow-blue-500/20 hover:scale-105"
                 : "border border-border bg-background text-muted-foreground backdrop-blur-sm hover:scale-105 hover:bg-muted/60 hover:text-foreground"
             }`}
           >

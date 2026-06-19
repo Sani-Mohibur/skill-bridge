@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { ROLES } from "@/constants/roles";
 
@@ -22,7 +21,7 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
           href="/slots"
           className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
             isActive("/slots")
-              ? "text-emerald-500 bg-emerald-500/5"
+              ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/15 dark:bg-blue-500/15"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
           }`}
         >
@@ -33,7 +32,7 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
           href="/tutors"
           className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
             isActive("/tutors")
-              ? "text-emerald-500 bg-emerald-500/5"
+              ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/15 dark:bg-blue-500/15"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
           }`}
         >
@@ -45,7 +44,7 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
         href="/how-it-works"
         className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
           isActive("/how-it-works")
-            ? "text-emerald-500 bg-emerald-500/5"
+            ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/15 dark:bg-blue-500/15"
             : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
         }`}
       >
@@ -56,7 +55,7 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
         href="/about"
         className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
           isActive("/about")
-            ? "text-emerald-500 bg-emerald-500/5"
+            ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/15 dark:bg-blue-500/15"
             : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
         }`}
       >
@@ -69,7 +68,7 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
             href="/bookings"
             className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
               isActive("/bookings")
-                ? "text-emerald-500 bg-emerald-500/5"
+                ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/15 dark:bg-blue-500/15"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
             }`}
           >
@@ -82,7 +81,7 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
               href="/reviews"
               className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
                 isActive("/reviews")
-                  ? "text-emerald-500 bg-emerald-500/5"
+                  ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/15 dark:bg-blue-500/15"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
               }`}
             >
@@ -95,7 +94,7 @@ export function NavLinks({ pathname, isLoggedIn, userRole }: NavLinksProps) {
           href="/register?role=tutor"
           className={`text-xs font-semibold tracking-wide px-4 py-2 rounded-xl transition-all duration-300 ${
             isActive("/register")
-              ? "text-emerald-500 bg-emerald-500/5"
+              ? "text-emerald-500 dark:text-blue-400 bg-emerald-500/15 dark:bg-blue-500/15"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
           }`}
         >

@@ -1,15 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import {
-  ArrowLeft,
-  User,
-  Mail,
-  ShieldAlert,
-  Loader2,
-  GraduationCap,
-} from "lucide-react";
+import { User, Mail, ShieldAlert, Loader2 } from "lucide-react";
 import { TutorAttendeeHeader } from "@/components/bookings/tutor/TutorAttendeeHeader";
 
 interface StudentAttendee {
@@ -116,7 +109,7 @@ export default function SlotStudentsPage() {
                 </div>
 
                 <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground bg-background dark:bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-300/60 dark:border-slate-800/80 self-start sm:self-auto">
-                  <Mail className="w-3.5 h-3.5 text-emerald-500" />
+                  <Mail className="w-3.5 h-3.5 text-emerald-500 dark:text-blue-500" />
                   <span>{row.studentProfile?.user?.email || "N/A"}</span>
                 </div>
               </div>

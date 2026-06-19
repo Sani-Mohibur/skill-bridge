@@ -56,7 +56,7 @@ export function SlotListCard({
     return {
       text: "Open",
       className:
-        "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20",
+        "bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-600 dark:text-blue-400 border border-emerald-500/20 dark:border-blue-500/20",
     };
   };
 
@@ -157,7 +157,7 @@ export function SlotListCard({
 
         {slotData.location && (
           <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground font-medium">
-            <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+            <MapPin className="w-3.5 h-3.5 text-emerald-500 dark:text-blue-500 shrink-0" />
             <span className="truncate">{slotData.location}</span>
           </div>
         )}
@@ -182,7 +182,7 @@ export function SlotListCard({
             <span>{slotData.timeDuration || "60"} Mins</span>
           </div>
           <div className="flex items-center gap-1.5 col-span-2 text-foreground font-semibold">
-            <DollarSign className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+            <DollarSign className="w-3.5 h-3.5 text-emerald-500 dark:text-blue-500 shrink-0" />
             <span>
               {slotData.pricePerHour ? `$${slotData.pricePerHour}/hr` : "$0/hr"}{" "}
               (Total: $
@@ -268,7 +268,7 @@ export function SlotListCard({
             <button
               type="submit"
               disabled={isActionLoading}
-              className="px-2 py-1 rounded bg-emerald-500 text-white font-bold text-xs flex items-center gap-1 cursor-pointer disabled:opacity-50"
+              className="px-2 py-1 rounded bg-emerald-500 dark:bg-blue-600 text-white font-bold text-xs flex items-center gap-1 cursor-pointer disabled:opacity-50"
             >
               <Check className="w-3 h-3" /> Save Changes
             </button>

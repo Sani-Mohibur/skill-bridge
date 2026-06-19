@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 interface MobileUserProfileProps {
   session: any;
 }
@@ -18,7 +16,7 @@ export function MobileUserProfile({ session }: MobileUserProfileProps) {
           className="w-10 h-10 rounded-xl object-cover border border-border"
         />
       ) : (
-        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-sm font-black border border-emerald-500/20">
+        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-500 dark:text-blue-400 flex items-center justify-center text-sm font-black border border-emerald-500/20 dark:border-blue-500/20">
           {user?.name?.charAt(0).toUpperCase() || "U"}
         </div>
       )}

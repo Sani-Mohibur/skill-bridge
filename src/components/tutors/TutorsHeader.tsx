@@ -60,7 +60,9 @@ export function TutorsHeader({
           className="w-full h-12 pl-11 pr-14 text-xs font-semibold bg-background/80 dark:bg-background/40 backdrop-blur-md hover:bg-background/90 border border-border/80 focus:border-emerald-500/40 dark:focus:border-blue-500/40 rounded-xl outline-hidden transition-all placeholder:text-muted-foreground/60 shadow-xs focus:shadow-[0_0_20px_rgba(16,185,129,0.06)] dark:focus:shadow-[0_0_20px_rgba(59,130,246,0.06)] focus:ring-4 focus:ring-emerald-500/5 dark:focus:ring-blue-500/5"
         />
         <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-muted/90 border border-border/70 text-[10px] text-muted-foreground/70 font-mono font-bold tracking-tight select-none pointer-events-none group-focus-within:opacity-0 transition-opacity duration-200">
-          <span>⌘</span>
+          <span>
+            {navigator?.platform?.toLowerCase().includes("mac") ? "⌘" : "Ctrl"}
+          </span>
           <span>K</span>
         </div>
       </div>
