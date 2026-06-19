@@ -44,7 +44,7 @@ export default function RegisterForm() {
         callbackURL: "/profile/edit",
       });
 
-      toast.success("Access authorized! Redirecting...");
+      // toast.success("Access authorized! Redirecting...");
       router.refresh();
     } catch (err: any) {
       toast.error(err?.message || "An authentication error occurred.");

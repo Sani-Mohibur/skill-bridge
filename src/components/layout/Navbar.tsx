@@ -37,7 +37,10 @@ export default function Navbar() {
               </div>
 
               <span className="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground to-muted-foreground group-hover:text-foreground transition-all duration-300">
-                SkillBridge
+                Skill
+                <span className="text-emerald-500 dark:text-blue-400">
+                  Bridge
+                </span>
               </span>
             </Link>
           </div>

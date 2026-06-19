@@ -247,6 +247,7 @@ export function SlotCreationForm({ apiBase }: SlotCreationFormProps) {
             <input
               type="number"
               min="0"
+              step="any" // to allow floating numbers
               disabled={isFree}
               value={formData.pricePerHour}
               onChange={handlePriceChange}
