@@ -1,16 +1,22 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
-import { Star, ShieldCheck, Clock, BookOpen, ChevronRight } from "lucide-react";
+import {
+  Star,
+  ShieldCheck,
+  Clock,
+  BookOpen,
+  ChevronRight,
+  Award,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 export interface Tutor {
   id: string;
   name: string;
   image?: string;
   isVerified: boolean;
+  isFeatured?: boolean;
   rating: number;
   reviewCount: number;
   categories: string[];
@@ -25,9 +31,10 @@ interface TutorCardProps {
 
 export function TutorCard({ tutor }: TutorCardProps) {
   return (
-    <div className="group relative bg-gradient-to-br from-slate-50 via-indigo-50/60 to-violet-100/40 dark:from-slate-950 dark:via-indigo-950/40 dark:to-violet-950/40 border border-border/70 hover:border-emerald-500/40 dark:hover:border-blue-500/40 rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-lg hover:shadow-emerald-500/5 dark:hover:shadow-blue-500/5">
+    <div className="group relative bg-gradient-to-br from-slate-50 via-indigo-50/60 to-violet-100/40 dark:from-slate-950 dark:via-indigo-950/40 dark:to-violet-950/40 border rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-lg hover:border-emerald-500/40 dark:hover:border-blue-500/40 hover:shadow-emerald-500/5 dark:hover:shadow-blue-500/5">
+      {/* Premium Ambient Background Hover Meshes */}
+      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.12),transparent_40%),radial-gradient(circle_at_top_right,rgba(20,184,166,0.10),transparent_45%),radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.12),transparent_40%),radial-gradient(circle_at_top_right,rgba(6,182,212,0.10),transparent_45%),radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)]" />
       <div>
-        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.12),transparent_40%),radial-gradient(circle_at_top_right,rgba(20,184,166,0.10),transparent_45%),radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.12),transparent_40%),radial-gradient(circle_at_top_right,rgba(6,182,212,0.10),transparent_45%),radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)]" />
         {/* Top Header Card Info Row */}
         <div className="flex items-start gap-4">
           {/* Tutor Avatar Frame */}
@@ -52,11 +59,19 @@ export function TutorCard({ tutor }: TutorCardProps) {
           </div>
 
           {/* Title and Badge Metadata Info */}
-          <div className="space-y-1 min-w-0">
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <h2 className="text-sm font-black tracking-tight text-foreground truncate max-w-[150px]">
+          <div className="space-y-1 min-w-0 flex-1">
+            <div className="flex items-center justify-between gap-1.5 w-full">
+              <h2 className="text-sm font-black tracking-tight text-foreground truncate max-w-[140px]">
                 {tutor.name}
               </h2>
+
+              {/* Premium Featured Badge Pill */}
+              {tutor.isFeatured && (
+                <span className="inline-flex items-center gap-0.5 text-[9px] font-black tracking-wide uppercase px-1.5 py-0.5 rounded-md bg-emerald-500/10 dark:bg-blue-500/10 text-emerald-600 dark:text-blue-400 border border-emerald-500/20 dark:border-blue-500/20 shadow-xs backdrop-blur-xs">
+                  <Award className="w-3 h-3" />
+                  Featured
+                </span>
+              )}
             </div>
 
             {/* Micro Rating Indicator Row */}
@@ -86,7 +101,7 @@ export function TutorCard({ tutor }: TutorCardProps) {
           ))}
         </div>
 
-        {/* Short Text Description Bio Bio Summary */}
+        {/* Short Text Description Bio */}
         <p className="text-xs text-muted-foreground line-clamp-2 mt-3 leading-relaxed">
           {tutor.bio}
         </p>
@@ -104,7 +119,7 @@ export function TutorCard({ tutor }: TutorCardProps) {
         </div>
       </div>
 
-      {/* Footer Price and Booking CTA CTA Block Row */}
+      {/* Footer Price and Booking CTA */}
       <div className="pt-4 mt-4 border-t border-border/40 flex items-center justify-between gap-2">
         <div className="flex flex-col">
           <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">
