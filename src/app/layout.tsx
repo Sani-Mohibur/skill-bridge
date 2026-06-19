@@ -60,10 +60,8 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
-          <Navbar />
           {children}
           <Toaster position="bottom-right" richColors closeButton />
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

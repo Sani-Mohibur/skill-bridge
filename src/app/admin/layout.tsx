@@ -12,7 +12,10 @@ import {
   Menu,
   X,
   LogOut,
+  Sun,
+  Moon,
 } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -21,8 +24,8 @@ interface AdminLayoutProps {
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
-  // Unified Admin Sidebar Navigation Map
   const navItems = [
     { name: "Overview", href: "/admin", icon: LayoutDashboard },
     { name: "User Directory", href: "/admin/users", icon: Users },
@@ -32,7 +35,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex transition-colors duration-200">
       {/* 1. Desktop Sidebar Component Container */}
       <aside className="hidden md:flex flex-col w-64 bg-background border-r border-black/5 dark:border-white/5 fixed inset-y-0 left-0 z-20">
         <div className="h-16 flex items-center px-6 border-b border-black/5 dark:border-white/5">
@@ -66,7 +69,26 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           })}
         </nav>
 
-        <div className="p-4 border-t border-black/5 dark:border-white/5">
+        {/* Bottom Utility Controls Block */}
+        <div className="p-4 border-t border-black/5 dark:border-white/5 space-y-2">
+          {/* Active Theme Switcher Action Toggle Row */}
+          <button
+            onClick={toggleTheme}
+            className="flex items-center justify-between w-full px-4 h-10 rounded-xl text-xs font-bold text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              {theme === "dark" ? (
+                <Moon className="w-4 h-4" />
+              ) : (
+                <Sun className="w-4 h-4" />
+              )}
+              <span>Interface Theme</span>
+            </div>
+            <span className="text-[10px] uppercase font-black tracking-wider text-muted-foreground/60">
+              {theme}
+            </span>
+          </button>
+
           <button className="flex items-center gap-3 w-full px-4 h-10 rounded-xl text-xs font-bold text-destructive hover:bg-destructive/10 transition-colors cursor-pointer">
             <LogOut className="w-4 h-4" />
             Exit Panel
@@ -79,40 +101,65 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <span className="text-sm font-black text-foreground">
           SkillBridge <span className="text-red-500">Admin</span>
         </span>
-        <button
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="p-2 rounded-lg bg-muted text-foreground cursor-pointer"
-        >
-          {isMobileOpen ? (
-            <X className="w-4 h-4" />
-          ) : (
-            <Menu className="w-4 h-4" />
-          )}
-        </button>
+
+        <div className="flex items-center gap-2">
+          {/* Mobile Theme Switch Button */}
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg bg-muted text-foreground cursor-pointer flex items-center justify-center"
+            title="Toggle theme"
+          >
+            {theme === "dark" ? (
+              <Moon className="w-4 h-4" />
+            ) : (
+              <Sun className="w-4 h-4" />
+            )}
+          </button>
+
+          <button
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            className="p-2 rounded-lg bg-muted text-foreground cursor-pointer flex items-center justify-center"
+          >
+            {isMobileOpen ? (
+              <X className="w-4 h-4" />
+            ) : (
+              <Menu className="w-4 h-4" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* 3. Mobile Navigation Draw Overlay Menu */}
       {isMobileOpen && (
-        <div className="md:hidden fixed inset-0 z-10 bg-background/90 backdrop-blur-md pt-20 px-4 space-y-2">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsMobileOpen(false)}
-                className={`flex items-center gap-3 px-4 h-12 rounded-xl text-xs font-bold ${
-                  isActive
-                    ? "bg-slate-900 text-white dark:bg-white dark:text-black"
-                    : "text-muted-foreground"
-                }`}
-              >
-                <Icon className="w-4.5 h-4.5" />
-                {item.name}
-              </Link>
-            );
-          })}
+        <div className="md:hidden fixed inset-0 z-10 bg-background/95 backdrop-blur-md pt-20 px-4 space-y-2 flex flex-col justify-between pb-6">
+          <div className="space-y-2">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileOpen(false)}
+                  className={`flex items-center gap-3 px-4 h-12 rounded-xl text-xs font-bold ${
+                    isActive
+                      ? "bg-slate-900 text-white dark:bg-white dark:text-black"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  <Icon className="w-4.5 h-4.5" />
+                  {item.name}
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="p-2">
+            <button className="flex items-center gap-3 w-full px-4 h-12 rounded-xl text-xs font-bold text-destructive bg-destructive/5 border border-destructive/10 cursor-pointer">
+              <LogOut className="w-4.5 h-4.5" />
+              Exit Panel
+            </button>
+          </div>
         </div>
       )}
 
