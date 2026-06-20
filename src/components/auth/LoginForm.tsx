@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ROLES } from "@/constants/roles";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -29,11 +30,14 @@ export default function LoginForm() {
             const userRole = ctx?.data?.user?.role;
 
             setTimeout(() => {
-              if (userRole === "tutor") {
+              if (userRole === ROLES.TUTOR) {
                 router.push("/slots");
-              } else {
+              } else if (userRole === ROLES.STUDENT) {
                 router.push("/tutors");
+              } else if (userRole === ROLES.ADMIN) {
+                router.push("/admin");
               }
+
               router.refresh();
             }, 800);
           },

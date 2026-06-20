@@ -11,8 +11,7 @@ export default function TutorBookingsDashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
 
-  const apiBase =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1";
+  const apiBase = process.env.NEXT_PUBLIC_API_URL!;
 
   const fetchTutorSlots = async () => {
     try {

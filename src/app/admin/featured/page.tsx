@@ -1,129 +1,191 @@
 "use client";
 
-import { Star, StarOff, ShieldCheck, ArrowUpRight, Search } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Loader2, Star } from "lucide-react";
+import { toast } from "sonner";
+import { FeaturedTutorFilterBar } from "@/components/admin/featured/FeaturedTutorFilterBar";
+import { FeaturedTutorRow } from "@/components/admin/featured/FeaturedTutorRow";
+import { Pagination } from "@/components/shared/Pagination";
+
+interface TutorData {
+  id: string;
+  userId: string;
+  title: string;
+  isVerified: boolean;
+  isFeatured: boolean;
+  bio: string;
+  qualifications: string;
+  skills: string[];
+  experienceYears: number;
+  pricePerHour: number;
+  rating: number;
+}
+
+interface MetaData {
+  page: number;
+  limit: number;
+  totalPages: number;
+}
 
 export default function AdminFeaturedTutorsPage() {
-  // Static placeholder array for featured dashboard control layout mockup
-  const mockTutors = [
-    {
-      id: "t1",
-      name: "Sarah Jenkins",
-      title: "MERN Stack Expert",
-      rating: 4.9,
-      reviews: 42,
-      isFeatured: true,
-    },
-    {
-      id: "t2",
-      name: "David Chen",
-      title: "Systems Engineer",
-      rating: 4.8,
-      reviews: 19,
-      isFeatured: true,
-    },
-    {
-      id: "t3",
-      name: "Elena Rostova",
-      title: "Data Scientist",
-      rating: 5.0,
-      reviews: 31,
-      isFeatured: false,
-    },
-    {
-      id: "t4",
-      name: "Marcus Brody",
-      title: "Security Specialist",
-      rating: 4.7,
-      reviews: 14,
-      isFeatured: false,
-    },
-  ];
+  const [tutors, setTutors] = useState<TutorData[]>([]);
+  const [meta, setMeta] = useState<MetaData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isActionLoading, setIsActionLoading] = useState<string | null>(null);
+
+  const [activeTab, setActiveTab] = useState<"all" | "featured" | "standard">(
+    "all",
+  );
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const apiBase = process.env.NEXT_PUBLIC_API_URL!;
+
+  const fetchTutors = async () => {
+    try {
+      setIsLoading(true);
+      const queryParams = new URLSearchParams({
+        page: currentPage.toString(),
+        limit: "10",
+        search: searchQuery,
+        status: activeTab, // backend filters based on featured status mapping
+      });
+
+      const res = await fetch(`${apiBase}/admin/tutors?${queryParams}`, {
+        credentials: "include",
+      });
+      const json = await res.json();
+      if (json.success) {
+        setTutors(json.data || []);
+        setMeta(json.meta || null);
+      }
+    } catch (err) {
+      console.error("Failed fetching tutor catalog:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab, searchQuery]);
+
+  useEffect(() => {
+    fetchTutors();
+  }, [currentPage, activeTab, searchQuery]);
+
+  const handleToggleFeature = async (
+    tutorId: string,
+    currentFeaturedStatus: boolean,
+  ) => {
+    try {
+      setIsActionLoading(tutorId);
+      const nextState = !currentFeaturedStatus;
+
+      const res = await fetch(`${apiBase}/admin/tutors/${tutorId}/featured`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ isFeatured: nextState }),
+        credentials: "include",
+      });
+
+      const json = await res.json();
+      if (json.success) {
+        toast.success(
+          nextState ? "Tutor featured successfully" : "Featured status removed",
+        );
+        fetchTutors();
+      } else {
+        toast.error(
+          json.message || "Failed to update highlight placement status.",
+        );
+      }
+    } catch (err) {
+      console.error("Feature action execution blocked:", err);
+      toast.error("Network communication failure.");
+    } finally {
+      setIsActionLoading(null);
+    }
+  };
 
   return (
     <div className="space-y-8 w-full animate-fade-in">
-      {/* Editorial Page Identification Header */}
       <div>
         <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
-          Featured Spotlights Manager
+          Featured Tutors Showcase
         </h1>
         <p className="text-xs text-muted-foreground mt-1">
-          Promote or demote elite verified partner accounts directly to the main
-          system homepage discoverability vectors.
+          Promote exceptional educators to the main portal homepage or manage
+          standard positioning ranks.
         </p>
       </div>
 
-      {/* Control Actions Configuration Panel Bar */}
-      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 bg-card border border-black/5 dark:border-white/5 p-4 rounded-2xl shadow-xs">
-        <div className="text-xs font-bold text-muted-foreground">
-          Showing {mockTutors.length} total active instructor records
-        </div>
+      <FeaturedTutorFilterBar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
 
-        <div className="relative max-w-xs w-full flex items-center">
-          <Search className="w-4 h-4 text-muted-foreground absolute left-3 pointer-events-none" />
-          <input
-            type="text"
-            placeholder="Search matching names..."
-            className="w-full h-9 pl-9 pr-4 text-xs rounded-xl border border-black/10 dark:border-white/10 bg-background focus:outline-hidden focus:border-emerald-500/50 dark:focus:border-blue-500/50 transition-colors"
-          />
-        </div>
-      </div>
-
-      {/* Tutors Setup Matrix Layout Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {mockTutors.map((tutor) => (
-          <div
-            key={tutor.id}
-            className={`bg-card border rounded-2xl p-5 shadow-xs flex justify-between items-start gap-4 transition-all relative overflow-hidden ${
-              tutor.isFeatured
-                ? "border-amber-500/30 dark:border-blue-500/40"
-                : "border-black/5 dark:border-white/5"
-            }`}
-          >
-            {/* Left Content Column */}
-            <div className="space-y-3">
-              <div className="space-y-0.5">
-                <div className="flex items-center gap-1.5">
-                  <h3 className="text-sm font-black text-foreground">
-                    {tutor.name}
-                  </h3>
-                  <ShieldCheck className="w-4 h-4 text-emerald-500 dark:text-blue-400 fill-emerald-500/10 dark:fill-blue-500/10" />
-                </div>
-                <p className="text-xs font-bold text-muted-foreground">
-                  {tutor.title}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 text-[11px] font-bold text-muted-foreground">
-                <span className="flex items-center gap-0.5 text-amber-500">
-                  <Star className="w-3.5 h-3.5 fill-current" /> {tutor.rating}
-                </span>
-                <span>({tutor.reviews} reviews)</span>
-              </div>
-            </div>
-
-            {/* Right Action Trigger Column */}
-            <div className="flex flex-col items-end justify-between h-full min-h-[76px] shrink-0">
-              <a
-                href={`/tutors/${tutor.id}`}
-                target="_blank"
-                className="text-muted-foreground hover:text-foreground transition-colors p-1"
-              >
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-
-              {tutor.isFeatured ? (
-                <button className="h-7 px-2.5 text-[10px] font-bold rounded-lg border border-red-500/20 bg-red-500/10 text-red-600 dark:text-red-400 flex items-center gap-1 transition-colors hover:bg-red-500/20 cursor-pointer">
-                  <StarOff className="w-3.5 h-3.5" /> Remove Spotlight
-                </button>
+      <div className="bg-card border border-black/5 dark:border-white/5 rounded-2xl shadow-xs overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-left">
+            <thead>
+              <tr className="border-b border-black/5 dark:border-white/5 bg-slate-50/50 dark:bg-slate-900/50 text-[10px] font-black text-muted-foreground uppercase tracking-wider">
+                <th className="px-6 py-4">Tutor Profile</th>
+                <th className="px-6 py-4">Subject Specialties</th>
+                <th className="px-6 py-4">Experience Rate</th>
+                <th className="px-6 py-4">Status</th>
+                <th className="px-6 py-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-black/5 dark:divide-white/5 text-xs">
+              {isLoading ? (
+                <tr>
+                  <td colSpan={5} className="text-center py-20">
+                    <div className="flex flex-col items-center justify-center space-y-3">
+                      <Loader2 className="w-6 h-6 text-primary animate-spin" />
+                      <p className="text-xs text-muted-foreground font-medium">
+                        Synchronizing featured expert directory...
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              ) : tutors.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="text-center py-16">
+                    <div className="flex flex-col items-center justify-center space-y-2 text-muted-foreground">
+                      <Star className="w-8 h-8 opacity-40" />
+                      <p className="font-bold text-sm text-foreground">
+                        No Tutors Cataloged
+                      </p>
+                    </div>
+                  </td>
+                </tr>
               ) : (
-                <button className="h-7 px-2.5 text-[10px] font-bold rounded-lg border border-black/10 dark:border-white/10 hover:bg-amber-500/10 hover:text-amber-600 dark:hover:text-amber-400 text-foreground flex items-center gap-1 transition-colors cursor-pointer">
-                  <Star className="w-3.5 h-3.5" /> Feature on Home
-                </button>
+                tutors.map((tutor) => (
+                  <FeaturedTutorRow
+                    key={tutor.id}
+                    tutor={tutor}
+                    onToggleFeature={handleToggleFeature}
+                    isActionLoading={isActionLoading}
+                  />
+                ))
               )}
-            </div>
-          </div>
-        ))}
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      {meta && meta.totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={meta.totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </div>
   );
 }

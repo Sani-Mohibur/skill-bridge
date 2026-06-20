@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ArrowUpRight,
-  TrendingUp,
-  ShieldAlert,
-  CheckCircle2,
-  UserCheck,
-} from "lucide-react";
+import { ArrowUpRight, TrendingUp, ShieldAlert, UserCheck } from "lucide-react";
 
 export default function AdminOverviewPage() {
   // Static placeholder data points for structural mockup

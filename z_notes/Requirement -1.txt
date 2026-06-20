@@ -1,0 +1,28 @@
+Here is the complete list of pages required for our Next.js App Router tutor marketplace.
+
+### Public Pages
+
+* Home Page - Hero Section, Featured Categories, How It Works, Success Stories
+* Tutor Search / Discovery Page
+* Tutor Public Profile Page
+* Login Page
+* Signup Page
+
+---
+
+### Tutor Dashboard (Protected)
+
+* Tutor Dashboard Overview
+* Manage Availability Slots
+* My Bookings / Roster
+* Slot Attendees / Students List
+* Tutor Profile Onboarding / Setup
+* Earnings / Payout Settings
+
+---
+
+### Shared / System Pages
+
+* Unauthorized Access Fallback (403)
+* Not Found Page (404)
+* Server Error Fallback (500)

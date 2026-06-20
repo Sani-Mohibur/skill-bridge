@@ -1,73 +1,113 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Search,
-  Filter,
-  Ban,
-  CheckCircle,
-  ShieldAlert,
-  MoreVertical,
-} from "lucide-react";
+import { useState, useEffect } from "react";
+import { Loader2, Users } from "lucide-react";
+import { UserFilterBar } from "@/components/admin/users/UserFilterBar";
+import { UserRow } from "@/components/admin/users/UserRow";
+import { Pagination } from "@/components/shared/Pagination";
+
+interface UserAccount {
+  id: string;
+  name: string;
+  email: string;
+  role: "student" | "tutor" | "admin";
+  banned: boolean;
+  createdAt: string;
+}
+
+interface MetaData {
+  page: number;
+  limit: number;
+  totalUsers: number;
+  totalPages: number;
+}
 
 export default function AdminUserDirectoryPage() {
-  const [activeTab, setActiveTab] = useState<"all" | "tutor" | "student">(
+  // State Matrix
+  const [users, setUsers] = useState<UserAccount[]>([]);
+  const [meta, setMeta] = useState<MetaData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isActionLoading, setIsActionLoading] = useState<string | null>(null);
+
+  // Filter & Pagination States
+  const [activeTab, setActiveTab] = useState<
+    "all" | "tutor" | "student" | "admin"
+  >("all");
+  const [statusFilter, setStatusFilter] = useState<"all" | "true" | "false">(
     "all",
   );
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Static user catalog mockup array matrix
-  const mockUsers = [
-    {
-      id: "u1",
-      name: "Sarah Jenkins",
-      email: "sarah.j@example.com",
-      role: "TUTOR",
-      status: "ACTIVE",
-      joined: "Mar 12, 2026",
-    },
-    {
-      id: "u2",
-      name: "David Chen",
-      email: "dchen@example.com",
-      role: "STUDENT",
-      status: "ACTIVE",
-      joined: "Jan 04, 2026",
-    },
-    {
-      id: "u3",
-      name: "Elena Rostova",
-      email: "elena.ros@example.com",
-      role: "TUTOR",
-      status: "PENDING",
-      joined: "Jun 18, 2026",
-    },
-    {
-      id: "u4",
-      name: "Marcus Brody",
-      email: "marcus@example.com",
-      role: "TUTOR",
-      status: "SUSPENDED",
-      joined: "Nov 22, 2025",
-    },
-    {
-      id: "u5",
-      name: "Amina Rahman",
-      email: "amina.r@example.com",
-      role: "STUDENT",
-      status: "ACTIVE",
-      joined: "Feb 19, 2026",
-    },
-  ];
+  const apiBase = process.env.NEXT_PUBLIC_API_URL!;
 
-  // Filtering filter logic based on local component tabs
-  const filteredUsers = mockUsers.filter((user) => {
-    if (activeTab === "all") return true;
-    return user.role.toLowerCase() === activeTab;
-  });
+  // Fetch Accounts Matrix
+  const fetchUsers = async () => {
+    try {
+      setIsLoading(true);
+      const queryParams = new URLSearchParams({
+        page: currentPage.toString(),
+        limit: "10",
+        search: searchQuery,
+        role: activeTab,
+        banned: statusFilter,
+        sortBy: "createdAt",
+        sortOrder: "desc",
+      });
+
+      const res = await fetch(`${apiBase}/admin/users?${queryParams}`, {
+        credentials: "include",
+      });
+      const json = await res.json();
+      if (json.success) {
+        setUsers(json.data || []);
+        setMeta(json.meta || null);
+      }
+    } catch (err) {
+      console.error("Failed fetching account listings:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Reset to page 1 whenever filters change to avoid empty data state splits
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab, statusFilter, searchQuery]);
+
+  // Synchronize on page or filter mutation boundaries
+  useEffect(() => {
+    fetchUsers();
+  }, [currentPage, activeTab, statusFilter, searchQuery]);
+
+  // Handle Ban / Unban Toggle Action Operations
+  const handleToggleBan = async (userId: string, currentBanStatus: boolean) => {
+    try {
+      setIsActionLoading(userId);
+      const res = await fetch(`${apiBase}/admin/users/${userId}/ban`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ banned: !currentBanStatus }),
+        credentials: "include",
+      });
+
+      const json = await res.json();
+      if (json.success) {
+        // Refresh local items seamlessly
+        fetchUsers();
+      }
+    } catch (err) {
+      console.error("Action transmission aborted:", err);
+    } finally {
+      setIsActionLoading(null);
+    }
+  };
 
   return (
     <div className="space-y-8 w-full animate-fade-in">
-      {/* Editorial Page Identification Header */}
+      {/* Editorial Page Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
@@ -80,35 +120,15 @@ export default function AdminUserDirectoryPage() {
         </div>
       </div>
 
-      {/* Control Actions & Utility Bar Layout */}
-      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 bg-card border border-black/5 dark:border-white/5 p-4 rounded-2xl shadow-xs">
-        {/* Left Segment: Role Segmentation Tabs */}
-        <div className="flex bg-slate-100 dark:bg-slate-900 p-1 rounded-xl border border-black/5 dark:border-white/5">
-          {(["all", "tutor", "student"] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 h-8 text-[11px] font-bold rounded-lg capitalize transition-all cursor-pointer ${
-                activeTab === tab
-                  ? "bg-background text-foreground shadow-xs"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {tab}s
-            </button>
-          ))}
-        </div>
-
-        {/* Right Segment: Search Field Matrix */}
-        <div className="relative max-w-xs w-full flex items-center">
-          <Search className="w-4 h-4 text-muted-foreground absolute left-3 pointer-events-none" />
-          <input
-            type="text"
-            placeholder="Search matching email or name..."
-            className="w-full h-9 pl-9 pr-4 text-xs rounded-xl border border-black/10 dark:border-white/10 bg-background focus:outline-hidden focus:border-emerald-500/50 dark:focus:border-blue-500/50 transition-colors"
-          />
-        </div>
-      </div>
+      {/* Filter Component Toolbar Context */}
+      <UserFilterBar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        statusFilter={statusFilter}
+        setStatusFilter={setStatusFilter}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
 
       {/* User Records Table Container */}
       <div className="bg-card border border-black/5 dark:border-white/5 rounded-2xl shadow-xs overflow-hidden">
@@ -124,85 +144,55 @@ export default function AdminUserDirectoryPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-black/5 dark:divide-white/5 text-xs">
-              {filteredUsers.map((user) => (
-                <tr
-                  key={user.id}
-                  className="hover:bg-slate-50/40 dark:hover:bg-slate-900/20 transition-colors"
-                >
-                  {/* Column 1: Identity Info Layout */}
-                  <td className="px-6 py-4">
-                    <div className="space-y-0.5">
-                      <div className="font-black text-foreground">
-                        {user.name}
-                      </div>
-                      <div className="text-[11px] text-muted-foreground font-medium">
-                        {user.email}
-                      </div>
-                    </div>
-                  </td>
-
-                  {/* Column 2: Security Role Info */}
-                  <td className="px-6 py-4">
-                    <span
-                      className={`inline-flex items-center text-[10px] font-black tracking-wide px-2 py-0.5 rounded border ${
-                        user.role === "TUTOR"
-                          ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
-                          : "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20"
-                      }`}
-                    >
-                      {user.role}
-                    </span>
-                  </td>
-
-                  {/* Column 3: Status Indicator Block */}
-                  <td className="px-6 py-4">
-                    <span
-                      className={`inline-flex items-center gap-1.5 text-[10px] font-bold ${
-                        user.status === "ACTIVE"
-                          ? "text-emerald-600 dark:text-blue-500"
-                          : user.status === "PENDING"
-                            ? "text-amber-600 dark:text-amber-400"
-                            : "text-red-600 dark:text-red-400"
-                      }`}
-                    >
-                      <span
-                        className={`w-1.5 h-1.5 rounded-full fill-current ${
-                          user.status === "ACTIVE"
-                            ? "bg-emerald-500 dark:bg-blue-500"
-                            : user.status === "PENDING"
-                              ? "bg-amber-500"
-                              : "bg-red-500"
-                        }`}
-                      />
-                      {user.status}
-                    </span>
-                  </td>
-
-                  {/* Column 4: Joined Date String */}
-                  <td className="px-6 py-4 text-muted-foreground font-medium">
-                    {user.joined}
-                  </td>
-
-                  {/* Column 5: Action Controls Group */}
-                  <td className="px-6 py-4 text-right">
-                    <div className="flex items-center justify-end gap-2">
-                      {user.status === "SUSPENDED" ? (
-                        <button className="h-7 px-2.5 rounded-lg border border-black/10 dark:border-white/10 hover:bg-emerald-500/10 hover:text-emerald-600 text-foreground text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-colors">
-                          <CheckCircle className="w-3.5 h-3.5" /> Lift Ban
-                        </button>
-                      ) : (
-                        <button className="h-7 px-2.5 rounded-lg border border-black/10 dark:border-white/10 hover:bg-red-500/10 hover:text-red-600 text-foreground text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-colors">
-                          <Ban className="w-3.5 h-3.5" /> Suspend
-                        </button>
-                      )}
+              {isLoading ? (
+                <tr>
+                  <td colSpan={5} className="text-center py-20">
+                    <div className="flex flex-col items-center justify-center space-y-3">
+                      <Loader2 className="w-6 h-6 text-primary animate-spin" />
+                      <p className="text-xs text-muted-foreground font-medium">
+                        Synchronizing master user directory ledger...
+                      </p>
                     </div>
                   </td>
                 </tr>
-              ))}
+              ) : users.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="text-center py-16">
+                    <div className="flex flex-col items-center justify-center space-y-2 text-muted-foreground">
+                      <Users className="w-8 h-8 opacity-40" />
+                      <p className="font-bold text-sm text-foreground">
+                        No Records Matching Filters
+                      </p>
+                      <p className="text-xs max-w-xs leading-relaxed">
+                        Adjust your structural parameters or search values to
+                        fetch matrix instances.
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                users.map((user) => (
+                  <UserRow
+                    key={user.id}
+                    user={user}
+                    onToggleBan={handleToggleBan}
+                    isActionLoading={isActionLoading}
+                  />
+                ))
+              )}
             </tbody>
           </table>
         </div>
       </div>
+
+      {/* Integrated Shared Pagination Footer Layout */}
+      {meta && meta.totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={meta.totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </div>
   );
 }
