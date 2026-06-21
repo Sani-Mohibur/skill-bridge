@@ -19,6 +19,13 @@ interface TutorData {
   experienceYears: number;
   pricePerHour: number;
   rating: number;
+  // Included nested user relation properties to surface names and emails
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    banned: boolean;
+  };
 }
 
 interface MetaData {
@@ -44,11 +51,16 @@ export default function AdminFeaturedTutorsPage() {
   const fetchTutors = async () => {
     try {
       setIsLoading(true);
+
+      let isFeaturedParam = "all";
+      if (activeTab === "featured") isFeaturedParam = "true";
+      if (activeTab === "standard") isFeaturedParam = "false";
+
       const queryParams = new URLSearchParams({
         page: currentPage.toString(),
         limit: "10",
         search: searchQuery,
-        status: activeTab, // backend filters based on featured status mapping
+        isFeatured: isFeaturedParam,
       });
 
       const res = await fetch(`${apiBase}/admin/tutors?${queryParams}`, {

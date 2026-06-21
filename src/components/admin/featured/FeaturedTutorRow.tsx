@@ -14,6 +14,13 @@ interface TutorData {
   experienceYears: number;
   pricePerHour: number;
   rating: number;
+  // Included nested user interface relation details
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    banned: boolean;
+  };
 }
 
 interface FeaturedTutorRowProps {
@@ -34,8 +41,17 @@ export function FeaturedTutorRow({
       {/* Column 1: Tutor Identity Focus */}
       <td className="px-6 py-4">
         <div className="space-y-1 max-w-xs">
-          <div className="font-black text-foreground">{tutor.title}</div>
-          <p className="text-[11px] text-muted-foreground line-clamp-2 leading-relaxed">
+          {/* Render real registration name & title headline together */}
+          <div className="font-black text-foreground">
+            {tutor.user?.name || "Unknown Mentor"}
+          </div>
+          <div className="text-[11px] font-medium text-primary/80">
+            {tutor.title || "No Profile Title Selected"}
+          </div>
+          <div className="text-[10px] text-muted-foreground font-mono">
+            {tutor.user?.email}
+          </div>
+          <p className="text-[11px] text-muted-foreground line-clamp-2 leading-relaxed pt-0.5">
             {tutor.bio}
           </p>
         </div>

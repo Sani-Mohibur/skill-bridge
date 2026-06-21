@@ -13,6 +13,9 @@ import {
   LogOut,
   Sun,
   Moon,
+  FolderKanban,
+  CalendarCheck,
+  Clock,
 } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { authClient } from "@/lib/auth-client";
@@ -54,7 +57,10 @@ export function AdminLayoutClient({ children }: AdminLayoutProps) {
     { name: "User Directory", href: "/admin/users", icon: Users },
     { name: "Vetting Queue", href: "/admin/verifications", icon: ShieldCheck },
     { name: "Featured Tutors", href: "/admin/featured", icon: Star },
-    // { name: "Financial Escrow", href: "/admin/finances", icon: CreditCard },
+    // Added operational control links seamlessly below
+    { name: "Categories", href: "/admin/categories", icon: FolderKanban },
+    { name: "Booking Logs", href: "/admin/bookings", icon: CalendarCheck },
+    { name: "Availabilities", href: "/admin/availabilities", icon: Clock },
   ];
 
   return (

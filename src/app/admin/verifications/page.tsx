@@ -1,204 +1,260 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Search,
-  ShieldCheck,
-  ShieldAlert,
-  CheckCircle,
-  XCircle,
-} from "lucide-react";
+import { useState, useEffect } from "react";
+import { Loader2, ShieldCheck, ShieldAlert, Search } from "lucide-react";
+import { toast } from "sonner";
+import { Pagination } from "@/components/shared/Pagination";
 
-export default function AdminTutorVerificationsPage() {
-  // Tutors are the primary focus for verification, filtering by validation status
-  const [verificationFilter, setVerificationFilter] = useState<
-    "all" | "verified" | "unverified"
-  >("all");
+interface TutorData {
+  id: string;
+  isVerified: boolean;
+  user: {
+    name: string;
+    email: string;
+  };
+}
+
+interface MetaData {
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export default function AdminVerificationsPage() {
+  const [tutors, setTutors] = useState<TutorData[]>([]);
+  const [meta, setMeta] = useState<MetaData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isActionLoading, setIsActionLoading] = useState<string | null>(null);
+
+  const [activeTab, setActiveTab] = useState<"all" | "verified" | "unverified">(
+    "all",
+  );
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Static mockup array representing tutor profiles
-  const mockTutors = [
-    {
-      id: "t1",
-      name: "Sarah Jenkins",
-      email: "sarah.j@example.com",
-      isVerified: true,
-      enrolledDate: "Mar 12, 2026",
-    },
-    {
-      id: "t2",
-      name: "Elena Rostova",
-      email: "elena.ros@example.com",
-      isVerified: false,
-      enrolledDate: "Jun 18, 2026",
-    },
-    {
-      id: "t3",
-      name: "Marcus Brody",
-      email: "marcus@example.com",
-      isVerified: false,
-      enrolledDate: "Nov 22, 2025",
-    },
-    {
-      id: "t4",
-      name: "Dr. Aris Thorne",
-      email: "thorne.a@example.com",
-      isVerified: true,
-      enrolledDate: "Feb 02, 2026",
-    },
-  ];
+  const apiBase = process.env.NEXT_PUBLIC_API_URL!;
 
-  // Filtering logic matching verification state and search queries
-  const filteredTutors = mockTutors.filter((tutor) => {
-    const matchesVerification =
-      verificationFilter === "all" ||
-      (verificationFilter === "verified" && tutor.isVerified) ||
-      (verificationFilter === "unverified" && !tutor.isVerified);
+  const fetchTutors = async () => {
+    try {
+      setIsLoading(true);
 
-    const matchesSearch =
-      tutor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tutor.email.toLowerCase().includes(searchQuery.toLowerCase());
+      let isVerifiedParam = "all";
+      if (activeTab === "verified") isVerifiedParam = "true";
+      if (activeTab === "unverified") isVerifiedParam = "false";
 
-    return matchesVerification && matchesSearch;
-  });
+      const queryParams = new URLSearchParams({
+        page: currentPage.toString(),
+        limit: "10",
+        search: searchQuery,
+        isVerified: isVerifiedParam,
+      });
+
+      const res = await fetch(`${apiBase}/admin/tutors?${queryParams}`, {
+        credentials: "include",
+      });
+      const json = await res.json();
+      if (json.success) {
+        setTutors(json.data || []);
+        setMeta(json.meta || null);
+      }
+    } catch (err) {
+      console.error("Failed fetching tutor verification directory:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab, searchQuery]);
+
+  useEffect(() => {
+    fetchTutors();
+  }, [currentPage, activeTab, searchQuery]);
+
+  const handleToggleVerify = async (
+    tutorId: string,
+    currentVerificationStatus: boolean,
+  ) => {
+    try {
+      setIsActionLoading(tutorId);
+      const nextState = !currentVerificationStatus;
+
+      const res = await fetch(`${apiBase}/admin/tutors/${tutorId}/verify`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ isVerified: nextState }),
+        credentials: "include",
+      });
+
+      const json = await res.json();
+      if (json.success) {
+        toast.success(
+          nextState
+            ? "Tutor verified successfully"
+            : "Verification credentials revoked",
+        );
+        fetchTutors();
+      } else {
+        toast.error(
+          json.message || "Failed to alter background clearance state.",
+        );
+      }
+    } catch (err) {
+      console.error("Verification adjustment network block:", err);
+      toast.error("Network communication failure.");
+    } finally {
+      setIsActionLoading(null);
+    }
+  };
 
   return (
     <div className="space-y-8 w-full animate-fade-in">
-      {/* Editorial Page Identification Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
-            Tutor Verifications
-          </h1>
-          <p className="text-xs text-muted-foreground mt-1">
-            Review background credentials, manage approval standings, and toggle
-            official verification badges.
-          </p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
+          Tutor Verification Dashboard
+        </h1>
+        <p className="text-xs text-muted-foreground mt-1">
+          Review credentials and authorize trusted platform instructors to
+          guarantee educational quality control boundaries.
+        </p>
       </div>
 
-      {/* Control Actions & Utility Bar Layout */}
-      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 bg-card border border-black/5 dark:border-white/5 p-4 rounded-2xl shadow-xs">
-        {/* Left Segment: Verification State Segmented Tabs */}
-        <div className="flex bg-slate-100 dark:bg-slate-900 p-1 rounded-xl border border-black/5 dark:border-white/5">
+      {/* Embedded Filter & Search Panel */}
+      <div className="flex flex-col sm:flex-row gap-4 items-center justify-between bg-card border border-black/5 dark:border-white/5 p-4 rounded-xl shadow-xs">
+        <div className="flex gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl w-full sm:w-auto">
           {(["all", "verified", "unverified"] as const).map((tab) => (
             <button
               key={tab}
-              onClick={() => setVerificationFilter(tab)}
-              className={`px-4 h-8 text-[11px] font-bold rounded-lg capitalize transition-all cursor-pointer ${
-                verificationFilter === tab
-                  ? "bg-background text-foreground shadow-xs"
+              onClick={() => setActiveTab(tab)}
+              className={`flex-1 sm:flex-none text-xs font-bold px-4 py-2 rounded-lg capitalize transition-all cursor-pointer ${
+                activeTab === tab
+                  ? "bg-white dark:bg-slate-800 text-foreground shadow-xs"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {tab === "all" ? "All Tutors" : tab}
+              {tab}
             </button>
           ))}
         </div>
 
-        {/* Right Segment: Search Field Matrix */}
-        <div className="relative max-w-xs w-full flex items-center">
-          <Search className="w-4 h-4 text-muted-foreground absolute left-3 pointer-events-none" />
+        <div className="relative w-full sm:w-72">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
+            placeholder="Search tutor name or email..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search name or email..."
-            className="w-full h-9 pl-9 pr-4 text-xs rounded-xl border border-black/10 dark:border-white/10 bg-background focus:outline-hidden focus:border-emerald-500/50 dark:focus:border-blue-500/50 transition-colors"
+            className="w-full bg-slate-50 dark:bg-slate-900/50 border border-black/5 dark:border-white/5 rounded-xl pl-10 pr-4 py-2 text-xs font-medium focus:outline-hidden focus:border-primary/40 transition-colors"
           />
         </div>
       </div>
 
-      {/* User Records Table Container */}
+      {/* Main Streamlined Table Content Block */}
       <div className="bg-card border border-black/5 dark:border-white/5 rounded-2xl shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="border-b border-black/5 dark:border-white/5 bg-slate-50/50 dark:bg-slate-900/50 text-[10px] font-black text-muted-foreground uppercase tracking-wider">
-                <th className="px-6 py-4">Tutor Profile</th>
-                <th className="px-6 py-4">Verification State</th>
-                <th className="px-6 py-4">Enrolled Date</th>
-                <th className="px-6 py-4 text-right">Administrative Action</th>
+                <th className="px-6 py-4">Tutor Profile Details</th>
+                <th className="px-6 py-4">Standing Status</th>
+                <th className="px-6 py-4 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-black/5 dark:divide-white/5 text-xs">
-              {filteredTutors.map((tutor) => (
-                <tr
-                  key={tutor.id}
-                  className="hover:bg-slate-50/40 dark:hover:bg-slate-900/20 transition-colors"
-                >
-                  {/* Column 1: Identity Info Layout */}
-                  <td className="px-6 py-4">
-                    <div className="space-y-0.5">
-                      <div className="font-black text-foreground">
-                        {tutor.name}
-                      </div>
-                      <div className="text-[11px] text-muted-foreground font-medium">
-                        {tutor.email}
-                      </div>
-                    </div>
-                  </td>
-
-                  {/* Column 2: Status Indicator Block */}
-                  <td className="px-6 py-4">
-                    <span
-                      className={`inline-flex items-center gap-1.5 text-[10px] font-bold ${
-                        tutor.isVerified
-                          ? "text-emerald-600 dark:text-blue-500"
-                          : "text-amber-600 dark:text-amber-400"
-                      }`}
-                    >
-                      {tutor.isVerified ? (
-                        <>
-                          <ShieldCheck className="w-4 h-4 text-emerald-500 dark:text-blue-500" />
-                          VERIFIED
-                        </>
-                      ) : (
-                        <>
-                          <ShieldAlert className="w-4 h-4 text-amber-500" />
-                          UNVERIFIED
-                        </>
-                      )}
-                    </span>
-                  </td>
-
-                  {/* Column 3: Enrolled Date String */}
-                  <td className="px-6 py-4 text-muted-foreground font-medium">
-                    {tutor.enrolledDate}
-                  </td>
-
-                  {/* Column 4: Action Controls Group */}
-                  <td className="px-6 py-4 text-right">
-                    <div className="flex items-center justify-end gap-2">
-                      {tutor.isVerified ? (
-                        <button className="h-7 px-2.5 rounded-lg border border-black/10 dark:border-white/10 hover:bg-red-500/10 hover:text-red-600 text-foreground text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-colors">
-                          <XCircle className="w-3.5 h-3.5" /> Revoke
-                          Verification
-                        </button>
-                      ) : (
-                        <button className="h-7 px-2.5 rounded-lg border border-black/10 dark:border-white/10 hover:bg-emerald-500/10 hover:text-emerald-600 text-foreground text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-colors">
-                          <CheckCircle className="w-3.5 h-3.5" /> Grant
-                          Verification
-                        </button>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-              {filteredTutors.length === 0 && (
+              {isLoading ? (
                 <tr>
-                  <td
-                    colSpan={4}
-                    className="text-center py-8 text-muted-foreground"
-                  >
-                    No matching profiles found.
+                  <td colSpan={3} className="text-center py-20">
+                    <div className="flex flex-col items-center justify-center space-y-3">
+                      <Loader2 className="w-6 h-6 text-primary animate-spin" />
+                      <p className="text-xs text-muted-foreground font-medium">
+                        Loading verification catalog records...
+                      </p>
+                    </div>
                   </td>
                 </tr>
+              ) : tutors.length === 0 ? (
+                <tr>
+                  <td colSpan={3} className="text-center py-16">
+                    <div className="flex flex-col items-center justify-center space-y-2 text-muted-foreground">
+                      <ShieldAlert className="w-8 h-8 opacity-40" />
+                      <p className="font-bold text-sm text-foreground">
+                        No Tutors Found matching filters
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                tutors.map((tutor) => {
+                  const isMutating = isActionLoading === tutor.id;
+                  return (
+                    <tr
+                      key={tutor.id}
+                      className="hover:bg-slate-50/40 dark:hover:bg-slate-900/20 transition-colors"
+                    >
+                      <td className="px-6 py-4">
+                        <div className="space-y-0.5">
+                          <div className="font-black text-foreground">
+                            {tutor.user?.name || "Unknown Identity"}
+                          </div>
+                          <div className="text-[11px] text-muted-foreground font-mono">
+                            {tutor.user?.email}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span
+                          className={`inline-flex items-center text-[10px] font-black tracking-wide px-2 py-0.5 rounded border capitalize ${
+                            tutor.isVerified
+                              ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
+                              : "bg-rose-500/10 text-rose-500 border-rose-500/20"
+                          }`}
+                        >
+                          {tutor.isVerified
+                            ? "Verified Approved"
+                            : "Unverified Pending"}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <div className="flex items-center justify-end">
+                          <button
+                            disabled={isMutating}
+                            onClick={() =>
+                              handleToggleVerify(tutor.id, tutor.isVerified)
+                            }
+                            className={`h-7 px-3 rounded-lg border text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-colors disabled:opacity-50 ${
+                              tutor.isVerified
+                                ? "border-black/10 dark:border-white/10 hover:bg-rose-500/10 hover:text-rose-600 text-foreground"
+                                : "border-primary/20 bg-primary/5 hover:bg-emerald-500/10 hover:text-emerald-600 hover:border-emerald-500/20 text-foreground"
+                            }`}
+                          >
+                            <ShieldCheck className="w-3.5 h-3.5" />
+                            {isMutating
+                              ? "Updating..."
+                              : tutor.isVerified
+                                ? "Revoke Verification"
+                                : "Grant Verification"}
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>
         </div>
       </div>
+
+      {meta && meta.totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={meta.totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </div>
   );
 }
