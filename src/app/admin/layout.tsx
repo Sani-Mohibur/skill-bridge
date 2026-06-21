@@ -12,7 +12,10 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
   // Fetch live server-side session using better-auth headers matrix
   const session = await authClient.getSession({
     fetchOptions: {
-      headers: await headers(),
+      headers: {
+        // Explicitly forward the cookie string from the browser to Render
+        cookie: (await headers()).get("cookie") || "",
+      },
     },
   });
 
