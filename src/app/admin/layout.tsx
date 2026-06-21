@@ -16,6 +16,11 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
     },
   });
 
+  console.log(
+    "SERVER DEBUG SESSION DATA:",
+    JSON.stringify(session?.data, null, 2),
+  );
+
   // Guard check: Redirect unauthenticated requests to login page immediately
   if (!session?.data) {
     redirect("/login");
