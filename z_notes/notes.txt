@@ -1,6 +1,0 @@
-Ok now listen for tutor we will do 
-
-Student - Find Tutors, How It Works, About, Bookings, Dashboard
-Tutor - Manage Slots, How It Works, About, Bookings, Reviews, Dashboard
-
-bug need to fix - for slot need to define a unique price.
