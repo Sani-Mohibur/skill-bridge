@@ -2,7 +2,7 @@ import { inferAdditionalFields } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  baseURL: "https://skill-bridge-six-liart.vercel.app/api/auth",
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth`,
   fetchOptions: {
     credentials: "include",
   },
