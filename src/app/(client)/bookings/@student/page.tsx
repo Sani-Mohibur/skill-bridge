@@ -72,7 +72,7 @@ export default function BookingsPage() {
   const fetchAvailableSlots = async () => {
     try {
       setIsSlotsLoading(true);
-      const res = await fetch(`${API_BASE}/availability/upcoming`, {
+      const res = await fetch(`${API_BASE}/availability/student-upcoming`, {
         credentials: "include",
       });
       const json = await res.json();
