@@ -41,7 +41,7 @@ export default function TutorDashboardView() {
             (acc: number, curr: SlotItem) => {
               const minutes = curr.timeDuration
                 ? parseInt(curr.timeDuration, 10)
-                : 0;
+                : 60;
               return acc + (isNaN(minutes) ? 0 : minutes);
             },
             0,
