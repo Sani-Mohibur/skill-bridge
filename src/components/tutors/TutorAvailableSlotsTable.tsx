@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Calendar, Clock, DollarSign, BookOpen, MapPin } from "lucide-react";
+import Link from "next/link";
+import { ROLES } from "@/constants/roles";
 
 export interface TutorSlotData {
   id: string;
@@ -17,12 +19,14 @@ interface TutorAvailableSlotsTableProps {
   slots: TutorSlotData[];
   onBookSlot: (slotId: string) => Promise<void>;
   isLoading: boolean;
+  userRole?: string;
 }
 
 export function TutorAvailableSlotsTable({
   slots,
   onBookSlot,
   isLoading,
+  userRole,
 }: TutorAvailableSlotsTableProps) {
   const [bookingId, setBookingId] = useState<string | null>(null);
 
@@ -43,6 +47,25 @@ export function TutorAvailableSlotsTable({
         {[1, 2, 3].map((n) => (
           <div key={n} className="h-16 bg-muted/40 rounded-xl" />
         ))}
+      </div>
+    );
+  }
+
+  // Guard Check: Show targeted sign-in prompt if not logged in as a student
+  if (userRole !== ROLES.STUDENT) {
+    return (
+      <div className="flex flex-col items-center justify-center py-10 border border-dashed border-border/60 rounded-2xl bg-muted/10 text-center px-4">
+        <Calendar className="w-8 h-8 text-muted-foreground/40 mb-2" />
+        <p className="text-xs font-semibold text-muted-foreground max-w-sm leading-relaxed">
+          To view and book available upcoming slots, please{" "}
+          <Link
+            href="/login"
+            className="text-emerald-600 dark:text-blue-400 hover:underline font-bold"
+          >
+            sign in with your student account
+          </Link>
+          .
+        </p>
       </div>
     );
   }

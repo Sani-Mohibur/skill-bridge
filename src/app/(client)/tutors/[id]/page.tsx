@@ -17,11 +17,13 @@ import {
   TutorSlotData,
 } from "@/components/tutors/TutorAvailableSlotsTable";
 import { toast } from "sonner";
+import { authClient } from "@/lib/auth-client";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 export default function TutorProfileDetailsPage() {
   const { id } = useParams();
+  const { data: session } = authClient.useSession();
   const [tutor, setTutor] = useState<any>(null);
   const [slots, setSlots] = useState<TutorSlotData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +55,7 @@ export default function TutorProfileDetailsPage() {
     try {
       setIsSlotsLoading(true);
       const res = await fetch(
-        `${API_BASE}/availability/upcoming?tutorId=${id}`,
+        `${API_BASE}/availability/student-upcoming?tutorId=${id}`,
         {
           credentials: "include",
         },
@@ -213,6 +215,7 @@ export default function TutorProfileDetailsPage() {
               slots={slots}
               onBookSlot={handleBookSlot}
               isLoading={isSlotsLoading}
+              userRole={session?.user?.role}
             />
           </div>
 

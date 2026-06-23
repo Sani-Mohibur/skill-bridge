@@ -5,8 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination:
-          "https://skill-bridge-backend-x2sb.onrender.com/api/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/:path*`,
       },
     ];
   },
