@@ -31,7 +31,6 @@ A modern, full-featured tutor-student marketplace UI built with Next.js 16, Type
   - [Environment Variables](#environment-variables)
   - [Running the Development Server](#running-the-development-server)
 - [Scripts](#scripts)
-- [Deployment](#deployment)
 
 ---
 
@@ -246,21 +245,3 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `npm run build` | Build the production bundle                      |
 | `npm run start` | Start the production server (after build)        |
 | `npm run lint`  | Run ESLint across the project                    |
-
----
-
-## Deployment
-
-This project is deployed on **Vercel**.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Sani-Mohibur/skill-bridge)
-
-**Steps to deploy:**
-
-1. Push your repository to GitHub.
-2. Import the project into [Vercel](https://vercel.com).
-3. Set the environment variables in the Vercel project settings:
-   - `NEXT_PUBLIC_BACKEND_URL`
-   - `NEXT_PUBLIC_API_URL` (use the Vercel frontend URL)
-   - `NEXT_PUBLIC_BASE_URL`
-4. Deploy — Vercel will automatically detect Next.js and configure the build.
